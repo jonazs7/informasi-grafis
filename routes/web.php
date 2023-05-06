@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TrainerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,12 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('test');
 });
+
+
+// Member Gym
+Route::get('/beranda', [MemberController::class, 'beranda'])->name('beranda');
+Route::get('/jadwal', [MemberController::class, 'jadwal'])->name('jadwal');
+Route::get('/biodata', [MemberController::class, 'biodata'])->name('biodata');
+
+// Trainer Gym
+Route::get('/berandaTrainer', [TrainerController::class, 'beranda'])->name('beranda');
