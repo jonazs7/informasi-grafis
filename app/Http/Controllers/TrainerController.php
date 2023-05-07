@@ -9,4 +9,8 @@ class TrainerController extends Controller
     public function beranda(){
         return view('beranda_trainer');
     }
+
+    public function jadwal(){
+        return view('jadwal_trainer');
+    }
 }

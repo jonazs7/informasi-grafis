@@ -114,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p class="help-block">Anda dapat unggah foto profil anda.</p>
                     </div>
                     <div style="margin-top: 5%">
-                      <button type="submit" class="btn btn-primary" style="width: 100%">Simpan</button>
+                      <button type="submit" class="btn btn-primary btn-block">Simpan</button>
                     </div>
                 </form>
                 <!-- end form start -->
