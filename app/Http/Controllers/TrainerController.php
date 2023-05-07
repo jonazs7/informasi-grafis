@@ -13,4 +13,12 @@ class TrainerController extends Controller
     public function jadwal(){
         return view('jadwal_trainer');
     }
+
+    public function create_kegiatan(){
+        return view('create_kegiatan_trainer');
+    }
+
+    public function hasil_capaian(){
+        return view('hasil_capaian_trainer');
+    }
 }

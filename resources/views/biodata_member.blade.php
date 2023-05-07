@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control" id="datepicker" placeholder="dd/mm/yyy" style="width: 8%">
+                        <input type="text" class="form-control" id="datepicker" placeholder="dd/mm/yyyy" style="width: 10%">
                       </div>
                     </div>
                     <div class="form-group">

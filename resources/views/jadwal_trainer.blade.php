@@ -39,9 +39,82 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main content -->
     <section class="content container-fluid">
-      
+       <!-- Data Table -->
+       <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Rincian Kegiatan</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Username</th>
+              <th>Nomor Telepon</th>
+              <th>Gender</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Thenmust</td>
+              <td>thenmust_pro</td>
+              <td>0821-3113-4354</td>
+              <td>Pria</td>
+              <td>Proses</td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm">+ Kegiatan</button>
+                <button type="button" class="btn btn-default btn-sm" style="margin-left: 8px">profil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Andriene Watson</td>
+              <td>andrienewatson82</td>
+              <td>0816-1312-2334</td>
+              <td>Wanita</td>
+              <td>Selesai</td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm">+ Kegiatan</button>
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-default" style="margin-left: 8px">profil</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+      <!-- end Data Table -->
+      <!-- modal -->
+      <div class="modal fade" id="modal-default">
+        <div class="modal-dialog" style="width: 30%">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Profil Thenmust</h4>
+              <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+            </div>
+            <div class="modal-body">
+              <p>Tanggal lahir : 21 Maret 2002</p>
+              <p>Gender : Pria</p>
+              <p>No Telepon : 0821-3113-4354</p>
+              <p>Alamat : Banguntapan, Jalan Pasar Telo</p>
+              <p>Lama pengalaman : < 3 Bulan</p>
+              <p>Goal : Increase Muscle Size</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
     
-      
     </section>
     <!-- /.content -->
   </div>

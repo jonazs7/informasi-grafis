@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <td>Push, Pull</td>
                   <td>Selesai</td>
                 </tr>
-                </tfoot>
+                </tbody>
               </table>
             </div>
             <!-- /.box-body -->

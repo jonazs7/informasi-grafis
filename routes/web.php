@@ -32,3 +32,5 @@ Route::get('/biodata', [MemberController::class, 'biodata'])->name('biodata');
 // Trainer Gym
 Route::get('/berandaTrainer', [TrainerController::class, 'beranda'])->name('beranda');
 Route::get('/jadwalTrainer', [TrainerController::class, 'jadwal'])->name('jadwal');
+Route::get('/createKegiatan', [TrainerController::class, 'create_kegiatan'])->name('createKegiatan');
+Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
