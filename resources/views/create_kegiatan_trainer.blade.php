@@ -57,6 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <th>Sesi Latihan</th>
                                     <th>Program Latihan</th>
                                     <th>Status</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

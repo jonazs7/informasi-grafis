@@ -21,4 +21,8 @@ class TrainerController extends Controller
     public function hasil_capaian(){
         return view('hasil_capaian_trainer');
     }
+
+    public function detail_info(){
+        return view('detail_info_trainer');
+    }
 }

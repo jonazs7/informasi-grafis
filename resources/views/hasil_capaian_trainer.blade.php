@@ -160,27 +160,100 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <h4 class="modal-title">Tambah Kegiatan Baru</h4>
           </div>
           <div class="modal-body">
-              <!-- Date -->
-              <div class="form-group">
+              <div style="display: flex; justify-content: space-around;">
+                <!-- Date -->
+                <div class="form-group" style="width: 35%">
                   <label>Tanggal Mulai</label>
 
                   <div class="input-group date">
-                      <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="datepickerStart" placeholder="dd/mm/yyyy">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="datepicker" placeholder="dd/mm/yyyy">
                   </div>
                   <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+                <!-- select -->
+                <div class="form-group" style="width: 35%">
+                  <label>Kidal</label>
+                  <select class="form-control">
+                    <option>Tidak</option>
+                    <option>Ya</option>
+                  </select>
+                </div>
+                <!-- end select -->
               </div>
-              <!-- /.form group -->
-              <!-- text input -->
-              <div class="form-group">
-              <label>Tinggi (m)</label>
-                <input type="text" class="form-control">
+              <div style="display: flex; justify-content: space-around;">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Tinggi (m)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Bisep (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
               </div>
-              <!-- end text input -->
-              
-          
+              <div style="display: flex; justify-content: space-around;">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Berat (kg)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Dada (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+              </div>
+              <div style="display: flex; justify-content: space-around;">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Leher (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Pantat (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+              </div>
+              <div style="display: flex; justify-content: space-around;">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Pinggang (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Paha Bawah (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+              </div>
+              <div style="display: flex; justify-content: space-around;">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Paha Atas (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Lingkar Betis (cm)</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- end text input -->
+              </div>
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
