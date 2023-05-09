@@ -86,9 +86,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <label>Alamat</label>
                       <textarea class="form-control" rows="3" placeholder="Enter ..." style="width: 25%"></textarea>
                     </div>
+                    <div class="form-group" style="width: 10%">
+                      <label>Kidal</label>
+                      <select class="form-control">
+                        <option>Tidak</option>
+                        <option>Ya</option>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label>Lama pengalaman</label>
-                      <select class="form-control" style="width: 25%">
+                      <select class="form-control" style="width: 15%">
                         <option>Belum pernah</option>
                         <option>< 3 Bulan</option>
                         <option>> 3 Bulan</option>

@@ -160,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <h4 class="modal-title">Tambah Kegiatan Baru</h4>
           </div>
           <div class="modal-body">
-              <div style="display: flex; justify-content: space-around;">
+              <div style="display: flex; justify-content: space-around">
                 <!-- Date -->
                 <div class="form-group" style="width: 35%">
                   <label>Tanggal Mulai</label>
@@ -174,15 +174,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
-                <!-- select -->
-                <div class="form-group" style="width: 35%">
-                  <label>Kidal</label>
-                  <select class="form-control">
-                    <option>Tidak</option>
-                    <option>Ya</option>
-                  </select>
-                </div>
-                <!-- end select -->
               </div>
               <div style="display: flex; justify-content: space-around;">
                 <!-- text input -->
