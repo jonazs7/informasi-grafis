@@ -35,3 +35,4 @@ Route::get('/jadwalTrainer', [TrainerController::class, 'jadwal'])->name('jadwal
 Route::get('/createKegiatan', [TrainerController::class, 'create_kegiatan'])->name('createKegiatan');
 Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
 Route::get('/detailInfo', [TrainerController::class, 'detail_info'])->name('detailInfo');
+Route::get('/anggotaGym', [TrainerController::class, 'anggota_gym'])->name('anggotaGym');

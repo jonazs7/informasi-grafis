@@ -25,4 +25,8 @@ class TrainerController extends Controller
     public function detail_info(){
         return view('detail_info_trainer');
     }
+
+    public function anggota_gym(){
+        return view('anggota_gym_trainer');
+    }
 }

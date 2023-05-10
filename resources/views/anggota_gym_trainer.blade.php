@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Jadwal Kebugaran Anggota Gym
+        Daftar Anggota Gym
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -42,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!-- Data Table -->
        <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Rincian Kegiatan</h3>
+            <button type="button" class="btn btn-primary btn-md">+ Tambah anggota</button>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -51,9 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <tr>
               <th>Nama</th>
               <th>Username</th>
-              <th>Nomor Telepon</th>
               <th>Gender</th>
-              <th>Status</th>
               <th>Aksi</th>
             </tr>
             </thead>
@@ -61,23 +59,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <tr>
               <td>Thenmust</td>
               <td>thenmust_pro</td>
-              <td>0821-3113-4354</td>
               <td>Pria</td>
-              <td>Proses</td>
               <td>
-                <button type="button" class="btn btn-primary btn-sm">Kegiatan</button>
-                <button type="button" class="btn btn-default btn-sm" style="margin-left: 8px">profil</button>
+                <button type="button" class="btn btn-danger btn-sm">Hapus</button>
               </td>
             </tr>
             <tr>
               <td>Andriene Watson</td>
               <td>andrienewatson82</td>
-              <td>0816-1312-2334</td>
               <td>Wanita</td>
-              <td>Selesai</td>
               <td>
-                <button type="button" class="btn btn-primary btn-sm">Kegiatan</button>
-                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-default" style="margin-left: 8px">profil</button>
+                <button type="button" class="btn btn-danger btn-sm">Hapus</button>
               </td>
             </tr>
             </tbody>
