@@ -50,8 +50,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p class="text-muted text-center">Member</p>
                   <table class="table text-center">
                     <td>
-                        <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#modal-default-tambah">Tambah Data</button>
-                        
+                        <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal" 
+                        data-target="#modal-default-data">Tambah Data</button>
                     </td>
                     <td>
                         <button type="button" class="btn btn-block btn-default btn-sm">Detail Info</button>
@@ -151,7 +151,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <!-- modal -->
-<div class="modal fade" id="modal-default-tambah">
+<div class="modal fade" id="modal-default-data">
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
@@ -256,6 +256,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
 
 
 <!-- page script -->

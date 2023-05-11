@@ -36,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
                     <li class="active">Here</li>
                 </ol>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-kegiatan"
                     style="margin-top: 12px">+ Tambah Kegiatan</button>
             </section>
 
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     <!-- modal -->
-    <div class="modal fade" id="modal-default">
+    <div class="modal fade" id="modal-default-kegiatan">
         <div class="modal-dialog" style="width: 20%">
             <div class="modal-content">
                 <div class="modal-header">

@@ -42,7 +42,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!-- Data Table -->
        <div class="box">
         <div class="box-header">
-            <button type="button" class="btn btn-primary btn-md">+ Tambah anggota</button>
+            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" 
+            data-target="#modal-default-anggota">+ Tambah Anggota</button>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -95,29 +96,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <!-- modal -->
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog" style="width: 30%">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Profil Thenmust</h4>
-        <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+<div class="modal fade" id="modal-default-anggota">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Tambah Anggota Gym Baru</h4>
+          </div>
+          <div class="modal-body">
+            <!-- text input -->
+            <div class="form-group">
+              <label>Nama Lengkap</label>
+                <input type="text" class="form-control">
+            </div>
+            <!-- end text input -->
+            <!-- text input -->
+            <div class="form-group">
+              <label>Username</label>
+                <input type="text" class="form-control">
+            </div>
+            <!-- end text input -->
+            <!-- text input -->
+            <div class="form-group">
+              <label>Password</label>
+                <input type="password" class="form-control">
+            </div>
+            <!-- end text input -->
+            <!-- text input -->
+            <div class="form-group">
+              <label>Password Konfirmasi</label>
+                <input type="password" class="form-control">
+            </div>
+            <!-- end text input -->
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-primary">Tambah</button>
+          </div>
       </div>
-      <div class="modal-body">
-        <p>Tanggal lahir : 21 Maret 2002</p>
-        <p>Gender : Pria</p>
-        <p>No Telepon : 0821-3113-4354</p>
-        <p>Alamat : Banguntapan, Jalan Pasar Telo</p>
-        <p>Kidal : Ya</p>
-        <p>Lama pengalaman : < 3 Bulan</p>
-        <p>Goal : Increase Muscle Size</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
+      <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>

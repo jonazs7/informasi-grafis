@@ -68,11 +68,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <label>Gender</label>
                       <div class="radio">
                         <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                          <input type="radio" name="optionsRadios" value="option1" checked>
                           Pria
                         </label>
                         <label style="margin-left: 12px">
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                          <input type="radio" name="optionsRadios" value="option1">
                           Wanita
                         </label>
                       </div>
@@ -121,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p class="help-block">Anda dapat unggah foto profil anda.</p>
                     </div>
                     <div style="margin-top: 5%">
-                      <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                      <button type="button" class="btn btn-block btn-primary">Simpan</button>
                     </div>
                 </form>
                 <!-- end form start -->
