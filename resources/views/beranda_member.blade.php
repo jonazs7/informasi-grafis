@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LPB(cm)</th>
               <th>LBS(cm)</th>
               <th>BMI</th>
-              <th>BFB(%)</th>
+              <th>BFP(%)</th>
             </tr>
             </thead>
             <tbody>

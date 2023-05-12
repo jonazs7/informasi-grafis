@@ -3,6 +3,7 @@
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TrainerController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,6 @@ Route::get('/createKegiatan', [TrainerController::class, 'create_kegiatan'])->na
 Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
 Route::get('/detailInfo', [TrainerController::class, 'detail_info'])->name('detailInfo');
 Route::get('/anggotaGym', [TrainerController::class, 'anggota_gym'])->name('anggotaGym');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
