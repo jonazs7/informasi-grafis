@@ -24,7 +24,6 @@ class Pengguna extends Model implements AuthenticatableContract
         'email',
         'password',
         'level',
-        'nama_user',
         'tgl_lahir',
         'gender',
         'tlpn',

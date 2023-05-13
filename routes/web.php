@@ -32,7 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['member'])->group(function(){
     Route::get('/beranda', [MemberController::class, 'beranda'])->name('beranda');
     Route::get('/jadwal', [MemberController::class, 'jadwal'])->name('jadwal');
-    Route::get('/biodata', [MemberController::class, 'biodata'])->name('biodata');
+    Route::get('/biodata', [MemberController::class, 'edit_biodata'])->name('edit_biodata');
+    //Route::put('/biodata/{id}', [MemberController::class, 'update_biodata'])->name('update_biodata');
 });
 
 // Trainer Gym

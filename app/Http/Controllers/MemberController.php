@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+
 
 class MemberController extends Controller
 {
@@ -14,7 +18,8 @@ class MemberController extends Controller
         return view('jadwal_member');
     }
 
-    public function biodata(){
-        return view('biodata_member');
+    public function edit_biodata(){
+        $pengguna = Auth::user();
+        return view('biodata_member', compact('pengguna'));
     }
 }
