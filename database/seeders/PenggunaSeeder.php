@@ -37,7 +37,6 @@ class PenggunaSeeder extends Seeder
             'kidal' => 'Ya', 'lama_pnglmn' => '> 3 Bulan', 'goal' => 'Lainnya', 'foto' => 'yosi.png', 'path' => '12121',
             'created_at' => '2023-05-13 08:47:22', 'updated_at' => '2023-05-13 08:47:22'],
         ];
-
         //DB::table('pengguna')->insert($data);
         foreach ($data as $item){
             Pengguna::create($item);

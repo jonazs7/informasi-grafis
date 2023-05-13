@@ -49,7 +49,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="" method="POST" enctype='multipart/form-data'>
+                <form action="{{ route('update_biodata') }}" method="POST" enctype='multipart/form-data'>
                   @csrf
                   <div class="box-body">
                     <div class="form-group">
@@ -58,11 +58,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group">
                       <label>Tanggal Lahir</label>
-                      <div class="input-group date">
+                      <div class="input-group">
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" name="tanggal_lahir" value="{{ $pengguna->tgl_lahir }}" class="form-control" id="datepicker" placeholder="dd/mm/yyyy" style="width: 10%">
+                        <input type="text" name="tanggal_lahir" value="{{ $pengguna->tgl_lahir }}" style="width: 8%" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
                       </div>
                     </div>
                     <div class="form-group">
@@ -83,13 +83,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group">
                       <label>Alamat</label>
-                      {{-- <input type="text" name="alamat" value="{{ $pengguna->alamat }}" class="form-control" style="width: 60%"> --}}
+                      <input type="text" name="alamat" value="{{ $pengguna->alamat }}" class="form-control" style="width: 60%">
                       {{-- <textarea class="form-control" name="alamat" rows="3" placeholder="Enter ..." style="width: 25%; text-align: left padding: 0;">
                         {{ trim($pengguna->alamat) }}
                       </textarea> --}}
-                      <div contenteditable="true" name="alamat" style="width: 300px; height: 150px; border: 1px solid #ccc; overflow: auto; padding:8px 8px 8px 8px;">
+                      {{-- <div contenteditable="true" name="alamat" style="width: 300px; height: 150px; border: 1px solid #ccc; overflow: auto; padding:8px 8px 8px 8px;">
                         {{ trim($pengguna->alamat) }}
-                      </div>
+                      </div> --}}
                     </div>
                     <div class="form-group" style="width: 10%">
                       <label>Kidal</label>
@@ -100,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group">
                       <label>Lama pengalaman</label>
-                      <select class="form-control" style="width: 15%" name="lama_pengalaman" value="{{ $pengguna->lama_pnglmn }}">
+                      <select class="form-control" name="lama_pengalaman" value="{{ $pengguna->lama_pnglmn }}" style="width: 15%">
                         <option value="Belum pernah" <?php if($pengguna->lama_pnglmn == 'Belum pernah') echo 'selected'; ?>>Belum pernah</option>
                         <option value="< 3 Bulan" <?php if($pengguna->lama_pnglmn == '< 3 Bulan') echo 'selected'; ?>>< 3 Bulan</option>
                         <option value="> 3 Bulan" <?php if($pengguna->lama_pnglmn == '> 3 Bulan') echo 'selected'; ?>>> 3 Bulan</option>
@@ -121,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputFile">File Foto</label>
+                      <label>File Foto</label>
                       <input type="file" name="foto"> 
                       <p class="help-block">Anda dapat unggah foto profil anda.</p>
                     </div>
