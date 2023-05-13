@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('data_fisik', function (Blueprint $table) {
             $table->unsignedSmallInteger('id_data_fisik')->autoIncrement();
-            $table->unsignedSmallInteger('id_pengguna');
-            $table->foreign('id_pengguna')->references('id_pengguna')->on('pengguna')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id')->on('pengguna')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('tgl');
             $table->float('tinggi', 5, 2);
             $table->float('berat', 5, 2);

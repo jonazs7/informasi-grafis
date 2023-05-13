@@ -11,7 +11,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree" style="margin-top: 50px">
-        <li class="{{ request()->is('berandaTrainer') ? 'active' : '' }}"><a href="/berandaTrainer"><i class="fa fa-dashboard"></i> <span>Beranda</span></a></li>
+        <li class="{{ request()->is('berandaTrainer', 'home') ? 'active' : '' }}"><a href="/berandaTrainer"><i class="fa fa-dashboard"></i> <span>Beranda</span></a></li>
         <li class="{{ request()->is('jadwalTrainer','createKegiatan') ? 'active' : '' }}"><a href="/jadwalTrainer"><i class="fa fa-tasks"></i> <span>Jadwal</span></a></li>
         <li class="{{ request()->is('hasilCapaian',  'detailInfo') ? 'active' : '' }}"><a href="/hasilCapaian"><i class="fa fa-bar-chart"></i> <span>Hasil Capaian</span></a></li>
         <li class="{{ request()->is('anggotaGym') ? 'active' : '' }}"><a href="/anggotaGym"><i class="fa fa-users"></i> <span>Anggota gym</span></a></li>

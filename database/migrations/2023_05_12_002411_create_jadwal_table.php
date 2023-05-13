@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('jadwal', function (Blueprint $table) {
             $table->unsignedSmallInteger('id_jadwal')->autoIncrement();
-            $table->unsignedSmallInteger('id_pengguna');
-            $table->foreign('id_pengguna')->references('id_pengguna')->on('pengguna')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id')->on('pengguna')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->tinyInteger('sesi_latihan');

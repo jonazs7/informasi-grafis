@@ -16,27 +16,33 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
-Route::get('/test', function () {
-    return view('test');
-});
-
-
-// Member Gym
-Route::get('/beranda', [MemberController::class, 'beranda'])->name('beranda');
-Route::get('/jadwal', [MemberController::class, 'jadwal'])->name('jadwal');
-Route::get('/biodata', [MemberController::class, 'biodata'])->name('biodata');
-
-// Trainer Gym
-Route::get('/berandaTrainer', [TrainerController::class, 'beranda'])->name('beranda');
-Route::get('/jadwalTrainer', [TrainerController::class, 'jadwal'])->name('jadwal');
-Route::get('/createKegiatan', [TrainerController::class, 'create_kegiatan'])->name('createKegiatan');
-Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
-Route::get('/detailInfo', [TrainerController::class, 'detail_info'])->name('detailInfo');
-Route::get('/anggotaGym', [TrainerController::class, 'anggota_gym'])->name('anggotaGym');
 Auth::routes();
 
+// Autentifikasi
+Route::get('/', function () {
+    return view('auth.login');
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Member Gym
+Route::middleware(['member'])->group(function(){
+    Route::get('/beranda', [MemberController::class, 'beranda'])->name('beranda');
+    Route::get('/jadwal', [MemberController::class, 'jadwal'])->name('jadwal');
+    Route::get('/biodata', [MemberController::class, 'biodata'])->name('biodata');
+});
+
+// Trainer Gym
+Route::middleware(['trainer'])->group(function(){
+    Route::get('/berandaTrainer', [TrainerController::class, 'beranda'])->name('beranda');
+    Route::get('/jadwalTrainer', [TrainerController::class, 'jadwal'])->name('jadwal');
+    Route::get('/createKegiatan', [TrainerController::class, 'create_kegiatan'])->name('createKegiatan');
+    Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
+    Route::get('/detailInfo', [TrainerController::class, 'detail_info'])->name('detailInfo');
+    Route::get('/anggotaGym', [TrainerController::class, 'anggota_gym'])->name('anggotaGym');
+});
+
+

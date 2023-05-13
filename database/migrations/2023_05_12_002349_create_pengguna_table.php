@@ -14,20 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pengguna', function (Blueprint $table) {
-            $table->unsignedSmallInteger('id_pengguna')->autoIncrement();
-            $table->string('username', 20);
-            $table->string('password', 30);
-            $table->string('level', 10);
-            $table->string('nama_user', 50);
-            $table->date('tgl_lahir');
-            $table->string('gender', 6);
-            $table->string('tlpn', 18);
-            $table->string('alamat', 150);
-            $table->string('kidal', 5);
-            $table->string('lama_pnglmn', 15);
-            $table->string('goal', 30);
-            $table->string('foto', 30);
-            $table->string('path', 50);
+            //$table->unsignedSmallInteger('id_pengguna')->autoIncrement();
+            $table->id();
+            $table->string('name', 50);
+            $table->string('email', 50)->unique();
+            $table->string('password', 100);
+            $table->string('level', 10)->nullable();
+            $table->date('tgl_lahir')->nullable();
+            $table->string('gender', 6)->nullable();
+            $table->string('tlpn', 18)->nullable();
+            $table->string('alamat', 150)->nullable();
+            $table->string('kidal', 5)->nullable();
+            $table->string('lama_pnglmn', 15)->nullable();
+            $table->string('goal', 30)->nullable();
+            $table->string('foto', 30)->nullable();
+            $table->string('path', 50)->nullable();
             $table->timestamps();
         });
     }
