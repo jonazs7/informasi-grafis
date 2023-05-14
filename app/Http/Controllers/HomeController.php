@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Pengguna;
+
+
 class HomeController extends Controller
 {
     /**
@@ -26,10 +29,13 @@ class HomeController extends Controller
     {
         // return view('home');
 
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+    
         if (Auth::user()->level == 'Trainer') { 
-            return view('beranda_trainer');
+            return view('beranda_trainer', ['imageName' => $pengguna->foto]);
         } elseif (Auth::user()->level == 'Member') { 
-            return view('beranda_member');
+            return view('beranda_member', ['imageName' => $pengguna->foto]);
         }
     }
 }

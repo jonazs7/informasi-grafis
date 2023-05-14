@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama Lengkap</label>
-                      <input type="text" name="nama" value="{{ $pengguna->name }}" class="form-control" style="width: 25%">
+                      <input type="text" name="nama_lengkap" value="{{ $pengguna->name }}" class="form-control" style="width: 25%">
                     </div>
                     <div class="form-group">
                       <label>Tanggal Lahir</label>
@@ -121,9 +121,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </select>
                     </div>
                     <div class="form-group">
-                      <label>File Foto</label>
-                      <input type="file" name="foto"> 
+                      <img src="{{ asset('images/' . $imageName) }}" style="width: 10%; height: 10%; margin-top: 8px">
                       <p class="help-block">Anda dapat unggah foto profil anda.</p>
+                      <label>File Foto</label>
+                      <input type="file" name="gambar">   
                     </div>
                     <div style="margin-top: 5%">
                       <button type="submit" class="btn btn-block btn-primary">Simpan</button>

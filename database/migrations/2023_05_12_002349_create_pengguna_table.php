@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pengguna', function (Blueprint $table) {
             //$table->unsignedSmallInteger('id_pengguna')->autoIncrement();
             $table->id();
-            $table->string('name', 50);
+            $table->string('name', 50)->nullable();
             $table->string('email', 50)->unique();
             $table->string('password', 100);
             $table->string('level', 10)->nullable();
@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('lama_pnglmn', 15)->nullable();
             $table->string('goal', 30)->nullable();
             $table->string('foto', 30)->nullable();
-            $table->string('path', 50)->nullable();
             $table->timestamps();
         });
     }

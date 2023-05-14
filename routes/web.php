@@ -34,6 +34,7 @@ Route::middleware(['member'])->group(function(){
     Route::get('/jadwal', [MemberController::class, 'jadwal'])->name('jadwal');
     Route::get('/biodata', [MemberController::class, 'edit_biodata'])->name('edit_biodata');
     Route::post('/biodata/update', [MemberController::class, 'update_biodata'])->name('update_biodata');
+  
 });
 
 // Trainer Gym

@@ -32,7 +32,6 @@ class Pengguna extends Model implements AuthenticatableContract
         'lama_pnglm',
         'goal',
         'foto',
-        'path'
     ];
 
     public function jadwal(){
