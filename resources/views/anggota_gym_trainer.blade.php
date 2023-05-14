@@ -51,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <thead>
             <tr>
               <th>Nama</th>
-              <th>Username</th>
+              <th>Email</th>
               <th>Gender</th>
               <th>Aksi</th>
             </tr>
@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- end text input -->
             <!-- text input -->
             <div class="form-group">
-              <label>Username</label>
+              <label>Email</label>
                 <input type="text" class="form-control">
             </div>
             <!-- end text input -->

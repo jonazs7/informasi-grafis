@@ -4,29 +4,51 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Pengguna;
+use Illuminate\Support\Facades\Auth;
+
+
 class TrainerController extends Controller
 {
     public function beranda(){
-        return view('beranda_trainer');
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('beranda_trainer', ['imageName' => $pengguna->foto]);
     }
 
     public function jadwal(){
-        return view('jadwal_trainer');
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('jadwal_trainer', ['imageName' => $pengguna->foto]);
     }
 
     public function create_kegiatan(){
-        return view('create_kegiatan_trainer');
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('create_kegiatan_trainer', ['imageName' => $pengguna->foto]);
     }
 
     public function hasil_capaian(){
-        return view('hasil_capaian_trainer');
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto]);
     }
 
     public function detail_info(){
-        return view('detail_info_trainer');
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('detail_info_trainer', ['imageName' => $pengguna->foto]);
     }
 
     public function anggota_gym(){
-        return view('anggota_gym_trainer');
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+        
+        return view('anggota_gym_trainer', ['imageName' => $pengguna->foto]);
     }
 }

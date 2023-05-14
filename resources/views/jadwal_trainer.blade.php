@@ -50,7 +50,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <thead>
             <tr>
               <th>Nama</th>
-              <th>Username</th>
+              <th>Email</th>
               <th>Nomor Telepon</th>
               <th>Gender</th>
               <th>Status</th>
