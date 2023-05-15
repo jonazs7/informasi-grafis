@@ -34,7 +34,8 @@ class HomeController extends Controller
     
         if (Auth::user()->level == 'Trainer') { 
             return view('beranda_trainer', ['imageName' => $pengguna->foto]);
-        } elseif (Auth::user()->level == 'Member') { 
+        } 
+        elseif (Auth::user()->level == 'Member') { 
             return view('beranda_member', ['imageName' => $pengguna->foto]);
         }
     }

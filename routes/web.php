@@ -45,6 +45,9 @@ Route::middleware(['trainer'])->group(function(){
     Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
     Route::get('/detailInfo', [TrainerController::class, 'detail_info'])->name('detailInfo');
     Route::get('/anggotaGym', [TrainerController::class, 'anggota_gym'])->name('anggotaGym');
+    Route::post('/anggotaGym', [TrainerController::class, 'save_anggota_gym'])->name('save_anggotaGym');
+    Route::delete('/anggotaGym/{kode}', [TrainerController::class, 'delete_anggota_gym'])->name('delete_anggota_gym');
+
 });
 
 

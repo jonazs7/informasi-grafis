@@ -35,6 +35,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
+      @if(session('success'))
+      <div class="alert alert-success alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Berhasil !</h4>
+        {{ session('success') }}
+      </div>
+      @endif
+      @if(session('berhasil'))
+      <div class="alert alert-success alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Berhasil !</h4>
+        {{ session('berhasil') }}
+      </div>
+      @endif
     </section>
 
     <!-- Main content -->
@@ -57,22 +71,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>Thenmust</td>
-              <td>thenmust_pro</td>
-              <td>Pria</td>
-              <td>
-                <button type="button" class="btn btn-danger btn-sm">Hapus</button>
-              </td>
-            </tr>
-            <tr>
+              @foreach ($show_pengguna as $pengguna)
+              <tr>
+                <td>{{ $pengguna->name }}</td>
+                <td>{{ $pengguna->email }}</td>
+                <td>{{ $pengguna->gender }}</td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default-hapus">Hapus</button>
+                </td>
+              </tr>
+              @endforeach
+            {{-- <tr>
               <td>Andriene Watson</td>
               <td>andrienewatson82</td>
               <td>Wanita</td>
               <td>
                 <button type="button" class="btn btn-danger btn-sm">Hapus</button>
               </td>
-            </tr>
+            </tr> --}}
             </tbody>
           </table>
         </div>
@@ -95,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 
-<!-- modal -->
+<!-- modal tambah anggota -->
 <div class="modal fade" id="modal-default-anggota">
   <div class="modal-dialog">
       <div class="modal-content">
@@ -105,37 +121,85 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <h4 class="modal-title">Tambah Anggota Gym Baru</h4>
           </div>
           <div class="modal-body">
+            <form method="POST" action="{{ route('save_anggotaGym') }}">
+              @csrf
             <!-- text input -->
             <div class="form-group">
               <label>Nama Lengkap</label>
-                <input type="text" class="form-control">
+                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <!-- end text input -->
             <!-- text input -->
             <div class="form-group">
               <label>Email</label>
-                <input type="text" class="form-control">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <!-- end text input -->
             <!-- text input -->
             <div class="form-group">
               <label>Password</label>
-                <input type="password" class="form-control">
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <!-- end text input -->
             <!-- text input -->
             <div class="form-group">
               <label>Password Konfirmasi</label>
-                <input type="password" class="form-control">
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             </div>
             <!-- end text input -->
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-              <button type="button" class="btn btn-primary">Tambah</button>
+              <button type="submit" class="btn btn-primary">Tambah</button>
           </div>
+        </form>
       </div>
       <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- modal hapus anggota -->
+<div class="modal fade" id="modal-default-hapus">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Alert</h4>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin ingin menghapus data ini&hellip;?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="{{ route('delete_anggota_gym', $pengguna->id) }}" method="post">
+          @csrf
+          @method('DELETE')
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary">Yakin</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
