@@ -58,18 +58,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>Thenmust</td>
-              <td>thenmust_pro</td>
-              <td>0821-3113-4354</td>
-              <td>Pria</td>
-              <td>Proses</td>
-              <td>
-                <button type="button" class="btn btn-primary btn-sm">Kegiatan</button>
-                <button type="button" class="btn btn-default btn-sm" style="margin-left: 8px">profil</button>
-              </td>
-            </tr>
-            <tr>
+              @foreach ($show_pengguna as $pengguna)
+              <tr>
+                <td>{{ $pengguna->name }}</td>
+                <td>{{ $pengguna->email }}</td>
+                <td>{{ $pengguna->tlpn }}</td>
+                <td>{{ $pengguna->gender }}</td>
+                <td>{{ $pengguna->status }}</td>
+                <td>
+                  <a type="button" class="btn btn-primary btn-sm" href="{{ route('createKegiatan', $pengguna->id) }}">Kegiatan</a>
+                  <button type="button" class="btn btn-default btn-sm" style="margin-left: 8px">profil</button>
+                </td>
+              </tr>
+              @endforeach
+            {{-- <tr>
               <td>Andriene Watson</td>
               <td>andrienewatson82</td>
               <td>0816-1312-2334</td>
@@ -79,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <button type="button" class="btn btn-primary btn-sm">Kegiatan</button>
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-default" style="margin-left: 8px">profil</button>
               </td>
-            </tr>
+            </tr> --}}
             </tbody>
           </table>
         </div>

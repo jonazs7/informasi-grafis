@@ -23,7 +23,12 @@ class TrainerController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('jadwal_trainer', ['imageName' => $pengguna->foto]);
+        $show_pengguna = DB::table('pengguna')
+            ->leftjoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
+            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender', 'jadwal.status') // bisa dihapus biar kebaca idnya ntar
+            ->get();
+
+        return view('jadwal_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
     }
 
     public function create_kegiatan(){
