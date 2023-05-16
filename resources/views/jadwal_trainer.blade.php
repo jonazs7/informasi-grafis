@@ -67,7 +67,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $pengguna->status }}</td>
                 <td>
                   <a type="button" class="btn btn-primary btn-sm" href="{{ route('createKegiatan', $pengguna->id) }}">Kegiatan</a>
-                  <button type="button" class="btn btn-default btn-sm" style="margin-left: 8px">profil</button>
+                  <button type="button" class="btn btn-default btn-sm" 
+                  data-toggle="modal" data-target="#modal-default" style="margin-left: 8px">Profil</button>
                 </td>
               </tr>
               @endforeach
@@ -104,21 +105,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 
-<!-- modal -->
+<!-- modal profil -->
 <div class="modal fade" id="modal-default">
-  <div class="modal-dialog" style="width: 30%">
+  <div class="modal-dialog" style="width: 20%">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Profil Thenmust</h4>
-        <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+        <h4 class="modal-title" style="text-align: center">Profil Thenmust</h4>
+        <div style="display: grid; place-items: center; margin-top: 8px; margin-bottom: 8px;">
+          <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+        </div>
       </div>
       <div class="modal-body">
         <p>Tanggal lahir : 21 Maret 2002</p>
         <p>Gender : Pria</p>
         <p>No Telepon : 0821-3113-4354</p>
-        <p>Alamat : Banguntapan, Jalan Pasar Telo</p>
+        <p>Alamat : Jl. Tritunggal No.4, Salakan, Sorosutan, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55162</p>
         <p>Kidal : Ya</p>
         <p>Lama pengalaman : < 3 Bulan</p>
         <p>Goal : Increase Muscle Size</p>

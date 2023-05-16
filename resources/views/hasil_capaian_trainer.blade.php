@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                   </ul>
 
-                  <div class="row">
+                  <div class="row" style="display: flex; justify-content: center">
                     <div class="chart col-md-6" id="sales-chart1" style="height: 150px; width: 150px;"></div>
                     <div class="chart col-md-6" id="sales-chart2" style="height: 150px; width: 150px;"></div>
                   </div>
@@ -124,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                   </ul>
 
-                  <div class="row">
+                  <div class="row" style="display: flex; justify-content: center">
                     <div class="chart col-md-6" id="sales-chart3" style="height: 150px; width: 150px;"></div>
                     <div class="chart col-md-6" id="sales-chart4" style="height: 150px; width: 150px;"></div>
                   </div>

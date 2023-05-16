@@ -25,17 +25,35 @@ class TrainerController extends Controller
 
         $show_pengguna = DB::table('pengguna')
             ->leftjoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
-            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender', 'jadwal.status') // bisa dihapus biar kebaca idnya ntar
+            ->where('level', 'Member')
+            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender', 'jadwal.status') // bisa dihapus biar kebaca idnya ntar, karena kalau pake select harus sama dengan yg diviewnya ketika ditampilin
+            ->distinct() // menghilangkan duplikasi data saat penampilan data
             ->get();
 
         return view('jadwal_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
     }
 
-    public function create_kegiatan(){
+    public function create_kegiatan($id){
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('create_kegiatan_trainer', ['imageName' => $pengguna->foto]);
+
+        // untuk nampilin makek join table, bisa makek ini, bisa nda
+        // $show_kegiatan = DB::table('jadwal')
+        //     ->join('pengguna', 'pengguna.id', '=', 'jadwal.id_pengguna')
+        //     ->where('id_pengguna', $id)
+        //     ->get();
+
+        $show_kegiatan = DB::table('jadwal')
+            ->where('id_pengguna', $id)
+            ->get();
+
+        $nama_user = Pengguna::find($id);
+
+        // untuk querystring berdasarkan email
+        // $nama_user =  Pengguna::where('email', $id)->first(); 
+
+        return view('create_kegiatan_trainer', ['imageName' => $pengguna->foto, 'show_kegiatan' => $show_kegiatan, 'nama_user' => $nama_user]);
     }
 
     public function hasil_capaian(){

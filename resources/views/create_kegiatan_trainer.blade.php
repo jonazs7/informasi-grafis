@@ -30,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Program Kebugaran, Thenmust
+                    Program Kebugaran, {{ $nama_user->name }}
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -61,6 +61,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($show_kegiatan as $kegiatan)
+                                <tr>
+                                    <td>{{ $kegiatan->tgl_mulai }}</td>
+                                    <td>{{ $kegiatan->tgl_selesai }}</td>
+                                    <td>{{ $kegiatan->sesi_latihan }}</td>
+                                    <td>{{ $kegiatan->jenis_latihan }}</td>
+                                    <td>{{ $kegiatan->status }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
