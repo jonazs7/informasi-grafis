@@ -67,8 +67,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $pengguna->status }}</td>
                 <td>
                   <a type="button" class="btn btn-primary btn-sm" href="{{ route('createKegiatan', $pengguna->id) }}">Kegiatan</a>
-                  <button type="button" class="btn btn-default btn-sm" 
-                  data-toggle="modal" data-target="#modal-default" style="margin-left: 8px">Profil</button>
+                  <a type="button" class="btn btn-default btn-sm profile-button" data-toggle="modal" 
+                  data-target="#modal-default-profile" data-id="{{ $pengguna->id }}" style="margin-left: 8px">Profil</a>
                 </td>
               </tr>
               @endforeach
@@ -106,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 <!-- modal profil -->
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-default-profile">
   <div class="modal-dialog" style="width: 20%">
     <div class="modal-content">
       <div class="modal-header">
@@ -118,13 +118,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </div>
       <div class="modal-body">
-        <p>Tanggal lahir : 21 Maret 2002</p>
-        <p>Gender : Pria</p>
-        <p>No Telepon : 0821-3113-4354</p>
-        <p>Alamat : Jl. Tritunggal No.4, Salakan, Sorosutan, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55162</p>
-        <p>Kidal : Ya</p>
-        <p>Lama pengalaman : < 3 Bulan</p>
-        <p>Goal : Increase Muscle Size</p>
+        <div style="display: flex;">
+          <p>Tanggal lahir &nbsp;:</p><p style="margin-left: 4px" id='tanggal_lahir'>Tanggal lahir :</p>
+        </div>
+        <div style="display: flex;">
+          <p>Gender &nbsp;:</p><p style="margin-left: 4px" id='gender'></p>
+        </div>
+        <div style="display: flex;">
+          <p>No Telepon &nbsp;:</p><p style="margin-left: 4px" id='telepon'></p>
+        </div>
+        <div style="">
+          <p>Alamat &nbsp;:</p><p style="margin-left: 4px" id='alamat'></p>
+        </div>
+        <div style="display: flex;">
+          <p>Kidal &nbsp;:</p><p style="margin-left: 4px" id='kidal'></p>
+        </div>
+        <div style="display: flex;">
+          <p>Lama pengalaman &nbsp;:</p><p style="margin-left: 4px" id='lama_pengalaman'></p>
+        </div>
+        <div style="display: flex;">
+          <p>Goal &nbsp;:</p><p style="margin-left: 4px" id='goal'></p>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
@@ -135,5 +149,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+<script>
+  $(document).ready(function() {
+      $('.profile-button').click(function() {
+          var userId = $(this).data('id');
+          var url = "{{ route('show_profile_anggota', ':id') }}".replace(':id', userId);
+          
+      // Mengirim permintaan AJAX ke backend Laravel
+      $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(response) {
+                    // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
+                    $('#tanggal_lahir').text(response.tgl_lahir);
+                    $('#gender').text(response.gender);
+                    $('#telepon').text(response.tlpn);
+                    $('#alamat').text(response.alamat); // --> make .text kalau dalam bentuk tag p html, .val dalam tag inputan form
+                    $('#kidal').text(response.kidal);
+                    $('#lama_pengalaman').text(response.lama_pnglmn);
+                    $('#goal').text(response.goal);
+                   
+                    // Isikan dengan data profil pengguna lainnya
+                    console.log(url)
+                },
+                error: function(xhr) {
+                    // Tangani jika terjadi kesalahan pada permintaan AJAX
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

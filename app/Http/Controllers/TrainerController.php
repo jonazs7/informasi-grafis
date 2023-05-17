@@ -56,6 +56,12 @@ class TrainerController extends Controller
         return view('create_kegiatan_trainer', ['imageName' => $pengguna->foto, 'show_kegiatan' => $show_kegiatan, 'nama_user' => $nama_user]);
     }
 
+    public function show_profile_anggota($id){
+        $cari_pengguna = Pengguna::findOrFail($id); // Mengambil data pengguna berdasarkan ID
+        
+        return response()->json($cari_pengguna);
+    }
+
     public function hasil_capaian(){
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
