@@ -22,6 +22,9 @@ class JadwalSeeder extends Seeder
             ['id_pengguna' => '1', 'tgl_mulai' => '2023-03-15', 'tgl_selesai' => '2023-04-15', 'sesi_latihan' => '6',
             'jenis_latihan' => 'Pull', 'status' => 'Selesai'],
 
+            ['id_pengguna' => '1', 'tgl_mulai' => '2023-02-10', 'tgl_selesai' => '2023-03-10', 'sesi_latihan' => '10',
+            'jenis_latihan' => 'Back', 'status' => 'Proses'],
+
             ['id_pengguna' => '3', 'tgl_mulai' => '2023-06-15', 'tgl_selesai' => '2023-06-15', 'sesi_latihan' => '8',
             'jenis_latihan' => 'Bisep', 'status' => 'Selesai'],
 

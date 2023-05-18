@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->tinyInteger('sesi_latihan');
-            $table->string('jenis_latihan', 25);
+            $table->string('jenis_latihan', 100);
             $table->string('status', 10);
             $table->timestamps();
         });

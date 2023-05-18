@@ -53,7 +53,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>Email</th>
               <th>Nomor Telepon</th>
               <th>Gender</th>
-              <th>Status</th>
               <th>Aksi</th>
             </tr>
             </thead>
@@ -64,9 +63,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $pengguna->email }}</td>
                 <td>{{ $pengguna->tlpn }}</td>
                 <td>{{ $pengguna->gender }}</td>
-                <td>{{ $pengguna->status }}</td>
                 <td>
-                  <a type="button" class="btn btn-primary btn-sm" href="{{ route('createKegiatan', $pengguna->id) }}">Kegiatan</a>
+                  <a type="button" class="btn btn-primary btn-sm" href="{{ route('lihatKegiatan', $pengguna->id) }}">Kegiatan</a>
                   <a type="button" class="btn btn-default btn-sm profile-button" data-toggle="modal" 
                   data-target="#modal-default-profile" data-id="{{ $pengguna->id }}" style="margin-left: 8px">Profil</a>
                 </td>
@@ -107,12 +105,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- modal profil -->
 <div class="modal fade" id="modal-default-profile">
-  <div class="modal-dialog" style="width: 20%">
+  <div class="modal-dialog" style="width: 25%">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" style="text-align: center">Profil Thenmust</h4>
+          <div style="display: flex; justify-content: center;">
+            <h4 class="modal-title" >Profil</h4> &nbsp;&nbsp; <br>
+            <h4 class="modal-title" id='nama'></h4>
+          </div>
+        
+        
         <div style="display: grid; place-items: center; margin-top: 8px; margin-bottom: 8px;">
           <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
@@ -127,7 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div style="display: flex;">
           <p>No Telepon &nbsp;:</p><p style="margin-left: 4px" id='telepon'></p>
         </div>
-        <div style="">
+        <div style="display: flex;">
           <p>Alamat &nbsp;:</p><p style="margin-left: 4px" id='alamat'></p>
         </div>
         <div style="display: flex;">
@@ -163,6 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 method: 'GET',
                 success: function(response) {
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
+                    $('#nama').text(response.name);
                     $('#tanggal_lahir').text(response.tgl_lahir);
                     $('#gender').text(response.gender);
                     $('#telepon').text(response.tlpn);

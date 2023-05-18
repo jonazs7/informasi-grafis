@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Pengguna;
+use App\Models\Jadwal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request\fill;
 
 
 class TrainerController extends Controller
@@ -26,19 +28,18 @@ class TrainerController extends Controller
         $show_pengguna = DB::table('pengguna')
             ->leftjoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
             ->where('level', 'Member')
-            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender', 'jadwal.status') // bisa dihapus biar kebaca idnya ntar, karena kalau pake select harus sama dengan yg diviewnya ketika ditampilin
+            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender') // bisa dihapus biar kebaca idnya ntar, karena kalau pake select harus sama dengan yg diviewnya ketika ditampilin
             ->distinct() // menghilangkan duplikasi data saat penampilan data
             ->get();
 
         return view('jadwal_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
     }
 
-    public function create_kegiatan($id){
+    public function lihat_kegiatan($id){
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-
-        // untuk nampilin makek join table, bisa makek ini, bisa nda
+        //untuk nampilin makek join table, bisa makek ini, bisa nda
         // $show_kegiatan = DB::table('jadwal')
         //     ->join('pengguna', 'pengguna.id', '=', 'jadwal.id_pengguna')
         //     ->where('id_pengguna', $id)
@@ -48,12 +49,40 @@ class TrainerController extends Controller
             ->where('id_pengguna', $id)
             ->get();
 
-        $nama_user = Pengguna::find($id);
+        $nama_pengguna = Pengguna::find($id);
 
         // untuk querystring berdasarkan email
-        // $nama_user =  Pengguna::where('email', $id)->first(); 
+        // $nama_pengguna =  Pengguna::where('email', $id)->first(); 
 
-        return view('create_kegiatan_trainer', ['imageName' => $pengguna->foto, 'show_kegiatan' => $show_kegiatan, 'nama_user' => $nama_user]);
+        return view('lihat_kegiatan_trainer', ['imageName' => $pengguna->foto, 'show_kegiatan' => $show_kegiatan, 'nama_pengguna' => $nama_pengguna]);
+    }
+
+    public function save_kegiatan(Request $request){
+        $program_latihan = implode(', ', $request->input('jenis_latihan'));
+
+        Jadwal::create([
+            'id_pengguna' => $request->input('kode_pengguna'),
+            'tgl_mulai' => $request->input('tanggal_mulai'),
+            'tgl_selesai' => $request->input('tanggal_selesai'),
+            'sesi_latihan' => $request->input('sesi_latihan'),
+            'status' => 'Proses',
+            'jenis_latihan' => $program_latihan
+        ]);
+
+        // $jadwal = new Jadwal();
+        // $jadwal->id_pengguna = $request->kode_pengguna;
+        // $jadwal->tgl_mulai = $request->tanggal_mulai;
+        // $jadwal->tgl_selesai = $request->tanggal_selesai;
+        // $jadwal->sesi_latihan = $request->sesi_latihan;
+        // $jadwal->status = 'Proses';
+        // $jadwal->save();
+        return back();
+    }
+
+    public function delete_kegiatan(Request $request){
+        $id = $request->input('id');
+        $jadwal = Jadwal::find($id);
+        $jadwal->delete();;
     }
 
     public function show_profile_anggota($id){

@@ -115,57 +115,57 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="modal fade" id="modal-default-anggota">
   <div class="modal-dialog">
       <div class="modal-content">
+        <form method="POST" action="{{ route('save_anggotaGym') }}">
+          @csrf
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">Tambah Anggota Gym Baru</h4>
           </div>
-          <div class="modal-body">
-            <form method="POST" action="{{ route('save_anggotaGym') }}">
-              @csrf
-            <!-- text input -->
-            <div class="form-group">
-              <label>Nama Lengkap</label>
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            <div class="modal-body">
+              <!-- text input -->
+              <div class="form-group">
+                <label>Nama Lengkap</label>
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <!-- end text input -->
-            <!-- text input -->
-            <div class="form-group">
-              <label>Email</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                  @error('name')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+              </div>
+              <!-- end text input -->
+              <!-- text input -->
+              <div class="form-group">
+                <label>Email</label>
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <!-- end text input -->
-            <!-- text input -->
-            <div class="form-group">
-              <label>Password</label>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                  @error('email')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+              <!-- end text input -->
+              <!-- text input -->
+              <div class="form-group">
+                <label>Password</label>
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                  @error('password')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+              <!-- end text input -->
+              <!-- text input -->
+              <div class="form-group">
+                <label>Password Konfirmasi</label>
+                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+              </div>
+              <!-- end text input -->
             </div>
-            <!-- end text input -->
-            <!-- text input -->
-            <div class="form-group">
-              <label>Password Konfirmasi</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-            </div>
-            <!-- end text input -->
-          </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
               <button type="submit" class="btn btn-primary">Tambah</button>
