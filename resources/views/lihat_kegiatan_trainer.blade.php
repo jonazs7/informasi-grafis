@@ -52,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>Id Jadwal</th>
                                     <th>Tanggal Mulai</th>
                                     <th>Tanggal Selesai</th>
                                     <th>Sesi Latihan</th>
@@ -63,18 +64,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <tbody>
                                 @foreach ($show_kegiatan as $kegiatan)
                                 <tr>
+                                    <td>{{ $kegiatan->id_jadwal }}</td>
                                     <td>{{ $kegiatan->tgl_mulai }}</td>
                                     <td>{{ $kegiatan->tgl_selesai }}</td>
                                     <td>{{ $kegiatan->sesi_latihan }}</td>
                                     <td>{{ $kegiatan->jenis_latihan }}</td>
                                     <td>{{ $kegiatan->status }}</td>
                                     <td>
-                                        <form action="{{ route('deleteKegiatan', $kegiatan->id_jadwal) }}" method="post">
+                                        {{-- <form action="{{ route('deleteKegiatan', $kegiatan->id_jadwal) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                        
+                                            <input type="text" name="id" value="{{ $kegiatan->id_jadwal }}">
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                        </form>
+                                        </form> --}}
+                                        <button type="button" class="btn btn-danger btn-sm" 
+                                        data-toggle="modal" data-target="#modal-default-hapus-kegiatan" 
+                                        data-id="{{ $kegiatan->id_jadwal }}">Hapus</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -98,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
 
-    <!-- modal -->
+    <!-- modal tambah kegiatan -->
     <div class="modal fade" id="modal-default-kegiatan">
         <div class="modal-dialog" style="width: 20%">
             <div class="modal-content">
@@ -211,7 +216,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <p>Apakah anda yakin ingin menghapus data ini&hellip;?</p>
             </div>
             <div class="modal-footer">
-            <form action="{{ route('deleteKegiatan') }}" method="post">
+            <form action="" id="deleteFormKegiatan" method="post">
                 @csrf
                 @method('DELETE')
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
@@ -224,5 +229,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+
+<script>
+    $('#modal-default-hapus-kegiatan').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var form = $('#deleteFormKegiatan');
+        var url = '{{ route("deleteKegiatan", ":id") }}';
+        url = url.replace(':id', id);
+        form.attr('action', url);
+        console.log(url);
+    });
+</script>
 </body>
 </html>

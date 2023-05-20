@@ -41,7 +41,6 @@ Route::middleware(['member'])->group(function(){
 Route::middleware(['trainer'])->group(function(){
     Route::get('/berandaTrainer', [TrainerController::class, 'beranda'])->name('beranda');
     Route::get('/jadwalTrainer', [TrainerController::class, 'jadwal'])->name('jadwal');
-    //Route::get('/createKegiatan', [TrainerController::class, 'create_kegiatan'])->name('createKegiatan');
     Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
     Route::get('/detailInfo', [TrainerController::class, 'detail_info'])->name('detailInfo');
     Route::get('/anggotaGym', [TrainerController::class, 'anggota_gym'])->name('anggotaGym');
@@ -50,7 +49,7 @@ Route::middleware(['trainer'])->group(function(){
     Route::get('/lihatKegiatan/{id}', [TrainerController::class, 'lihat_kegiatan'])->name('lihatKegiatan');
     Route::get('/profileAnggota/{id}', [TrainerController::class, 'show_profile_anggota'])->name('show_profile_anggota');
     Route::post('/saveKegiatan', [TrainerController::class, 'save_kegiatan'])->name('save_kegiatan');
-    Route::delete('/deleteKegiatan', [TrainerController::class, 'delete_kegiatan'])->name('deleteKegiatan');
+    Route::delete('/deleteKegiatan/{kode_jadwal}', [TrainerController::class, 'delete_kegiatan'])->name('deleteKegiatan');
 
 
 });

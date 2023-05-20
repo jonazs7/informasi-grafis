@@ -79,10 +79,24 @@ class TrainerController extends Controller
         return back();
     }
 
-    public function delete_kegiatan(Request $request){
-        $id = $request->input('id');
-        $jadwal = Jadwal::find($id);
-        $jadwal->delete();;
+    public function delete_kegiatan($kode_jadwal){
+        // $idJadwal = $request->query('id_jadwal');
+
+        // $jadwal = Jadwal::find($idJadwal);
+
+        // if (!$jadwal) {
+        //     return redirect()->route('tampil.jadwal')->with('error', 'Data tidak ditemukan');
+        // }
+
+        // $jadwal->delete();
+
+        // return redirect()->route('tampil.jadwal')->with('success', 'Data berhasil dihapus');
+
+        DB::table('jadwal')
+        ->where('id_jadwal', $kode_jadwal)
+        ->delete();
+
+        return back();
     }
 
     public function show_profile_anggota($id){
