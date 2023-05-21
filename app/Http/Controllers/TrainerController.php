@@ -35,7 +35,7 @@ class TrainerController extends Controller
         return view('jadwal_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
     }
 
-    public function lihat_kegiatan($id){
+    public function show_kegiatan($id){
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 

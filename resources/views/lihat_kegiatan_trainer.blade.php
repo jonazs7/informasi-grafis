@@ -51,8 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="box-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
-                                <tr>
-                                    <th>Id Jadwal</th>
+                                <tr> 
                                     <th>Tanggal Mulai</th>
                                     <th>Tanggal Selesai</th>
                                     <th>Sesi Latihan</th>
@@ -64,7 +63,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <tbody>
                                 @foreach ($show_kegiatan as $kegiatan)
                                 <tr>
-                                    <td>{{ $kegiatan->id_jadwal }}</td>
                                     <td>{{ $kegiatan->tgl_mulai }}</td>
                                     <td>{{ $kegiatan->tgl_selesai }}</td>
                                     <td>{{ $kegiatan->sesi_latihan }}</td>
