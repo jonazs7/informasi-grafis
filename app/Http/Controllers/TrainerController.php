@@ -109,7 +109,17 @@ class TrainerController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto]);
+        $show_capaian = DB::table('pengguna')
+        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+        ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.name', 'pengguna.level', 'pengguna.email',
+        'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bm'), DB::raw('AVG(body_fat) as rerata_bp'))
+      
+        ->where('level', '=', 'Member')
+        ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
+        'pengguna.tlpn', 'pengguna.gender')
+        ->get();
+
+        return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto, 'show_capaian' => $show_capaian]);
     }
 
     public function detail_info(){

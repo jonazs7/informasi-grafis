@@ -41,6 +41,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <section class="content container-fluid">
         <div class="row">
 
+          <table>
+            <th>Nama</th>
+            <th>level</th>
+            <th>email</th>
+            <th>tlpn</th>
+            <th>gender</th>
+            <th>body mass</th>
+            <th>body fat</th>
+
+          @foreach ($show_capaian as $capaian)
+          <tr>
+            <td>{{ $capaian->name }}</td>
+            <td>{{ $capaian->level }}</td>
+            <td>{{ $capaian->email }}</td>
+            <td>{{ $capaian->tlpn }}</td>
+            <td>{{ $capaian->gender }}</td>
+            <td>{{ $capaian->rerata_bm }}</td>
+            <td>{{ $capaian->rerata_bp }}</td>
+          </tr>
+              
+          @endforeach
+          </table>
+
             <div class="col-md-3">
               <!-- Profile Image -->
               <div class="box box-primary">
