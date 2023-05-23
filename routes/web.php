@@ -50,6 +50,7 @@ Route::middleware(['trainer'])->group(function(){
     Route::get('/profileAnggota/{id}', [TrainerController::class, 'show_profile_anggota'])->name('show_profile_anggota');
     Route::post('/saveKegiatan', [TrainerController::class, 'save_kegiatan'])->name('save_kegiatan');
     Route::delete('/deleteKegiatan/{kode_jadwal}', [TrainerController::class, 'delete_kegiatan'])->name('deleteKegiatan');
+    Route::get('editKegiatan/{id}', [TrainerController::class, 'edit_kegiatan'])->name('editKegiatan');
 
 
 });

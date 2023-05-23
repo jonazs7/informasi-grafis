@@ -51,6 +51,8 @@ class TrainerController extends Controller
 
         $nama_pengguna = Pengguna::find($id);
 
+       
+
         // untuk querystring berdasarkan email
         // $nama_pengguna =  Pengguna::where('email', $id)->first(); 
 
@@ -97,6 +99,12 @@ class TrainerController extends Controller
         ->delete();
 
         return back();
+    }
+
+    public function edit_kegiatan($id){
+        $cari_kegiatan = Jadwal::findOrFail($id); // Mengambil data pengguna berdasarkan ID
+        
+        return response()->json($cari_kegiatan);
     }
 
     public function show_profile_anggota($id){

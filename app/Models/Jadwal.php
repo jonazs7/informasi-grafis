@@ -11,6 +11,7 @@ class Jadwal extends Model
 
     protected $fillable = [
         'id_pengguna',
+        'goal',
         'tgl_mulai',
         'tgl_selesai',
         'sesi_latihan',

@@ -30,7 +30,6 @@ class Pengguna extends Model implements AuthenticatableContract
         'alamat',
         'kidal',
         'lama_pnglm',
-        'goal',
         'foto',
     ];
 

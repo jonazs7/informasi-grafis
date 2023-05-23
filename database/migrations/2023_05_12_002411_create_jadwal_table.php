@@ -17,11 +17,12 @@ return new class extends Migration
             $table->unsignedSmallInteger('id_jadwal')->autoIncrement();
             $table->unsignedBigInteger('id_pengguna');
             $table->foreign('id_pengguna')->references('id')->on('pengguna')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('tgl_mulai');
-            $table->date('tgl_selesai');
-            $table->tinyInteger('sesi_latihan');
-            $table->string('jenis_latihan', 100);
-            $table->string('status', 10);
+            $table->string('goal', 30)->nullable();
+            $table->date('tgl_mulai')->nullable();
+            $table->date('tgl_selesai')->nullable();
+            $table->tinyInteger('sesi_latihan')->nullable();
+            $table->string('jenis_latihan', 100)->nullable();
+            $table->string('status', 10)->nullable();
             $table->timestamps();
         });
     }
