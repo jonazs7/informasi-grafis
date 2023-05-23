@@ -64,13 +64,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @endforeach
           </table>
 
+          
+          @foreach ($show_capaian as $capaian)
             <div class="col-md-3">
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="{{ asset('lte/dist/img/user4-128x128.jpg') }}" alt="User profile picture">
-                  <h3 class="profile-username text-center">Thenmust</h3>
-                  <p class="text-muted text-center">Member</p>
+                  <img class="profile-user-img img-responsive img-circle" src="{{ asset('images/' . $capaian->foto) }}" 
+                  style="width: 100px; height: 100px;">
+                  <h3 class="profile-username text-center">{{ $capaian->name }}</h3>
+                  <p class="text-muted text-center">{{ $capaian->level }}</p>
                   <table class="table text-center">
                     <td>
                         <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal" 
@@ -80,23 +83,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <button type="button" class="btn btn-block btn-default btn-sm">Detail Info</button>
                     </td>
                   </table>
-                  {{-- <div style="display: flex; justify-content: center">
-                    <button type="button" class="btn btn-primary btn-sm" style="">Tambah Data</button>
-                    <button type="button" class="btn btn-default btn-sm">Detail Info</button>
-                  </div> --}}
                   <div style="margin-top: 12px; margin-bottom: 12px">
                     <b style="font-size: 18px">Informasi Kontak</b>
-                  </div>
-                 
+                  </div>           
                   <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                      <b class="fa fa-envelope"></b> <a style="margin-left: 12px">thenmust_pro</a>
+                      <b class="fa fa-envelope"></b> <a style="margin-left: 12px">{{ $capaian->email }}</a>
                     </li>
                     <li class="list-group-item">
-                      <b class="fa fa-phone"></b> <a style="margin-left: 12px">0812-3113-4354</a>
+                      <b class="fa fa-phone"></b> <a style="margin-left: 12px">{{ $capaian->tlpn }}</a>
                     </li>
                     <li class="list-group-item">
-                      <b class="fa fa-map-pin"></b> <a style="margin-left: 12px">Banguntapan, Jalan Pasar Telo</a>
+                      <b class="fa fa-map-pin"></b> <a style="margin-left: 12px">{{ $capaian->gender }}</a>
                     </li>
                   </ul>
 
@@ -110,8 +108,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.box -->
             </div>
             <!-- /.col -->
+          @endforeach
+            
 
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
@@ -127,10 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <button type="button" class="btn btn-block btn-default btn-sm">Detail Info</button>
                     </td>
                   </table>
-                  {{-- <div style="display: flex; justify-content: center">
-                    <button type="button" class="btn btn-primary btn-sm" style="">Tambah Data</button>
-                    <button type="button" class="btn btn-default btn-sm">Detail Info</button>
-                  </div> --}}
+
                   <div style="margin-top: 12px; margin-bottom: 12px">
                     <b style="font-size: 18px">Informasi Kontak</b>
                   </div>
@@ -156,7 +153,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <!-- /.box -->
             </div>
-            <!-- /.col -->
+            <!-- /.col --> --}}
+            
         </div>
         <!-- /.row -->
 

@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Auth;
 //     return view('test');
 // });
 
-Auth::routes();
 
 // Autentifikasi
+Auth::routes();
 Route::get('/', function () {
     return view('auth.login');
 });

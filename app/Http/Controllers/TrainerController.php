@@ -111,11 +111,10 @@ class TrainerController extends Controller
 
         $show_capaian = DB::table('pengguna')
         ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
-        ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.name', 'pengguna.level', 'pengguna.email',
+        ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
         'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bm'), DB::raw('AVG(body_fat) as rerata_bp'))
-      
         ->where('level', '=', 'Member')
-        ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
+        ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
         'pengguna.tlpn', 'pengguna.gender')
         ->get();
 

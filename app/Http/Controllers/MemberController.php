@@ -38,6 +38,11 @@ class MemberController extends Controller
         // Mengambil data formulir yang akan diperbarui
         $pengguna = Pengguna::where('id', $user->id)->first();
 
+        // Validasi resolusi gambar
+        // $this->validate($request, [
+        //     'gambar' => 'dimensions:max_width=128, max_height=128',
+        // ]);
+
         // Perbarui data formulir
         $pengguna->name = $request->input('nama_lengkap');
         $pengguna->tgl_lahir = $request->input('tanggal_lahir');

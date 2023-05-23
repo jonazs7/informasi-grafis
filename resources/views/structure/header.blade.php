@@ -32,7 +32,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               {{-- <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image"> --}}
-              <img src="{{ asset('images/' . $imageName) }}" class="user-image" alt="User Image">
+              <img src="{{ asset('images/' . $imageName) }}" class="user-image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
@@ -40,10 +40,15 @@
               <!-- The user image in the menu -->
               <li class="user-header">
                 {{-- <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image"> --}}
-                <img src="{{ asset('images/' . $imageName) }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('images/' . $imageName) }}" class="img-circle">
                 <p>
                   {{ Auth::user()->name }} - {{ Auth::user()->level }}
-                  <small>Member sejak {{ Auth::user()->created_at->format('j F Y') }}</small>
+
+                  @if (Auth::user()->level === 'Member' )   
+                    <small>Member sejak {{ Auth::user()->created_at->format('j F Y') }}</small>     
+                  @else
+                    <small>Trainer sejak {{ Auth::user()->created_at->format('j F Y') }}</small>
+                  @endif
                 </p>
               </li>
               <!-- Menu Body -->
