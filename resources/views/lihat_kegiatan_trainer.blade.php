@@ -52,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr> 
-                                    <th>ID Jadwal</th>
+                                    <th>No</th>
                                     <th>Goal</th>
                                     <th>Tanggal Mulai</th>
                                     <th>Tanggal Selesai</th>
@@ -63,9 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($show_kegiatan as $kegiatan)
+                                @foreach ($show_kegiatan as $no => $kegiatan)
                                 <tr>
-                                    <td>{{ $kegiatan->id_jadwal }}</td>
+                                    <td>{{ $no + 1 }}</td>
                                     <td>{{ $kegiatan->goal }}</td>
                                     <td>{{ $kegiatan->tgl_mulai }}</td>
                                     <td>{{ $kegiatan->tgl_selesai }}</td>
@@ -242,7 +242,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="modal fade" id="modal-default-ubah-kegiatan">
         <div class="modal-dialog" style="width: 20%">
             <div class="modal-content">
-                <form method="POST" action="">
+                {{-- <form method="POST" action="{{ route('updateKegiatan', ['id_jadwal' => $kegiatan->id_jadwal]) }}"> --}}
+                <form method="POST" action="{{ route('updateKegiatan', ['kode_jadwal' => ':id_jadwal']) }}" id="update-form">
                     @csrf
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -366,33 +367,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 </script>
 
-{{-- <script>
-$(document).on('click', '.update-jadwal', function() {
-    var jadwalId = $(this).data('id');
-    
-    // Mengirim permintaan Ajax untuk mendapatkan data jadwal berdasarkan ID
-    $.ajax({
-        url: 'jadwal/' + jadwalId + '/edit', // Ganti dengan rute yang sesuai di aplikasi Laravel Anda
-        type: 'GET',
-        success: function(response) {
-            // Mengisi nilai form modal dengan data jadwal yang diperoleh
-            $('#jadwal_kode').val(response.id_jadwal);
-            $('#goal').val(response.goal);
-            $('#tanggal_mulai').val(response.tgl_mulai);
-            $('#tanggal_selesai').val(response.tgl_selesai);
-            $('#sesi_latihan').val(response.sesi_latihan);
-            $('#program_latihan').val(response.jenis_latihan);
-            // Tambahkan baris ini untuk mengisi nilai form modal dengan data lainnya
-            
-            // Menampilkan form modal
-            $('#modal-default-ubah-kegiatan').modal('show');
-
-            console.log(url);
-        }
-    });
-});
-</script> --}}
-
 <script>
   $(document).ready(function() {
       // Fungsi untuk membuka form modal
@@ -408,7 +382,7 @@ $(document).on('click', '.update-jadwal', function() {
                 method: 'GET',
                 success: function(response) {
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
-                    $('#jadwal_kode').val(response.id_jadwal);
+                    //$('#jadwal_kode').val(response.id_jadwal);
                     $('#goal').val(response.goal);
                     $('#tanggal_mulai').val(response.tgl_mulai);
                     $('#tanggal_selesai').val(response.tgl_selesai);
@@ -435,5 +409,54 @@ $(document).on('click', '.update-jadwal', function() {
         });
     });
 </script>
+
+<script>
+$(document).ready(function() {
+  var form = $('#update-form');
+  var originalAction = form.attr('action'); // Simpan URL action asli
+
+  // Fungsi untuk membuka form modal
+  $('.update-jadwal').click(function() {
+    $('input[type=checkbox]').prop('checked', false);
+    var jadwalId = $(this).data('id');
+    form.attr('action', originalAction.replace(':id_jadwal', jadwalId));
+  });
+
+  // Fungsi untuk menutup form modal
+  $('#modal-default-ubah-kegiatan').on('hidden.bs.modal', function() {
+    form.attr('action', originalAction); // Mengembalikan URL action ke nilai asli
+  });
+});
+</script>
+
+{{-- Kaya gini bisa, tapi harus make document ready  PENJELASAN :
+    Dalam contoh skrip yang Anda berikan, fungsi $('.update-jadwal').click(function() { ... }); akan dieksekusi ketika 
+    elemen dengan kelas "update-jadwal" diklik. Namun, jika Anda menutup formulir dan membukanya kembali, fungsi 
+    tersebut tidak akan dieksekusi lagi. Oleh karena itu, nilai jadwalId tidak akan diperbarui.
+    Untuk mengatasi masalah ini, Anda dapat memindahkan kode yang terdapat dalam 
+    fungsi $('.update-jadwal').click(function() { ... }); ke 
+    dalam fungsi $(document).ready(function() { ... });. Dengan demikian, ketika halaman dimuat, kode 
+    tersebut akan dieksekusi dan akan mengikat fungsi klik ke elemen "update-jadwal" yang ada pada saat 
+    itu maupun yang akan muncul di kemudian hari. Dengan memindahkan kode ke dalam 
+    fungsi $(document).ready(), Anda memastikan bahwa fungsi klik akan selalu 
+    terikat ke elemen dengan kelas "update-jadwal" pada saat halaman selesai dimuat.--}}
+{{-- <script>
+$(document).ready(function(){
+    $('.update-jadwal').click(function() {
+    $('input[type=checkbox]').prop('checked', false);
+    var jadwalId = $(this).data('id');
+    $('#update-form').attr('action', $('#update-form').attr('action').replace(':id_jadwal', jadwalId));
+    });
+});
+</script> --}}
+
+{{-- Kalau ga make document ready kaga bisa, aneh anjr --}}
+{{-- <script>
+$('.update-jadwal').click(function() {
+    $('input[type=checkbox]').prop('checked', false);
+    var jadwalId = $(this).data('id');
+    $('#update-form').attr('action', $('#update-form').attr('action').replace(':id_jadwal', jadwalId));
+    });
+</script> --}}
 </body>
 </html>

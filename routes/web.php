@@ -51,6 +51,7 @@ Route::middleware(['trainer'])->group(function(){
     Route::post('/saveKegiatan', [TrainerController::class, 'save_kegiatan'])->name('save_kegiatan');
     Route::delete('/deleteKegiatan/{kode_jadwal}', [TrainerController::class, 'delete_kegiatan'])->name('deleteKegiatan');
     Route::get('editKegiatan/{kode_jadwal}', [TrainerController::class, 'edit_kegiatan'])->name('editKegiatan');
+    Route::post('/updateKegiatan/{kode_jadwal}', [TrainerController::class, 'update_kegiatan'])->name('updateKegiatan');
 
 
 });

@@ -108,6 +108,26 @@ class TrainerController extends Controller
         return response()->json($cari_kegiatan);
     }
 
+    public function update_kegiatan(Request $request, $jadwalId){
+        // Ambil data dari permintaan
+        $goal = $request->input('goal');
+        $tanggalMulai = $request->input('tanggal_mulai');
+        $tanggalSelesai = $request->input('tanggal_selesai');
+        $sesiLatihan = $request->input('sesi_latihan');
+        $jenisLatihan = implode(', ', $request->input('jenis_latihan'));
+
+        // Lakukan pemrosesan update kegiatan sesuai dengan data yang diterima
+        $jadwal = Jadwal::where('id_jadwal', $jadwalId)->first();
+        $jadwal->goal = $goal;
+        $jadwal->tgl_mulai = $tanggalMulai;
+        $jadwal->tgl_selesai = $tanggalSelesai;
+        $jadwal->sesi_latihan = $sesiLatihan;
+        $jadwal->jenis_latihan = $jenisLatihan;
+        $jadwal->update();
+
+        return back();
+    }
+
     public function show_profile_anggota($id){
         // Mengambil data pengguna berdasarkan ID
         $cari_pengguna = Pengguna::findOrFail($id); 

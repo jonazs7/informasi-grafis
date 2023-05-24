@@ -19,6 +19,8 @@ class Jadwal extends Model
         'status'
     ];
 
+    protected $primaryKey = 'id_jadwal';
+
     public function pengguna(){
         return $this->belongsTo(Pengguna::class);
     }
