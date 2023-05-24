@@ -26,10 +26,10 @@ class JadwalSeeder extends Seeder
             'jenis_latihan' => 'Back', 'status' => 'Proses'],
 
             ['id_pengguna' => '3', 'goal' => NULL, 'tgl_mulai' => '2023-06-15', 'tgl_selesai' => '2023-06-15', 'sesi_latihan' => '8',
-            'jenis_latihan' => 'Bisep', 'status' => 'Selesai'],
+            'jenis_latihan' => 'Bicep', 'status' => 'Selesai'],
 
             ['id_pengguna' => '4', 'goal' => NULL, 'tgl_mulai' => '2023-08-10', 'tgl_selesai' => '2023-09-10', 'sesi_latihan' => '12',
-            'jenis_latihan' => 'Trisep', 'status' => 'Proses'],
+            'jenis_latihan' => 'Tricep', 'status' => 'Proses'],
         ];
 
         DB::table('jadwal')->insert($data);
