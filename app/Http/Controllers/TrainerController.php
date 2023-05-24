@@ -101,14 +101,16 @@ class TrainerController extends Controller
         return back();
     }
 
-    public function edit_kegiatan($id){
-        $cari_kegiatan = Jadwal::findOrFail($id); // Mengambil data pengguna berdasarkan ID
-        
+    public function edit_kegiatan($kode_jadwal){
+        // Mengambil data kegiatan berdasarkan id_jadwal
+        $cari_kegiatan = Jadwal::where('id_jadwal', $kode_jadwal)->first(); 
+       
         return response()->json($cari_kegiatan);
     }
 
     public function show_profile_anggota($id){
-        $cari_pengguna = Pengguna::findOrFail($id); // Mengambil data pengguna berdasarkan ID
+        // Mengambil data pengguna berdasarkan ID
+        $cari_pengguna = Pengguna::findOrFail($id); 
         
         return response()->json($cari_pengguna);
     }

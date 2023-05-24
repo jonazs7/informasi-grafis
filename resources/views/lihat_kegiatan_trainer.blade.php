@@ -52,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr> 
+                                    <th>ID Jadwal</th>
                                     <th>Goal</th>
                                     <th>Tanggal Mulai</th>
                                     <th>Tanggal Selesai</th>
@@ -64,6 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <tbody>
                                 @foreach ($show_kegiatan as $kegiatan)
                                 <tr>
+                                    <td>{{ $kegiatan->id_jadwal }}</td>
                                     <td>{{ $kegiatan->goal }}</td>
                                     <td>{{ $kegiatan->tgl_mulai }}</td>
                                     <td>{{ $kegiatan->tgl_selesai }}</td>
@@ -249,6 +251,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="modal-body">
                         <input type="text" name="jadwal_id" id="jadwal_kode"> <!-- Hidden field untuk ID jadwal -->
+                        <!-- Goal -->
+                        <div class="form-group">
+                            <label>Goal</label>
+                            <select class="form-control" name="goal" id="goal">
+                              <option value="Increase muscle size">Increase muscle size</option>
+                              <option value="Lose body fat">Lose body fat</option>
+                              <option value="Sport spesific training">Sport spesific training</option>
+                              <option value="Rehabilitate an injury">Rehabilitate an injury</option>
+                              <option value="Nutrition education">Nutrition education</option>
+                              <option value="Start an work out train">Start an work out train</option>
+                              <option value="Fan">Fan</option>
+                              <option value="Motivation">Motivation</option>
+                              <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <!-- /.Goal -->
                         <!-- Date -->
                         <div class="form-group">
                             <label>Tanggal Mulai</label>
@@ -377,7 +395,10 @@ $(document).on('click', '.update-jadwal', function() {
 
 <script>
   $(document).ready(function() {
+      // Fungsi untuk membuka form modal
       $('.update-jadwal').click(function() {
+        // Hapus data lama yang mungkin tersisa sebelum membuka modal
+        $('input[type=checkbox]').prop('checked', false);
           var userId = $(this).data('id');
           var url = "{{ route('editKegiatan', ':id') }}".replace(':id', userId);
           
@@ -392,9 +413,19 @@ $(document).on('click', '.update-jadwal', function() {
                     $('#tanggal_mulai').val(response.tgl_mulai);
                     $('#tanggal_selesai').val(response.tgl_selesai);
                     $('#sesi_latihan').val(response.sesi_latihan);
-                    $('#program_latihan').val(response.jenis_latihan);
-                    // Isikan dengan data profil pengguna lainnya
-                    console.log(url)
+
+                    // Mengisi nilai checkbox
+                    var dataLama = response.jenis_latihan; // Array yang berisi nilai terpisah
+                    var checkboxes = $('[name="jenis_latihan[]"]');
+                    checkboxes.each(function() {
+                        var value = $(this).val();
+                        if (dataLama.includes(value)) {
+                            $(this).prop('checked', true);
+                        }
+                    });
+  
+                    console.log(url);
+                    console.log(response.jenis_latihan);
                 },
                 error: function(xhr) {
                     // Tangani jika terjadi kesalahan pada permintaan AJAX
