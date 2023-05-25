@@ -51,17 +51,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th>No</th>
                   <th>Goal</th>
                   <th>Tanggal Mulai</th>
                   <th>Tanggal Selesai</th>
-                  <th>Sesi Latihan</th>
+                  <th>Sesi Latihan Tiap Bulan</th>
                   <th>Program Latihan</th>
                   <th>Status</th>
                 </tr>
                 </thead>
                 <tbody> 
-                @foreach ($show_jadwal as $jadwal)
+                @foreach ($show_jadwal as $no => $jadwal)
                 <tr>
+                  <td>{{ $no + 1 }}</td>
                   <td>{{ $jadwal->goal }}</td>
                   <td>{{ $jadwal->tgl_mulai }}</td>
                   <td>{{ $jadwal->tgl_selesai }}</td>
