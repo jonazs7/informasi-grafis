@@ -112,7 +112,12 @@ class TrainerController extends Controller
         $tanggalMulai = $request->input('tanggal_mulai');
         $tanggalSelesai = $request->input('tanggal_selesai');
         $sesiLatihan = $request->input('sesi_latihan');
-        $jenisLatihan = implode(', ', $request->input('jenis_latihan'));
+        $jenisLatihan = $request->input('jenis_latihan');
+        if (is_array($jenisLatihan) && count($jenisLatihan) > 0) {
+            $jenisLatihan = implode(', ', $jenisLatihan);
+        } else {
+            $jenisLatihan = NULL;
+        }
 
         // Lakukan pemrosesan update kegiatan sesuai dengan data yang diterima
         $jadwal = Jadwal::where('id_jadwal', $jadwalId)->first();

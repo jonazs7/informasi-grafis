@@ -56,46 +56,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{ route('update_biodata') }}" method="POST" enctype='multipart/form-data'>
+                <form class="form-horizontal" action="{{ route('update_biodata') }}" method="POST" enctype='multipart/form-data'>
                   @csrf
-                  <div class="box-body">
-                    <div class="form-group" style="display: flex">
-                      <label  for="exampleInputEmail1" style="margin-top: 4px">Nama Lengkap :</label>
-                      <input type="text" name="nama_lengkap" value="{{ $pengguna->name }}" class="form-control" style="width: 25%; margin-left: 2%;">
-                    </div>
-                    <div class="form-group" style="display: flex">
-                      <label style="margin-top: 4px">Tanggal Lahir :</label>
-                      <div class="input-group" style="margin-left: 2.6%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" name="tanggal_lahir" value="{{ $pengguna->tgl_lahir }}" class="form-control" 
-                        style="width: 60%" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
+                  <div class="box-body" style="margin-top: 2%; margin-left: -5%;">
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Nama Lengkap :</label>
+                      <div class="col-sm-3">
+                        <input type="text" name="nama_lengkap" value="{{ $pengguna->name }}" class="form-control">
                       </div>
                     </div>
-                    <div class="form-group" style="display: flex">
-                      <label style="margin-top: 4px">Gender :</label>
-                      <div class="radio">
-                        <div style="display: flex; margin-left: 60%; margin-top: -5%;">
-                          <label>
-                            <input type="radio" name="option_gender" value="Pria" {{ old('option', $pengguna->gender) == 'Pria' ? 'checked' : '' }}> Pria
-                          </label>
-                          <label style="margin-left: 12px">
-                            <input type="radio" name="option_gender" value="Wanita" {{ old('option', $pengguna->gender) == 'Wanita' ? 'checked' : '' }}> Wanita
-                          </label>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Tanggal Lahir :</label>
+                      <div class="col-sm-2">
+                        <div class="input-group">                       
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" name="tanggal_lahir" value="{{ $pengguna->tgl_lahir }}" class="form-control" 
+                            data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <div style="display: flex">
-                        <label for="exampleInputEmail1">No Telepon :</label>
-                        <input type="text" name="no_telepon" value="{{ $pengguna->tlpn }}" class="form-control" style="margin-left: 3.5%; margin-top: -0.5%; width: 12%;">
+                      <label class="control-label col-sm-2">Gender :</label>
+                      <div class="col-sm-5">
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="option_gender" value="Pria" {{ old('option', $pengguna->gender) == 'Pria' ? 'checked' : '' }}> Pria
+                            </label>
+                            <label style="margin-left: 12px">
+                              <input type="radio" name="option_gender" value="Wanita" {{ old('option', $pengguna->gender) == 'Wanita' ? 'checked' : '' }}> Wanita
+                            </label>
+                        </div>
                       </div>
-                      <p class="help-block" style="margin-left: 9.2%">Contoh: 08xx-xxxx-xxxx</p>
                     </div>
-                    <div class="form-group" style="display: flex">
-                      <label>Alamat :</label>
-                      <input type="text" name="alamat" value="{{ $pengguna->alamat }}" class="form-control" style="margin-left: 5.2%; width: 60%;">
+                    <div class="form-group">
+                      <div>
+                        <label class="control-label col-sm-2">No Telepon :</label>
+                        <div class="col-sm-2">
+                          <input type="text" name="no_telepon" id="telephone" value="{{ $pengguna->tlpn }}" 
+                          class="form-control" oninput="formatTelephone()" maxlength="14" >
+                        </div>
+                      </div>
+                      {{-- <p class="help-block">Contoh: 08xx-xxxx-xxxx</p> --}}
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Alamat :</label>
+                      <div class="col-sm-4">
+                        <input type="text" name="alamat" value="{{ $pengguna->alamat }}" class="form-control">
+                      </div>
                       {{-- <textarea class="form-control" name="alamat" rows="3" placeholder="Enter ..." style="width: 25%; text-align: left padding: 0;">
                         {{ trim($pengguna->alamat) }}
                       </textarea> --}}
@@ -104,15 +113,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div> --}}
                     </div>
                     <div class="form-group">
-                      <label>Kidal :</label>
-                      <div class="radio">
-                        <div style="display: flex; margin-left: 9%; margin-top: -2.8%; margin-bottom: 2%;">
-                          <label>
-                            <input type="radio" name="option_kidal" value="Ya" {{ old('option', $pengguna->kidal) == 'Ya' ? 'checked' : '' }}> Ya
-                          </label>
-                          <label style="margin-left: 12px">
-                            <input type="radio" name="option_kidal" value="Tidak" {{ old('option', $pengguna->kidal) == 'Tidak' ? 'checked' : '' }}> Tidak
-                          </label>
+                      <label class="control-label col-sm-2">Kidal :</label>
+                      <div class="col-sm-5">
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="option_kidal" value="Ya" {{ old('option', $pengguna->kidal) == 'Ya' ? 'checked' : '' }}> Ya
+                            </label>
+                            <label style="margin-left: 12px">
+                              <input type="radio" name="option_kidal" value="Tidak" {{ old('option', $pengguna->kidal) == 'Tidak' ? 'checked' : '' }}> Tidak
+                            </label>
                         </div>
                       </div>
                     </div>
@@ -123,13 +132,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <option value="Ya" <?php if($pengguna->kidal == 'Ya') echo 'selected'; ?>>Ya</option>
                       </select>
                     </div> --}}
-                    <div class="form-group" style="display: flex;">
-                      <label>Lama pengalaman :</label>
-                      <select class="form-control" name="lama_pengalaman" value="{{ $pengguna->lama_pnglmn }}" style="width: 15%; margin-left: 2%; margin-top: -0.4%;">
-                        <option value="Belum pernah" <?php if($pengguna->lama_pnglmn == 'Belum pernah') echo 'selected'; ?>>Belum pernah</option>
-                        <option value="< 3 Bulan" <?php if($pengguna->lama_pnglmn == '< 3 Bulan') echo 'selected'; ?>>< 3 Bulan</option>
-                        <option value="> 3 Bulan" <?php if($pengguna->lama_pnglmn == '> 3 Bulan') echo 'selected'; ?>>> 3 Bulan</option>
-                      </select>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">Lama pengalaman :</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" name="lama_pengalaman" value="{{ $pengguna->lama_pnglmn }}">
+                          <option value="Belum pernah" <?php if($pengguna->lama_pnglmn == 'Belum pernah') echo 'selected'; ?>>Belum pernah</option>
+                          <option value="< 3 Bulan" <?php if($pengguna->lama_pnglmn == '< 3 Bulan') echo 'selected'; ?>>< 3 Bulan</option>
+                          <option value="> 3 Bulan" <?php if($pengguna->lama_pnglmn == '> 3 Bulan') echo 'selected'; ?>>> 3 Bulan</option>
+                        </select>
+                      </div>
                     </div>
                     {{-- <div class="form-group">
                       <label>Goal</label>
@@ -146,14 +157,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </select>
                     </div> --}}
                     <div class="form-group">
-                      <img src="{{ asset('images/' . $imageName) }}" style="width: 6%; height: 6%; margin-top: 8px">
-                      <p class="help-block">Anda dapat unggah foto profil anda.</p>
-                      <label>File Foto</label>
-                      <input type="file" name="gambar">   
-                    </div>
-                    <div style="margin-top: 4%">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <img src="{{ asset('images/' . $imageName) }}" style="width: 6%; height: 6%; margin-top: 8px">
+                        <p class="help-block">Anda dapat unggah foto profil anda.</p>
+                        <label>File Foto</label>
+                        <input type="file" name="gambar">   
+                      </div>
+                    </div>      
+                  </div>
+                    <!-- box-footer -->
+                    <div class="box-footer">
                       <button type="submit" class="btn btn-block btn-primary">Simpan</button>
                     </div>
+                    <!-- /.box-footer -->
                 </form>
                 <!-- end form start -->
             </div>
@@ -176,3 +192,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </body>
 </html>
+
+
+<script>
+  function formatTelephone() {
+    var telephoneInput = document.getElementById('telephone');
+    var input = telephoneInput.value.replace(/\D/g, ''); // Hapus semua karakter non-digit. 
+    // Ekspresi reguler /\D/g mencocokkan semua karakter yang bukan digit dan '' adalah string kosong 
+    // yang digunakan untuk menghapus karakter-karakter tersebut.
+  
+    // Tambahkan garis setiap empat angka
+    var formattedInput = '';  // sebagai string kosong yang akan berisi nilai input yang telah diformat.
+    for (var i = 0; i < input.length; i++) {
+      if (i > 0 && i % 4 === 0) {
+        formattedInput += '-';
+      }
+      formattedInput += input[i]; // kita menambahkan karakter saat ini ke dalam formattedInput.
+      // Dalam setiap iterasi loop for, input[i] adalah karakter saat ini yang sedang diproses dalam masukan telepon. 
+      // Operator += digunakan untuk menggabungkan karakter tersebut dengan nilai yang sudah ada dalam formattedInput. 
+      // Dengan demikian, pada setiap iterasi, karakter saat ini akan ditambahkan ke akhir nilai yang sudah ada dalam 
+      // formattedInput.
+      // Misalnya, jika formattedInput saat ini adalah '123' dan input[i] adalah '4', maka operasi formattedInput += 
+      // input[i]; akan menghasilkan formattedInput menjadi '1234'. Hal ini memungkinkan kita untuk membangun nilai 
+      // yang sudah diformat langkah demi langkah selama loop berlangsung.
+    }
+    telephoneInput.value = formattedInput; // input telepon yang ditampilkan akan diformat dengan garis setiap empat angka.
+  }
+  </script>

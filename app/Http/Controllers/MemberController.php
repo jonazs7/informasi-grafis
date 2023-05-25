@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class MemberController extends Controller
@@ -21,7 +23,21 @@ class MemberController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('jadwal_member', ['imageName' => $pengguna->foto]);
+        $show_jadwal = DB::table('jadwal')
+        ->where('id_pengguna', $user->id)
+        ->get();
+
+        return view('jadwal_member', ['imageName' => $pengguna->foto, 'show_jadwal' => $show_jadwal,  'pengguna' => $pengguna]);
+    }
+
+    public function save_goal(Request $request){
+        Jadwal::create([
+            'id_pengguna' => $request->input('kode_pengguna'),
+            'goal' => $request->input('goal'),
+            'status' => 'Proses'
+        ]);
+
+        return back();
     }
 
     public function edit_biodata(){

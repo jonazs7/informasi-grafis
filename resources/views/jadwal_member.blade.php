@@ -35,6 +35,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
+      style="margin-top: 12px">+ Tambah Goal</button>
     </section>
 
     <!-- Main content -->
@@ -49,6 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th>Goal</th>
                   <th>Tanggal Mulai</th>
                   <th>Tanggal Selesai</th>
                   <th>Sesi Latihan</th>
@@ -56,21 +59,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <th>Status</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody> 
+                @foreach ($show_jadwal as $jadwal)
                 <tr>
-                  <td>2023-01-01</td>
-                  <td>2023-03-01</td>
-                  <td>12 kali</td>
-                  <td>Push, Pull</td>
-                  <td>Proses</td>
+                  <td>{{ $jadwal->goal }}</td>
+                  <td>{{ $jadwal->tgl_mulai }}</td>
+                  <td>{{ $jadwal->tgl_selesai }}</td>
+                  <td>{{ $jadwal->sesi_latihan }}</td>
+                  <td>{{ $jadwal->jenis_latihan }}</td>
+                  <td>{{ $jadwal->status }}</td>        
                 </tr>
-                <tr>
+                @endforeach
+                {{-- <tr>
+                  <td>2023-02-02</td>
                   <td>2023-02-02</td>
                   <td>2023-03-02</td>
                   <td>6 kali</td>
                   <td>Push, Pull</td>
                   <td>Selesai</td>
-                </tr>
+                </tr> --}}
                 </tbody>
               </table>
             </div>
@@ -90,5 +97,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 
+
+<!-- modal tambah goal -->
+<div class="modal fade" id="modal-default-tambah-goal">
+  <div class="modal-dialog" style="width: 20%">
+      <div class="modal-content">
+          <form method="POST" action="{{ route('saveGoal') }}">
+              @csrf
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Tambah Goal Baru</h4>
+              </div>
+              <div class="modal-body">
+                  <!-- Input field untuk data -->
+                  <input type="text" name="kode_pengguna" value="{{ $pengguna->id }}">
+                  <!-- Goal -->
+                  <div class="form-group">
+                    <label>Goal</label>
+                    <select class="form-control" name="goal" id="goal">
+                      <option value="Increase muscle size">Increase muscle size</option>
+                      <option value="Lose body fat">Lose body fat</option>
+                      <option value="Sport spesific training">Sport spesific training</option>
+                      <option value="Rehabilitate an injury">Rehabilitate an injury</option>
+                      <option value="Nutrition education">Nutrition education</option>
+                      <option value="Start an work out train">Start an work out train</option>
+                      <option value="Fan">Fan</option>
+                      <option value="Motivation">Motivation</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </div>
+                  <!-- /.Goal -->
+                  <!-- /.form group -->
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary">Tambah</button>
+              </div>
+          </form>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 </body>
 </html>

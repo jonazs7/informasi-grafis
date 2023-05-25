@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('alamat', 150)->nullable();
             $table->string('kidal', 5)->nullable();
             $table->string('lama_pnglmn', 15)->nullable();
-            $table->string('foto', 30)->nullable();
+            $table->string('foto', 50)->nullable();
             $table->timestamps();
         });
     }
