@@ -26,8 +26,8 @@ class PenggunaSeeder extends Seeder
             'kidal' => 'Tidak', 'lama_pnglmn' => '< 3 bulan',
             'created_at' => '2023-05-13 00:05:11', 'updated_at' => '2023-05-13 00:05:11'],
 
-            ['id' => '2', 'name' => 'Eko Verianto', 'email' => 'eko@gmail.com', 
-            'password' => '$2y$10$jUDs/6Xdh9bOF8KopQQl/.dE0tBfsIBlVMnoER8qnFMu6zXe0B6jK', 'level' => 'Trainer',
+            ['id' => '2', 'name' => 'Mas Odie', 'email' => 'odie@gmail.com', 
+            'password' => '$2y$10$yFaYvLUuf9y4RgVngfXrQe.DNAU/IhYk4.bd5eOMp56g1P.AYen5i', 'level' => 'Trainer',
             'created_at' => '2023-05-13 00:05:35', 'updated_at' => '2023-05-13 00:05:35'],
 
             ['id' => '3', 'name' => 'Yosua Nissi', 'email' => 'yosua@gmail.com', 

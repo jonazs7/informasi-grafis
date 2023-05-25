@@ -51,8 +51,6 @@ class TrainerController extends Controller
 
         $nama_pengguna = Pengguna::find($id);
 
-       
-
         // untuk querystring berdasarkan email
         // $nama_pengguna =  Pengguna::where('email', $id)->first(); 
 

@@ -46,12 +46,11 @@ class MemberController extends Controller
         // Perbarui data formulir
         $pengguna->name = $request->input('nama_lengkap');
         $pengguna->tgl_lahir = $request->input('tanggal_lahir');
-        $pengguna->gender = $request->input('option');
+        $pengguna->gender = $request->input('option_gender');
         $pengguna->tlpn = $request->input('no_telepon');
         $pengguna->alamat = $request->input('alamat');
-        $pengguna->kidal = $request->input('kidal');
+        $pengguna->kidal = $request->input('option_kidal');
         $pengguna->lama_pnglmn = $request->input('lama_pengalaman');
-        $pengguna->goal = $request->input('goal');
         if ($request->hasFile('gambar')) {
             $image = $request->file('gambar');
             $imageName = uniqid().'_'.$image->getClientOriginalName();

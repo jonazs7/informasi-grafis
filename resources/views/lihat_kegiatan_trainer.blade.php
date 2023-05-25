@@ -36,8 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
                     <li class="active">Here</li>
                 </ol>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-kegiatan"
-                    style="margin-top: 12px">+ Tambah Kegiatan</button>
+                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-kegiatan"
+                    style="margin-top: 12px">+ Tambah Kegiatan</button> --}}
             </section>
 
             <!-- Main content -->
@@ -248,7 +248,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Ubah Kegiatan</h4>
+                        <h4 class="modal-title">Tambah Kegiatan</h4>
                     </div>
                     <div class="modal-body">
                         <input type="text" name="jadwal_id" id="jadwal_kode"> <!-- Hidden field untuk ID jadwal -->
@@ -344,7 +344,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -382,7 +382,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 method: 'GET',
                 success: function(response) {
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
-                    //$('#jadwal_kode').val(response.id_jadwal);
+                    $('#jadwal_kode').val(response.id_jadwal);
                     $('#goal').val(response.goal);
                     $('#tanggal_mulai').val(response.tgl_mulai);
                     $('#tanggal_selesai').val(response.tgl_selesai);

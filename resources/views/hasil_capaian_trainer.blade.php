@@ -40,7 +40,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <section class="content container-fluid">
         <div class="row">
-
           <table>
             <th>Nama</th>
             <th>level</th>
@@ -49,7 +48,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <th>gender</th>
             <th>body mass</th>
             <th>body fat</th>
-
           @foreach ($show_capaian as $capaian)
           <tr>
             <td>{{ $capaian->name }}</td>
@@ -60,11 +58,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <td>{{ $capaian->rerata_bm }}</td>
             <td>{{ $capaian->rerata_bp }}</td>
           </tr>
-              
           @endforeach
           </table>
-
-          
           @foreach ($show_capaian as $capaian)
             <div class="col-md-3">
               <!-- Profile Image -->
@@ -77,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <table class="table text-center">
                     <td>
                         <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal" 
-                        data-target="#modal-default-data">Tambah Data</button>
+                        data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}">Tambah Data</button>
                     </td>
                     <td>
                         <button type="button" class="btn btn-block btn-default btn-sm">Detail Info</button>
@@ -94,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <b class="fa fa-phone"></b> <a style="margin-left: 12px">{{ $capaian->tlpn }}</a>
                     </li>
                     <li class="list-group-item">
-                      <b class="fa fa-map-pin"></b> <a style="margin-left: 12px">{{ $capaian->gender }}</a>
+                      <b class="fa fa-intersex"></b> <a style="margin-left: 12px">{{ $capaian->gender }}</a>
                     </li>
                   </ul>
 
@@ -171,16 +166,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 
-<!-- modal -->
-<div class="modal fade" id="modal-default-data">
+<!-- modal tambah data fisik -->
+<div class="modal fade" id="modal-default-data-fisik">
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Tambah Kegiatan Baru</h4>
+              <h4 class="modal-title">Tambah Data Fisik Baru</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body">  
+            <form method="POST" action=""> 
+              <!-- Input field untuk data -->
+              <input type="text" name="kode_pengguna" value="{{ $capaian->id }}">         
               <div style="display: flex; justify-content: space-around">
                 <!-- Date -->
                 <div class="form-group" style="width: 35%">
@@ -266,6 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- end text input -->
               </div>
+            </form>  
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -277,7 +276,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 
 
 <!-- page script -->
@@ -329,6 +327,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
       hideHover: 'auto'
     });
   });
+</script>
+
+<script>
+    $('#modal-default-data-fisik').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        // var form = $('#deleteFormKegiatan');
+        // var url = '{{ route("deleteKegiatan", ":id") }}';
+        // url = url.replace(':id', id);
+        // form.attr('action', url);
+        console.log(id);
+    });
 </script>
 </body>
 </html>
