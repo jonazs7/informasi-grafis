@@ -117,7 +117,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
         
         <div style="display: grid; place-items: center; margin-top: 8px; margin-bottom: 8px;">
-          <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          <img id="gambar" class="img-circle" style="width: 160px; height: 160px;">
+          {{-- <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" id="gambar" class="img-circle" alt="User Image"> --}}
         </div>
       </div>
       <div class="modal-body">
@@ -165,7 +166,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 url: url,
                 method: 'GET',
                 success: function(response) {
+                    //  Untuk menggabungkan jalur relatif ke folder "images" dengan ID gambar dan ekstensi file
+                    var imageUrl = '/images/' + response.foto; // Ganti dengan logika Anda
+
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
+                    $('#gambar').attr('src', imageUrl);
                     $('#nama').text(response.name);
                     $('#tanggal_lahir').text(response.tgl_lahir);
                     $('#gender').text(response.gender);
@@ -174,9 +179,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#kidal').text(response.kidal);
                     $('#lama_pengalaman').text(response.lama_pnglmn);
                     $('#goal').text(response.goal);
-                   
                     // Isikan dengan data profil pengguna lainnya
-                    console.log(url)
+
+                    console.log(url);
+                    console.log(response.foto);
                 },
                 error: function(xhr) {
                     // Tangani jika terjadi kesalahan pada permintaan AJAX
