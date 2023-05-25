@@ -67,7 +67,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <td>{{ $jadwal->tgl_selesai }}</td>
                   <td>{{ $jadwal->sesi_latihan }}</td>
                   <td>{{ $jadwal->jenis_latihan }}</td>
-                  <td>{{ $jadwal->status }}</td>        
+                  <td>
+                    <div class="label {{ $jadwal->status === 'Proses' ? 'bg-yellow' : 'bg-green' }}">
+                      {{ $jadwal->status }}
+                    </div>
+                  </td>        
                 </tr>
                 @endforeach
                 {{-- <tr>

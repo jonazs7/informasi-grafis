@@ -71,7 +71,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <td>{{ $kegiatan->tgl_selesai }}</td>
                                     <td>{{ $kegiatan->sesi_latihan }}</td>
                                     <td>{{ $kegiatan->jenis_latihan }}</td>
-                                    <td>{{ $kegiatan->status }}</td>
+                                    <td>
+                                        <div class="label {{ $kegiatan->status === 'Proses' ? 'bg-yellow' : 'bg-green' }}">
+                                        {{ $kegiatan->status }}
+                                        </div>
+                                    </td>
                                     <td>
                                         {{-- <form action="{{ route('deleteKegiatan', $kegiatan->id_jadwal) }}" method="post">
                                             @csrf
