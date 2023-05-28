@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataFisik;
 use Illuminate\Http\Request;
 
 use App\Models\Pengguna;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request\fill;
+use Carbon\Carbon; // Import Carbon untuk manipulasi tanggal
 
 
 class TrainerController extends Controller
@@ -111,13 +113,30 @@ class TrainerController extends Controller
         $goal = $request->input('goal');
         $tanggalMulai = $request->input('tanggal_mulai');
         $tanggalSelesai = $request->input('tanggal_selesai');
+        // try {
+        //     // Mengubah format inputan tanggal menjadi objek Carbon
+        //     $tanggalSelesai = Carbon::createFromFormat('Y-m-d', $tanggalSelesai, 'Asia/Jakarta');
+        // } catch (\Exception $e) {
+        //     // Tangani kesalahan format tanggal yang tidak valid
+        //     // Misalnya, kembalikan respon error atau lakukan tindakan lainnya
+        // }
+        // // Membandingkan tanggal hari ini dengan tanggal selesai
+        // if(Carbon::now('Asia/Jakarta')->isSameDay($tanggalSelesai)) {
+        //     $status = "Selesai";
+        // } elseif(Carbon::now('Asia/Jakarta')->greaterThan($tanggalSelesai)) {
+        //     $status = "Selesai";
+        // } else {
+        //     $status = "Proses";
+        // }
         $sesiLatihan = $request->input('sesi_latihan');
+
         $jenisLatihan = $request->input('jenis_latihan');
         if (is_array($jenisLatihan) && count($jenisLatihan) > 0) {
             $jenisLatihan = implode(', ', $jenisLatihan);
         } else {
             $jenisLatihan = NULL;
         }
+        $status = $request->input('status');
 
         // Lakukan pemrosesan update kegiatan sesuai dengan data yang diterima
         $jadwal = Jadwal::where('id_jadwal', $jadwalId)->first();
@@ -126,6 +145,7 @@ class TrainerController extends Controller
         $jadwal->tgl_selesai = $tanggalSelesai;
         $jadwal->sesi_latihan = $sesiLatihan;
         $jadwal->jenis_latihan = $jenisLatihan;
+        $jadwal->status = $status;
         $jadwal->update();
 
         return back();
@@ -145,13 +165,48 @@ class TrainerController extends Controller
         $show_capaian = DB::table('pengguna')
         ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
         ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
-        'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bm'), DB::raw('AVG(body_fat) as rerata_bp'))
+        'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
         ->where('level', '=', 'Member')
         ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
         'pengguna.tlpn', 'pengguna.gender')
         ->get();
 
         return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto, 'show_capaian' => $show_capaian]);
+    }
+
+    public function create_data_fisik($kode_pengguna){
+        $show_capaian_js = DB::table('pengguna')
+        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+        ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
+        'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
+        ->where('level', '=', 'Member')
+        ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
+        'pengguna.tlpn', 'pengguna.gender')
+        ->where('id', $kode_pengguna)
+        ->first();
+
+        return response()->json($show_capaian_js);
+    }
+
+    public function save_data_fisik(Request $request){
+        DataFisik::create([
+            'id_pengguna' => $request->input('kode_pengguna'),
+            'tgl' => $request->input('tanggal'),
+            'tinggi' => $request->input('tinggi'),
+            'bisep' => $request->input('lingkar_bisep'),
+            'berat' => $request->input('berat'),
+            'dada' => $request->input('lingkar_dada'),
+            'neck' => $request->input('lingkar_leher'),
+            'pantat' => $request->input('lingkar_pantat'),
+            'hip' => $request->input('lingkar_pinggang'),
+            'paha_bwh' => $request->input('lingkar_paha_bawah'),
+            'waist' => $request->input('lingkar_paha_atas'),
+            'betis' => $request->input('lingkar_betis'),
+            'body_mass' => 55,
+            'body_fat' => 55
+        ]);
+
+        return back();
     }
 
     public function detail_info(){

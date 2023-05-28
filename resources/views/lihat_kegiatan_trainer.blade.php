@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
 
-    <!-- modal tambah kegiatan -->
+    {{-- <!-- modal tambah kegiatan -->
     <div class="modal fade" id="modal-default-tambah-kegiatan">
         <div class="modal-dialog" style="width: 20%">
             <div class="modal-content">
@@ -213,7 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+    <!-- /.modal --> --}}
 
     <!-- modal hapus kegiatan -->
     <div class="modal fade" id="modal-default-hapus-kegiatan">
@@ -256,6 +256,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="modal-body">
                         <input type="text" name="jadwal_id" id="jadwal_kode"> <!-- Hidden field untuk ID jadwal -->
+                        <!-- Status -->
+                        <div class="form-group">
+                            <label>Status Kegiatan Berjalan</label>
+                            <select class="form-control" name="status" id="status">
+                              <option value="Proses">Proses</option>
+                              <option value="Selesai">Selesai</option>
+                            </select>
+                        </div>
+                        <!-- /.Status -->
                         <!-- Goal -->
                         <div class="form-group">
                             <label>Goal</label>
@@ -387,6 +396,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 success: function(response) {
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
                     $('#jadwal_kode').val(response.id_jadwal);
+                    $('#status').val(response.status);
                     $('#goal').val(response.goal);
                     $('#tanggal_mulai').val(response.tgl_mulai);
                     $('#tanggal_selesai').val(response.tgl_selesai);

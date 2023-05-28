@@ -53,6 +53,8 @@ Route::middleware(['trainer'])->group(function(){
     Route::delete('/deleteKegiatan/{kode_jadwal}', [TrainerController::class, 'delete_kegiatan'])->name('deleteKegiatan');
     Route::get('editKegiatan/{kode_jadwal}', [TrainerController::class, 'edit_kegiatan'])->name('editKegiatan');
     Route::post('/updateKegiatan/{kode_jadwal}', [TrainerController::class, 'update_kegiatan'])->name('updateKegiatan');
+    Route::get('/createDataFisik/{kode_pengguna}', [TrainerController::class, 'create_data_fisik'])->name('createDataFisik');
+    Route::post('/saveDataFisik', [TrainerController::class, 'save_data_fisik'])->name('saveDataFisik');
 
 
 });
