@@ -81,7 +81,7 @@ class MemberController extends Controller
         $pengguna->save();
         
         // Redirect ke halaman yang diinginkan setelah berhasil diperbarui
-        return redirect()->route('edit_biodata')->with('success', 'Data telah diperbarui');
+        return redirect()->route('editBiodata')->with('success', 'Data telah diperbarui');
     }
     
 }

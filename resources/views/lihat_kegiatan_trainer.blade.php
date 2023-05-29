@@ -119,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="modal fade" id="modal-default-tambah-kegiatan">
         <div class="modal-dialog" style="width: 20%">
             <div class="modal-content">
-                <form method="POST" action="{{ route('save_kegiatan') }}">
+                <form method="POST" action="{{ route('saveKegiatan') }}">
                     @csrf
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

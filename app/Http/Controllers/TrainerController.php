@@ -207,35 +207,49 @@ class TrainerController extends Controller
 
         } else {
             // Menangani kasus jika jenis kelamin tidak ada
-            return back()->with('error', 'Jenis kelamin belum ada, harap isi terlebih dahulu');
+            return back()->with('error', 'Data jenis kelamin belum ada, harap isi terlebih dahulu');
         }
-            
-            // Menyimpan data fisik berdasarkan jenis kelamin
-            DataFisik::create([
-                'id_pengguna' => $request->input('kode_pengguna'),
-                'tgl' => $request->input('tanggal'),
-                'tinggi' => $request->input('tinggi'),
-                'bisep' => $request->input('lingkar_bisep'),
-                'berat' => $request->input('berat'),
-                'dada' => $request->input('lingkar_dada'),
-                'neck' => $request->input('lingkar_leher'),
-                'pantat' => $request->input('lingkar_pantat'),
-                'hip' =>  $request->input('lingkar_paha_atas'),
-                'paha_bwh' => $request->input('lingkar_paha_bawah'),
-                'waist' => $request->input('lingkar_pinggang'),
-                'betis' => $request->input('lingkar_betis'),
-                'body_mass' => $body_mass,
-                'body_fat' => $body_fat
-            ]);
+
+        // Menyimpan data fisik berdasarkan jenis kelamin
+        DataFisik::create([
+            'id_pengguna' => $request->input('kode_pengguna'),
+            'tgl' => $request->input('tanggal'),
+            'tinggi' => $request->input('tinggi'),
+            'bisep' => $request->input('lingkar_bisep'),
+            'berat' => $request->input('berat'),
+            'dada' => $request->input('lingkar_dada'),
+            'neck' => $request->input('lingkar_leher'),
+            'pantat' => $request->input('lingkar_pantat'),
+            'hip' =>  $request->input('lingkar_paha_atas'),
+            'paha_bwh' => $request->input('lingkar_paha_bawah'),
+            'waist' => $request->input('lingkar_pinggang'),
+            'betis' => $request->input('lingkar_betis'),
+            'body_mass' => $body_mass,
+            'body_fat' => $body_fat
+        ]);
 
         return back()->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function detail_info(){
+    public function detail_info($kode_pengguna){
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('detail_info_trainer', ['imageName' => $pengguna->foto]);
+        $show_data_fisik = DB::table('data_fisik')
+        ->where('id_pengguna', $kode_pengguna)
+        ->get();
+
+        $nama_pengguna = Pengguna::find($kode_pengguna);
+
+        return view('detail_info_trainer', ['imageName' => $pengguna->foto, 'show_data_fisik' => $show_data_fisik, 'nama_pengguna' => $nama_pengguna ]);
+    }
+
+    public function delete_data_fisik($kode_data_fisik){
+        DB::table('data_fisik')
+        ->where('id_data_fisik', $kode_data_fisik)
+        ->delete();
+
+        return back()->with('delete', 'Data berhasil dihapus');;
     }
 
     public function anggota_gym(){

@@ -110,9 +110,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-          <div style="display: flex; justify-content: center;">
-            <h4 class="modal-title" >Profil</h4> &nbsp;&nbsp; <br>
-            <h4 class="modal-title" id='nama'></h4>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <h4 class="modal-title"></h4>&nbsp;&nbsp;
+            <h4 class="modal-title" style="margin-top: -5%"><b id='nama'></b></h4>
           </div>
         
         
@@ -123,25 +123,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <div class="modal-body">
         <div style="display: flex;">
-          <p>Tanggal lahir &nbsp;:</p><p style="margin-left: 4px" id='tanggal_lahir'>Tanggal lahir :</p>
+          <b><p>Tanggal lahir &nbsp;:</p></b><p style="margin-left: 4px" id='tanggal_lahir'>Tanggal lahir :</p>
         </div>
         <div style="display: flex;">
-          <p>Gender &nbsp;:</p><p style="margin-left: 4px" id='gender'></p>
+          <b><p>Gender &nbsp;:</p></b><p style="margin-left: 4px" id='gender'></p>
         </div>
         <div style="display: flex;">
-          <p>No Telepon &nbsp;:</p><p style="margin-left: 4px" id='telepon'></p>
+          <b><p>No Telepon &nbsp;:</p></b><p style="margin-left: 4px" id='telepon'></p>
         </div>
         <div style="display: flex;">
-          <p>Alamat &nbsp;:</p><p style="margin-left: 4px" id='alamat'></p>
+          <b><p>Alamat &nbsp;:</p></b><p style="margin-left: 4px" id='alamat'></p>
         </div>
         <div style="display: flex;">
-          <p>Kidal &nbsp;:</p><p style="margin-left: 4px" id='kidal'></p>
+          <b><p>Kidal &nbsp;:</p></b><p style="margin-left: 4px" id='kidal'></p>
         </div>
         <div style="display: flex;">
-          <p>Lama pengalaman &nbsp;:</p><p style="margin-left: 4px" id='lama_pengalaman'></p>
+          <b><p>Lama pengalaman &nbsp;:</p></b><p style="margin-left: 4px" id='lama_pengalaman'></p>
         </div>
         <div style="display: flex;">
-          <p>Goal &nbsp;:</p><p style="margin-left: 4px" id='goal'></p>
+          <b><p>Goal &nbsp;:</p></b><p style="margin-left: 4px" id='goal'></p>
         </div>
       </div>
       <div class="modal-footer">
@@ -159,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $(document).ready(function() {
       $('.profile-button').click(function() {
           var userId = $(this).data('id');
-          var url = "{{ route('show_profile_anggota', ':id') }}".replace(':id', userId);
+          var url = "{{ route('showProfileAnggota', ':id') }}".replace(':id', userId);
           
       // Mengirim permintaan AJAX ke backend Laravel
       $.ajax({

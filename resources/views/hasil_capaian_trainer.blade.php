@@ -176,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>
                   <button type="button" class="btn btn-primary btn-sm create-data-fisik" data-toggle="modal" 
                   data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}">Tambah Data</button>
-                  <button type="button" class="btn btn-default btn-sm">Detail Info</button>
+                  <a type="button" class="btn btn-default btn-sm" href="{{ route('detailInfo', $capaian->id) }}">Detail Info</a>
                 </td>
               </tr>
               @endforeach
@@ -220,7 +220,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Tambah Data Fisik Baru</h4>
+              <div style="display: flex; flex-direction: column">
+                <h4 class="modal-title">Tambah Data Fisik Baru,&nbsp;</h4>
+                <h4 class="modal-title"><b id="nama"></b></h4>
+              </div>
           </div>
           <form method="POST" action="{{ route('saveDataFisik') }}"> 
             @csrf
@@ -391,10 +394,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 success: function(response) {
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
                      $('#kode_pengguna').val(response.id);
+                     $('#nama').text(response.name);
                      $('#jekel').val(response.gender);
 
                     console.log(response.id);
                     console.log(url);
+                    console.log(response.name);
                     console.log(response.gender);
                 },
                 error: function(xhr) {

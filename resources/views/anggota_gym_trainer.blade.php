@@ -77,7 +77,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $pengguna->email }}</td>
                 <td>{{ $pengguna->gender }}</td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default-hapus-anggota" data-id="{{ $pengguna->id }}">Hapus</button>
+                  <button type="button" class="btn btn-danger btn-sm" 
+                  data-toggle="modal" data-target="#modal-default-hapus-anggota" data-id="{{ $pengguna->id }}">Hapus</button>
                 </td>
               </tr>
               @endforeach
@@ -191,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <p>Apakah anda yakin ingin menghapus data ini&hellip;?</p>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('delete_anggota_gym', $pengguna->id) }}" id="deleteFormAnggota" method="post">
+        <form action="{{ route('deleteAnggotaGym', $pengguna->id) }}" id="deleteFormAnggota" method="post">
           @csrf
           @method('DELETE')
           <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
@@ -211,7 +212,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       var button = $(event.relatedTarget);
       var id = button.data('id');
       var form = $('#deleteFormAnggota');
-      var url = '{{ route("delete_anggota_gym", ":id") }}';
+      var url = '{{ route("deleteAnggotaGym", ":id") }}';
       url = url.replace(':id', id);
       form.attr('action', url);
       console.log(url);

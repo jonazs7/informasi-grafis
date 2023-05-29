@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{ route('update_biodata') }}" method="POST" enctype='multipart/form-data'>
+                <form class="form-horizontal" action="{{ route('updateBiodata') }}" method="POST" enctype='multipart/form-data'>
                   @csrf
                   <div class="box-body" style="margin-top: 2%; margin-left: -5%;">
                     <div class="form-group">

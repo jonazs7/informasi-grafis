@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <thead>
             <tr>
               <th>Tanggal</th>
-              <th>Ti(m)</th>
+              <th>Ti(cm)</th>
               <th>Be(kg)</th>
               <th>LL(cm)</th>
               <th>LP(cm)</th>
@@ -161,7 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <tfoot>
             <tr>
               <th>Tanggal</th>
-              <th>Ti(m)</th>
+              <th>Ti(cm)</th>
               <th>Be(kg)</th>
               <th>LL(cm)</th>
               <th>LP(cm)</th>

@@ -29,12 +29,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Detail Informasi Capaian Anggota Gym, Thenmust
+        Detail Informasi Capaian, {{ $nama_pengguna->name }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
+      @if(session('delete'))
+      <div class="alert alert-success alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Berhasil !</h4>
+        {{ session('delete') }}
+      </div>
+      @endif
     </section>
 
     <!-- Main content -->
@@ -97,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <thead>
             <tr>
               <th>Tanggal</th>
-              <th>Ti(m)</th>
+              <th>Ti(cm)</th>
               <th>Be(kg)</th>
               <th>LL(cm)</th>
               <th>LP(cm)</th>
@@ -109,10 +116,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LBS(cm)</th>
               <th>BMI</th>
               <th>BFB(%)</th>
+              <th>Aksi</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+              @foreach ($show_data_fisik as $data_fisik)
+              <tr>
+                <td>{{ $data_fisik->tgl }}</td>
+                <td>{{ $data_fisik->tinggi }}</td>
+                <td>{{ $data_fisik->berat }}</td>
+                <td>{{ $data_fisik->neck }}</td>
+                <td>{{ $data_fisik->waist}}</td>
+                <td>{{ $data_fisik->hip }}</td>
+                <td>{{ $data_fisik->bisep }}</td>
+                <td>{{ $data_fisik->dada }}</td>
+                <td>{{ $data_fisik->pantat }}</td>
+                <td>{{ $data_fisik->paha_bwh }}</td>
+                <td>{{ $data_fisik->betis }}</td>
+                <td>{{ $data_fisik->body_mass }}</td>
+                <td>{{ $data_fisik->body_fat }}</td>
+                <td><button type="button" class="btn btn-danger btn-sm" 
+                  data-toggle="modal" data-target="#modal-default-hapus-data_fisik" data-id="{{ $data_fisik->id_data_fisik }}">Hapus</button>
+                </td>
+              </tr>
+              @endforeach
+            {{-- <tr>
               <td>2023-03-21</td>
               <td>1,63</td>
               <td>55,2</td>
@@ -126,12 +154,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <td>32</td>
               <td>15</td>
               <td>20</td>
-            </tr>
+            </tr> --}}
             </tbody>
             <tfoot>
             <tr>
               <th>Tanggal</th>
-              <th>Ti(m)</th>
+              <th>Ti(cm)</th>
               <th>Be(kg)</th>
               <th>LL(cm)</th>
               <th>LP(cm)</th>
@@ -143,6 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LBS(cm)</th>
               <th>BMI</th>
               <th>BFP(%)</th>
+              <th>Aksi</th>
             </tr>
             </tfoot>
           </table>
@@ -163,6 +192,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 
+
+<!-- modal hapus data fisik -->
+<div class="modal fade" id="modal-default-hapus-data_fisik">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Peringatan</h4>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin ingin menghapus data ini&hellip;?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="" id="deleteFormDataFisik" method="post">
+          @csrf
+          @method('DELETE')
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary">Yakin</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<script>
+  $('#modal-default-hapus-data_fisik').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      var id = button.data('id');
+      var form = $('#deleteFormDataFisik');
+      var url = '{{ route("deleteDataFisik", ":id") }}';
+      url = url.replace(':id', id);
+      form.attr('action', url);
+      console.log(url);
+  });
+</script>
 
 <!-- page script -->
 <script>
