@@ -35,6 +35,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
+      @if(session('error'))
+      <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
+        {{ session('error') }}
+      </div>
+      @endif
+      @if(session('success'))
+      <div class="alert alert-success alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i>Berhasil !</h4>
+        {{ session('success') }}
+      </div>
+      @endif
     </section>
 
     <!-- Main content -->
@@ -211,8 +225,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <form method="POST" action="{{ route('saveDataFisik') }}"> 
             @csrf
             <div class="modal-body">  
-                <!-- Input field untuk data -->
-                <input type="text" name="kode_pengguna" id="kode_pengguna">         
+                <!-- Input field untuk data id pengguna -->
+                <input type="text" name="kode_pengguna" id="kode_pengguna">  
+                <!-- Input field untuk data gender -->       
+                <input type="text" name="jekel" id="jekel">         
                 <div style="display: flex; justify-content: space-around">
                   <!-- Date -->
                   <div class="form-group">
@@ -229,7 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div style="display: flex; justify-content: space-around;">
                   <!-- text input -->
                   <div class="form-group">
-                    <label>Tinggi (m)</label>
+                    <label>Tinggi (cm)</label>
                       <input type="text" name="tinggi" class="form-control">
                   </div>
                   <!-- end text input -->
@@ -375,15 +391,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 success: function(response) {
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
                      $('#kode_pengguna').val(response.id);
-                    // $('#status').val(response.status);
-                    // $('#goal').val(response.goal);
-                    // $('#tanggal_mulai').val(response.tgl_mulai);
-                    // $('#tanggal_selesai').val(response.tgl_selesai);
-                    // $('#sesi_latihan').val(response.sesi_latihan);
+                     $('#jekel').val(response.gender);
 
-                    console.log(url);
                     console.log(response.id);
-    
+                    console.log(url);
+                    console.log(response.gender);
                 },
                 error: function(xhr) {
                     // Tangani jika terjadi kesalahan pada permintaan AJAX

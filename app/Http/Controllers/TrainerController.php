@@ -189,24 +189,46 @@ class TrainerController extends Controller
     }
 
     public function save_data_fisik(Request $request){
-        DataFisik::create([
-            'id_pengguna' => $request->input('kode_pengguna'),
-            'tgl' => $request->input('tanggal'),
-            'tinggi' => $request->input('tinggi'),
-            'bisep' => $request->input('lingkar_bisep'),
-            'berat' => $request->input('berat'),
-            'dada' => $request->input('lingkar_dada'),
-            'neck' => $request->input('lingkar_leher'),
-            'pantat' => $request->input('lingkar_pantat'),
-            'hip' => $request->input('lingkar_pinggang'),
-            'paha_bwh' => $request->input('lingkar_paha_bawah'),
-            'waist' => $request->input('lingkar_paha_atas'),
-            'betis' => $request->input('lingkar_betis'),
-            'body_mass' => 55,
-            'body_fat' => 55
-        ]);
+        $gender = $request->input('jekel');
 
-        return back();
+        // Memeriksa jenis kelamin dan mengatur rumus yang sesuai
+        if ($gender == 'Pria') {
+            // Rumus untuk Pria
+            $body_mass = $request->input('berat') / (($request->input('tinggi') / 100) * ($request->input('tinggi') / 100));
+            $body_fat = 495 / (1.0324 - 0.19077 * log10($request->input('lingkar_pinggang')-$request->input('lingkar_leher'))
+                        + 0.15456 * log10($request->input('tinggi')) ) - 450;
+
+        } elseif ($gender == 'Wanita') {
+            // Rumus untuk Wanita
+            $body_mass = $request->input('berat') / (($request->input('tinggi') / 100) * ($request->input('tinggi') / 100));
+            $body_fat =  495 / (1.29579 - 0.35004 * log10($request->input('lingkar_pinggang')+
+            $request->input('lingkar_paha_atas')-$request->input('lingkar_leher'))
+                        + 0.22100 * log10($request->input('tinggi')) ) - 450;
+
+        } else {
+            // Menangani kasus jika jenis kelamin tidak ada
+            return back()->with('error', 'Jenis kelamin belum ada, harap isi terlebih dahulu');
+        }
+            
+            // Menyimpan data fisik berdasarkan jenis kelamin
+            DataFisik::create([
+                'id_pengguna' => $request->input('kode_pengguna'),
+                'tgl' => $request->input('tanggal'),
+                'tinggi' => $request->input('tinggi'),
+                'bisep' => $request->input('lingkar_bisep'),
+                'berat' => $request->input('berat'),
+                'dada' => $request->input('lingkar_dada'),
+                'neck' => $request->input('lingkar_leher'),
+                'pantat' => $request->input('lingkar_pantat'),
+                'hip' =>  $request->input('lingkar_paha_atas'),
+                'paha_bwh' => $request->input('lingkar_paha_bawah'),
+                'waist' => $request->input('lingkar_pinggang'),
+                'betis' => $request->input('lingkar_betis'),
+                'body_mass' => $body_mass,
+                'body_fat' => $body_fat
+            ]);
+
+        return back()->with('success', 'Data berhasil ditambahkan');
     }
 
     public function detail_info(){
