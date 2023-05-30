@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="revenue-chart" style="height: 300px;"></div>
+              <canvas id="jumlah-anggota-gym-chart" style="width: 200px; height: 40px;"></canvas>
             </div>
             <!-- /.box-body -->
           </div>
@@ -61,11 +61,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.col (LEFT) -->
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <!-- DONUT CHART -->
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Status Training 2023</h3>
+              <h3 class="box-title">Status Training <?php echo date('Y'); ?></h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+              <canvas id="status-training-chart"></canvas>
             </div>
             <!-- /.box-body -->
           </div>
@@ -82,11 +82,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.col (LEFT) -->
 
-        <div class="col-md-6">
+        <div class="col-md-8">
           <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Goal Anggota Gym 2023</h3>
+              <h3 class="box-title">Goal Anggota Gym <?php echo date('Y'); ?></h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -94,8 +94,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-            <div class="box-body chart-responsive">
-              <div class="chart" id="bar-chart" style="height: 300px;"></div>
+            <div class="box-body chart-responsive" style="width: 95%; height: 0; padding-bottom: 47%;">
+              <canvas id="goal-anggota-gym-chart"></canvas>
             </div>
             <!-- /.box-body -->
           </div>
@@ -121,64 +121,156 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- page script -->
 <script>
-  $(function () {
-    "use strict";
+  // LINE CHART
+  // Mendapatkan data dari PHP dan mengonversi ke dalam variabel JavaScript
+  var totalMember = @json($total_member);
+  var bulan = @json($bulan);
 
-    // AREA CHART
-    var area = new Morris.Area({
-      element: 'revenue-chart',
-      resize: true,
-      data: [
-        {y: '2011 Q1', item1: 2666, item2: 2666},
-        {y: '2011 Q2', item1: 2778, item2: 2294},
-        {y: '2011 Q3', item1: 4912, item2: 1969},
-        {y: '2011 Q4', item1: 3767, item2: 3597},
-        {y: '2012 Q1', item1: 6810, item2: 1914},
-        {y: '2012 Q2', item1: 5670, item2: 4293},
-        {y: '2012 Q3', item1: 4820, item2: 3795},
-        {y: '2012 Q4', item1: 15073, item2: 5967},
-        {y: '2013 Q1', item1: 10687, item2: 4460},
-        {y: '2013 Q2', item1: 8432, item2: 5713}
-      ],
-      xkey: 'y',
-      ykeys: ['item1', 'item2'],
-      labels: ['Item 1', 'Item 2'],
-      lineColors: ['#a0d0e0', '#3c8dbc'],
-      hideHover: 'auto'
-    });
+  console.log(totalMember);
+  console.log(bulan);
 
-    //DONUT CHART
-    var donut = new Morris.Donut({
-      element: 'sales-chart',
-      resize: true,
-      colors: ["#3c8dbc", "#f56954", "#00a65a"],
-      data: [
-        {label: "Download Sales", value: 12},
-        {label: "In-Store Sales", value: 30},
-        {label: "Mail-Order Sales", value: 20}
-      ],
-      hideHover: 'auto'
-    });
+  // Konfigurasi grafik
+  var ctx = document.getElementById('jumlah-anggota-gym-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: bulan,  // Data untuk sumbu x (bulan)
+      datasets: [{
+        label: '',
+        data: totalMember,  // Data untuk sumbu y (total member)
+        borderColor: '#4B94C0',
+        fill: true
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Bulan'
+          }
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Jumlah Anggota'
+          },
+          ticks: {
+            precision: 0
+          }
+        }
+      }
+    }
+  });
+</script>
 
-    //BAR CHART
-    var bar = new Morris.Bar({
-      element: 'bar-chart',
-      resize: true,
-      data: [
-        {y: '2006', a: 100, b: 90},
-        {y: '2007', a: 75, b: 65},
-        {y: '2008', a: 50, b: 40},
-        {y: '2009', a: 75, b: 65},
-        {y: '2010', a: 50, b: 40},
-        {y: '2011', a: 75, b: 65},
-        {y: '2012', a: 100, b: 90}
-      ],
-      barColors: ['#00a65a', '#f56954'],
-      xkey: 'y',
-      ykeys: ['a', 'b'],
-      labels: ['CPU', 'DISK'],
-      hideHover: 'auto'
-    });
+<script>
+  // PIE CHART
+  // Mendapatkan data dari PHP dan mengonversi ke dalam variabel JavaScript
+  var totalStatus = @json($total_status);
+  var status = @json($status);
+
+  console.log(totalStatus);
+  console.log([status]);
+
+  // Memisahkan data status "Proses" dan "Selesai"
+  var statusProses = [];
+  var statusSelesai = [];
+
+  for (var i = 0; i < status.length; i++) {
+    if (status[i] === 'Proses') {
+      statusProses.push(totalStatus[i]);
+    } else if (status[i] === 'Selesai') {
+      statusSelesai.push(totalStatus[i]);
+    }
+  }
+
+  // Konfigurasi grafik
+  var ctx = document.getElementById('status-training-chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Proses', 'Selesai'],  // Data untuk sumbu x (status)
+      datasets: [{
+        label: '',
+        data: totalStatus,  // Data untuk sumbu y (total status)
+        // borderColor: ['#F39C12', '#00A65A'],
+        backgroundColor: ['#FFCD56', '#4BC0C0'],
+        fill: true
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Status'
+          }
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Jumlah Status'
+          },
+          ticks: {
+            precision: 0
+          }
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  // BAR CHART
+  // Mendapatkan data dari PHP dan mengonversi ke dalam variabel JavaScript
+  var totalGoal = @json($total_goal);
+  var goal = @json($goal);
+
+  console.log(totalGoal);
+  console.log(goal);
+
+  // Konfigurasi grafik
+  var ctx = document.getElementById('goal-anggota-gym-chart').getContext('2d');
+  // Daftar warna border
+  var borderColorList = ['#4B94C0', '#FF6384', '#36A2EB', '#FFCE56', '#8CFF40', '#FF9F40', '#A854D4', '#FF4D4D', '#00C9A7'];
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: goal,  // Data untuk sumbu x (goal)
+      datasets: [{
+        label: '',
+        data: totalGoal,  // Data untuk sumbu y (total goal)
+        borderColor: borderColorList,
+        backgroundColor: borderColorList.map(color => color + '80'), // Menambahkan transparansi pada warna latar belakang
+        fill: false
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Jenis Goal'
+          }
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Jumlah Goal'
+          },
+          ticks: {
+            precision: 0
+          }
+        }
+      }
+    }
   });
 </script>
 </body>

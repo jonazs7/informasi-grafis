@@ -66,6 +66,8 @@
 <!-- Morris.js charts -->
 <script src="{{ asset('lte/bower_components/raphael/raphael.min.js') }}"></script>
 <script src="{{ asset('lte/bower_components/morris.js/morris.min.js') }}"></script>
+<!-- Chart.js charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- page script -->
 <script>
     $(function() {

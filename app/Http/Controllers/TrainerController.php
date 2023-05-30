@@ -20,7 +20,67 @@ class TrainerController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('beranda_trainer', ['imageName' => $pengguna->foto]);
+        // // Mendapatkan data dari database dan mengurutkannya berdasarkan bulan
+        // $data = Pengguna::select(DB::raw("MONTHNAME(created_at) as bulan, COUNT(email) as total_member"))
+        // ->groupBy(DB::raw("MONTHNAME(created_at)"))
+        // ->orderBy(DB::raw("MONTH(created_at)"))
+        // ->get();
+
+        // // Mendapatkan semua nama bulan dalam tahun
+        // $namaBulan = array(
+        // 'January', 'February', 'March', 'April', 'May', 'June', 
+        // 'July', 'August', 'September', 'October', 'November', 'December'
+        // );
+
+        // // Membuat array kosong untuk total member
+        // $totalMember = array_fill(0, 12, 0);
+
+        // // Mengisi array total member dengan data yang diperoleh dari database
+        // foreach ($data as $item) {
+        // $bulanIndex = array_search($item->bulan, $namaBulan);
+        // $totalMember[$bulanIndex] = $item->total_member;
+        // }
+
+        // // Mengonversi data menjadi JSON untuk dikirim ke JavaScript
+        // $bulan = $namaBulan;
+        // $total_member = $totalMember;
+
+        // SUMBU Y - Jumlah Anggota Gym Bulanan
+        $total_member = Pengguna::select(DB::raw("CAST(COUNT(email) as int) as total_member"))
+        ->where('level', 'Member')
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck('total_member');
+
+        // SUMBU X - Jumlah Anggota Gym Bulanan
+        $bulan = Pengguna::select(DB::raw("MONTHNAME(created_at) as bulan"))
+        ->where('level', 'Member')
+        ->groupBy(DB::raw("MONTHNAME(created_at)"))
+        ->orderBy(DB::raw("MONTH(created_at)"))
+        ->pluck('bulan');
+
+        // SUMBU Y - STATUS TRAINING
+        $total_status = Jadwal::select(DB::raw("CAST(COUNT(status) as int) as total_status"))
+        ->groupBy(DB::raw("status"))
+        ->pluck('total_status');
+        
+        // SUMBU X - STATUS TRAINING
+        $status = Jadwal::select(DB::raw("status"))
+        ->groupBy(DB::raw("status"))
+        ->pluck('status');
+
+        // SUMBU Y - Goal Anggota Gym 
+        $total_goal = Jadwal::select(DB::raw("CAST(COUNT(goal) as int) as total_goal"))
+        ->groupBy(DB::raw("goal"))
+        ->pluck('total_goal');
+        
+        // SUMBU X - Goal Anggota Gym 
+        $goal = Jadwal::select(DB::raw("goal"))
+        ->groupBy(DB::raw("goal"))
+        ->pluck('goal');
+       
+        return view('beranda_trainer', ['imageName' => $pengguna->foto, 'total_member' => $total_member, 'bulan' => $bulan,
+                    'total_status' => $total_status, 'status' => $status, 'total_goal' => $total_goal, 
+                    'goal' => $goal]);
     }
 
     public function jadwal(){
@@ -56,7 +116,8 @@ class TrainerController extends Controller
         // untuk querystring berdasarkan email
         // $nama_pengguna =  Pengguna::where('email', $id)->first(); 
 
-        return view('lihat_kegiatan_trainer', ['imageName' => $pengguna->foto, 'show_kegiatan' => $show_kegiatan, 'nama_pengguna' => $nama_pengguna]);
+        return view('lihat_kegiatan_trainer', ['imageName' => $pengguna->foto, 'show_kegiatan' => $show_kegiatan, 
+                    'nama_pengguna' => $nama_pengguna]);
     }
 
     public function save_kegiatan(Request $request){
@@ -241,7 +302,8 @@ class TrainerController extends Controller
 
         $nama_pengguna = Pengguna::find($kode_pengguna);
 
-        return view('detail_info_trainer', ['imageName' => $pengguna->foto, 'show_data_fisik' => $show_data_fisik, 'nama_pengguna' => $nama_pengguna ]);
+        return view('detail_info_trainer', ['imageName' => $pengguna->foto, 'show_data_fisik' => $show_data_fisik, 
+                    'nama_pengguna' => $nama_pengguna ]);
     }
 
     public function delete_data_fisik($kode_data_fisik){
