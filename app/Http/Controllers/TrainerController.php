@@ -159,7 +159,7 @@ class TrainerController extends Controller
         ->where('id_jadwal', $kode_jadwal)
         ->delete();
 
-        return back()->with('hapusKegiatan', 'Data kegiatan berhasil dihapus');
+        return back()->with('hapusKegiatan', 'Data kegiatan telah dihapus');
     }
 
     public function edit_kegiatan($kode_jadwal){
@@ -209,7 +209,7 @@ class TrainerController extends Controller
         $jadwal->status = $status;
         $jadwal->update();
 
-        return back()->with('updateKegiatan', 'Data kegiatan berhasil ditambahkan');
+        return back()->with('updateKegiatan', 'Data kegiatan berhasil diperbarui');
     }
 
     public function show_profile_anggota($id){
@@ -289,7 +289,7 @@ class TrainerController extends Controller
             'body_fat' => $body_fat
         ]);
 
-        return back()->with('success', 'Data berhasil ditambahkan');
+        return back()->with('success', 'Data fisik berhasil ditambahkan');
     }
 
     public function detail_info($kode_pengguna){
@@ -311,7 +311,7 @@ class TrainerController extends Controller
         ->where('id_data_fisik', $kode_data_fisik)
         ->delete();
 
-        return back()->with('delete', 'Data berhasil dihapus');;
+        return back()->with('delete', 'Data fisik telah dihapus');;
     }
 
     public function anggota_gym(){
@@ -340,7 +340,7 @@ class TrainerController extends Controller
             'level' => 'Member',
         ]);
 
-        return redirect()->route('anggotaGym')->with('success', 'Data telah ditambahkan');
+        return redirect()->route('anggotaGym')->with('success', 'Data anggota gym telah ditambahkan');
     }
 
     public function delete_anggota_gym($kode){
@@ -348,6 +348,6 @@ class TrainerController extends Controller
         $pengguna = Pengguna::where('id', $kode)->first();
         $pengguna->delete();
        
-        return redirect()->route('anggotaGym')->with('berhasil', 'Data telah dihapus');
+        return redirect()->route('anggotaGym')->with('berhasil', 'Data anggota gym telah dihapus');
     }
 }

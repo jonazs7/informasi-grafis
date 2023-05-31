@@ -396,8 +396,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
   $(document).ready(function() {
-      // Fungsi untuk membuka form modal
-      $('.update-jadwal').click(function() {
+    //   $('.update-jadwal').click(function() {   
+        // beda on click dengan clik, kalau clik mengikat 
+        // elemen dihalaman itu saja, kalau on click tetap terikat 
+        // dan berlaku untuk elemen-elemen yang muncul secara dinamis, termasuk 
+        // elemen .update-jadwal pada halaman paginasi selanjutnya.    
+    // Fungsi untuk membuka form modal    
+      $(document).on('click', '.update-jadwal', function() {
         // Hapus data lama yang mungkin tersisa sebelum membuka modal
         $('input[type=checkbox]').prop('checked', false);
           var userId = $(this).data('id');
@@ -439,7 +444,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
 
 <script>
-$(document).ready(function() {
+// $(document).ready(function() {
+$(document).on('click', function() {
   var form = $('#update-form');
   var originalAction = form.attr('action'); // Simpan URL action asli
 
