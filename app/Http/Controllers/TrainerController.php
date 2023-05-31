@@ -159,7 +159,7 @@ class TrainerController extends Controller
         ->where('id_jadwal', $kode_jadwal)
         ->delete();
 
-        return back();
+        return back()->with('hapusKegiatan', 'Data kegiatan berhasil dihapus');
     }
 
     public function edit_kegiatan($kode_jadwal){
@@ -209,7 +209,7 @@ class TrainerController extends Controller
         $jadwal->status = $status;
         $jadwal->update();
 
-        return back();
+        return back()->with('updateKegiatan', 'Data kegiatan berhasil ditambahkan');
     }
 
     public function show_profile_anggota($id){

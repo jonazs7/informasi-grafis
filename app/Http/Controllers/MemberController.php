@@ -37,7 +37,7 @@ class MemberController extends Controller
             'status' => 'Proses'
         ]);
 
-        return back();
+        return back()->with('berhasil', 'Data goal telah ditambahkan');
     }
 
     public function edit_biodata(){
@@ -81,7 +81,7 @@ class MemberController extends Controller
         $pengguna->save();
         
         // Redirect ke halaman yang diinginkan setelah berhasil diperbarui
-        return redirect()->route('editBiodata')->with('success', 'Data telah diperbarui');
+        return redirect()->route('editBiodata')->with('success', 'Data biodata telah diperbarui');
     }
     
 }

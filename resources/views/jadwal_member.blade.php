@@ -35,6 +35,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
+      @if(session('berhasil'))
+      <div class="alert alert-success alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Berhasil !</h4>
+        {{ session('berhasil') }}
+      </div>
+      @endif
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
       style="margin-top: 12px">+ Tambah Goal</button>
     </section>
