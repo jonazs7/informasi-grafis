@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request\fill;
 use Carbon\Carbon; // Import Carbon untuk manipulasi tanggal
+use Illuminate\Support\Facades\Validator;
 
 
 class TrainerController extends Controller
@@ -250,6 +251,14 @@ class TrainerController extends Controller
     }
 
     public function save_data_fisik(Request $request){
+        $request->validate([
+            'tanggal' => 'required|date_format:Y/m/d',
+            // Tambahkan aturan validasi lainnya di sini
+        ], [
+            'tanggal.required' => 'Kolom tanggal harus diisi.',
+            'tanggal.date_format' => 'Format tanggal harus dalam format Y/m/d atau Tahun/Bulan/Tanggal.',
+        ]);
+
         $gender = $request->input('jekel');
 
         // Memeriksa jenis kelamin dan mengatur rumus yang sesuai

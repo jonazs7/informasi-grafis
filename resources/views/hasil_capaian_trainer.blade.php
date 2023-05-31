@@ -49,6 +49,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{ session('success') }}
       </div>
       @endif
+      {{-- @if(session('errorTanggal'))
+      <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
+        {{ session('errorTanggal') }}
+      </div>
+      @endif --}}
+      @if ($errors->any())
+      <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
+          @foreach ($errors->all() as $error)
+          {{ $error }}
+          @endforeach
+        </div>
+      @endif
     </section>
 
     <!-- Main content -->
@@ -240,7 +256,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" name="tanggal" id="tanggal" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
+                      <input type="text" name="tanggal" required class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
                     </div>
                   </div>
                   <!-- /.form group -->
@@ -249,13 +265,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- text input -->
                   <div class="form-group">
                     <label>Tinggi (cm)</label>
-                      <input type="text" name="tinggi" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="tinggi" class="form-control">
                   </div>
                   <!-- end text input -->
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Bisep (cm)</label>
-                      <input type="text" name="lingkar_bisep" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_bisep" class="form-control">
                   </div>
                   <!-- end text input -->
                 </div>
@@ -263,13 +281,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- text input -->
                   <div class="form-group">
                     <label>Berat (kg)</label>
-                      <input type="text" name="berat" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="berat" class="form-control">
                   </div>
                   <!-- end text input -->
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Dada (cm)</label>
-                      <input type="text" name="lingkar_dada" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_dada" class="form-control">
                   </div>
                   <!-- end text input -->
                 </div>
@@ -277,13 +297,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Leher (cm)</label>
-                      <input type="text" name="lingkar_leher" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_leher" class="form-control">
                   </div>
                   <!-- end text input -->
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Pantat (cm)</label>
-                      <input type="text" name="lingkar_pantat" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_pantat" class="form-control">
                   </div>
                   <!-- end text input -->
                 </div>
@@ -291,13 +313,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Pinggang (cm)</label>
-                      <input type="text" name="lingkar_pinggang" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_pinggang" class="form-control">
                   </div>
                   <!-- end text input -->
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Paha Bawah (cm)</label>
-                      <input type="text" name="lingkar_paha_bawah" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_paha_bawah" class="form-control">
                   </div>
                   <!-- end text input -->
                 </div>
@@ -305,13 +329,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Paha Atas (cm)</label>
-                      <input type="text" name="lingkar_paha_atas" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_paha_atas" class="form-control">
                   </div>
                   <!-- end text input -->
                   <!-- text input -->
                   <div class="form-group">
                     <label>Lingkar Betis (cm)</label>
-                      <input type="text" name="lingkar_betis" class="form-control">
+                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
+                      name="lingkar_betis" class="form-control">
                   </div>
                   <!-- end text input -->
                 </div>
@@ -410,6 +436,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
 </script>
+
+
+
 </body>
 </html>
 
