@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @foreach ($errors->all() as $error)
           {{ $error }}
           @endforeach
-        </div>
+        </div> 
       @endif
     </section>
 
