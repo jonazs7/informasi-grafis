@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LPB(cm)</th>
               <th>LBS(cm)</th>
               <th>BMI</th>
-              <th>BFB(%)</th>
+              <th>BFP(%)</th>
               <th>Aksi</th>
             </tr>
             </thead>
@@ -134,7 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $data_fisik->paha_bwh }}</td>
                 <td>{{ $data_fisik->betis }}</td>
                 <td>{{ $data_fisik->body_mass }}</td>
-                <td>{{ $data_fisik->body_fat }}</td>
+                <td>{{ $data_fisik->body_fat }} %</td>
                 <td><button type="button" class="btn btn-danger btn-sm" 
                   data-toggle="modal" data-target="#modal-default-hapus-data_fisik" data-id="{{ $data_fisik->id_data_fisik }}">Hapus</button>
                 </td>

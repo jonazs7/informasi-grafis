@@ -168,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <th>Gender</th>
                 <th>Rerata BMI</th>
                 <th>Status Rerata BMI</th>
-                <th>Rerata BFP</th>
+                <th>Rerata BFP(%)</th>
                 <th>Status Rerata BFP</th>
                 <th>Aksi</th>
               </tr>
