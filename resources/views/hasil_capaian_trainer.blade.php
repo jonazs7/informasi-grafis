@@ -49,13 +49,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{ session('success') }}
       </div>
       @endif
-      {{-- @if(session('errorTanggal'))
-      <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
-        {{ session('errorTanggal') }}
-      </div>
-      @endif --}}
       @if ($errors->any())
       <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -174,9 +167,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <th>Nama</th>
                 <th>Gender</th>
                 <th>Rerata BMI</th>
-                <th>Status BMI</th>
+                <th>Status Rerata BMI</th>
                 <th>Rerata BFP</th>
-                <th>Status BFP</th>
+                <th>Status Rerata BFP</th>
                 <th>Aksi</th>
               </tr>
               </thead>
@@ -185,10 +178,87 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <tr>
                 <td>{{ $capaian->name }}</td>
                 <td>{{ $capaian->gender }}</td>
-                <td>{{ $capaian->rerata_bmi }}</td>
-                <td>isi ktrng bmi</td>
-                <td>{{ $capaian->rerata_bfp }}</td>
-                <td>isi ktrng bfp</td>
+                <td>{{ number_format($capaian->rerata_bmi, 2) }}</td>
+                <td>
+                  @php
+                    $bmiLabel = '';
+                    $bmiColor = '';
+
+                    if($capaian->rerata_bmi < 18.5) {
+                        $bmiLabel = 'Underweight';
+                        $bmiColor = '#3C8DBC';
+                    } elseif ($capaian->rerata_bmi >= 18.5 && $capaian->rerata_bmi <= 24.9) {
+                        $bmiLabel = 'Normal weight';
+                        $bmiColor = '#00A65A';
+                    } elseif ($capaian->rerata_bmi >= 25 && $capaian->rerata_bmi <= 29.9) {
+                        $bmiLabel = 'Overweight';
+                        $bmiColor = '#F39C12';
+                    } elseif ($capaian->rerata_bmi >= 30 && $capaian->rerata_bmi <= 35) {
+                        $bmiLabel = 'Obese';
+                        $bmiColor = '#DD4B39';
+                    } else {
+                        $bmiLabel = 'Morbid obesity';
+                        $bmiColor = '#504C8C';
+                    }
+                  @endphp
+                  @if ($capaian->rerata_bmi !== NULL)
+                    <div class="badge" style="background-color: {{ $bmiColor }};">
+                      {{ $bmiLabel }}
+                    </div>
+                  @endif  
+                </td>
+                <td>{{ number_format($capaian->rerata_bfp) }} %</td>
+                <td>
+                  @php
+                  $bfpLabel = '';
+                  $bfpColor = '';
+                  // WANITA
+                  if($capaian->rerata_bfp < 10 && $capaian->gender ==='Wanita') {
+                      $bfpLabel = 'Unknown';
+                      $bfpColor = '#d2d6de';
+                  } elseif($capaian->rerata_bfp >= 10 && $capaian->rerata_bfp <= 13.49 && $capaian->gender ==='Wanita') {
+                      $bfpLabel = 'Essential Fat';
+                      $bfpColor = '#3c8dbc';
+                  } elseif ($capaian->rerata_bfp >= 13.50 && $capaian->rerata_bfp <= 20.49 && $capaian->gender ==='Wanita') {
+                      $bfpLabel = 'Athletes';
+                      $bfpColor = '#00c0ef';
+                  } elseif ($capaian->rerata_bfp >= 20.50 && $capaian->rerata_bfp <= 24.49 && $capaian->gender ==='Wanita') {
+                      $bfpLabel = 'Fitness';
+                      $bfpColor = '#00a65a';  
+                  } elseif ($capaian->rerata_bfp >= 24.50 && $capaian->rerata_bfp <= 31.49 && $capaian->gender ==='Wanita') {
+                      $bfpLabel = 'Acceptable';
+                      $bfpColor = '#f39c12';
+                  } elseif ($capaian->rerata_bfp >= 31.50 && $capaian->gender ==='Wanita') {
+                      $bfpLabel = 'Obese';
+                      $bfpColor = '#f56954';
+                  }
+                  // PRIA
+                  if($capaian->rerata_bfp < 2 && $capaian->gender ==='Pria') {
+                      $bfpLabel = 'Unknown';
+                      $bfpColor = '#d2d6de';
+                  } elseif($capaian->rerata_bfp >= 2 && $capaian->rerata_bfp <= 5.49 && $capaian->gender ==='Pria') {
+                      $bfpLabel = 'Essential Fat';
+                      $bfpColor = '#3c8dbc';
+                  } elseif ($capaian->rerata_bfp >= 5.50 && $capaian->rerata_bfp <= 13.49 && $capaian->gender ==='Pria') {
+                      $bfpLabel = 'Athletes';
+                      $bfpColor = '#00c0ef';
+                  } elseif ($capaian->rerata_bfp >= 13.50 && $capaian->rerata_bfp <= 17.49 && $capaian->gender ==='Pria') {
+                      $bfpLabel = 'Fitness';
+                      $bfpColor = '#00a65a';  
+                  } elseif ($capaian->rerata_bfp >= 17.50 && $capaian->rerata_bfp <= 24.49 && $capaian->gender ==='Pria') {
+                      $bfpLabel = 'Acceptable';
+                      $bfpColor = '#f39c12';
+                  } elseif ($capaian->rerata_bfp >= 25.50 && $capaian->gender ==='Pria') {
+                      $bfpLabel = 'Obese';
+                      $bfpColor = '#f56954';
+                  }
+                  @endphp
+                  @if ($capaian->rerata_bfp !== NULL)
+                    <div class="badge" style="background-color: {{ $bfpColor }};">
+                      {{ $bfpLabel }}
+                    </div>
+                  @endif  
+                </td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm create-data-fisik" data-toggle="modal" 
                   data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}">Tambah Data</button>
