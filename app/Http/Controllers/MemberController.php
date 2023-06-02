@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\DataFisik;
 
 
 class MemberController extends Controller
@@ -16,7 +17,36 @@ class MemberController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        return view('beranda_member', ['imageName' => $pengguna->foto]);
+        $show_data_fisik = DB::table('data_fisik')
+        ->where('id_pengguna', $user->id)
+        ->get();
+
+        // SUMBU Y - BMI
+        $y_bmi = DataFisik::select(DB::raw("body_mass"))
+        ->where('id_pengguna', $user->id)
+        ->orderBy('tgl')
+        ->pluck('body_mass');
+
+        // SUMBU X - BMI
+        $x_bmi = DataFisik::select(DB::raw("tgl"))
+        ->where('id_pengguna', $user->id)
+        ->orderBy('tgl')
+        ->pluck('tgl');
+
+        // SUMBU Y - BFP
+        $y_bfp = DataFisik::select(DB::raw("body_fat"))
+        ->where('id_pengguna', $user->id)
+        ->orderBy('tgl')
+        ->pluck('body_fat');
+
+        // SUMBU X - BFP
+        $x_bfp = DataFisik::select(DB::raw("tgl"))
+        ->where('id_pengguna', $user->id)
+        ->orderBy('tgl')
+        ->pluck('tgl');
+
+        return view('beranda_member', ['imageName' => $pengguna->foto, 'show_data_fisik' => $show_data_fisik,
+                    'y_bmi' => $y_bmi, 'x_bmi' => $x_bmi, 'y_bfp' => $y_bfp, 'x_bfp' => $x_bfp]);
     }
 
     public function jadwal(){

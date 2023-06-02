@@ -64,9 +64,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $pengguna->tlpn }}</td>
                 <td>{{ $pengguna->gender }}</td>
                 <td>
-                  <a type="button" class="btn btn-primary btn-sm" href="{{ route('showKegiatan', $pengguna->id) }}">Kegiatan</a>
+                  {{-- <a type="button" class="btn btn-primary btn-sm" href="{{ route('showKegiatan', $pengguna->id) }}">Kegiatan</a>
                   <a type="button" class="btn btn-default btn-sm profile-button" data-toggle="modal" 
-                  data-target="#modal-default-profile" data-id="{{ $pengguna->id }}" style="margin-left: 8px">Profil</a>
+                  data-target="#modal-default-profile" data-id="{{ $pengguna->id }}" style="margin-left: 8px">Profil</a> --}}
+                  <a class="btn btn-app" type="button" href="{{ route('showKegiatan', $pengguna->id) }}">
+                    <span class="badge bg-yellow">3</span>
+                    <i class="fa fa-calendar"></i> Kegiatan
+                  </a>
+                  <a class="btn btn-app profile-button" type="button" data-toggle="modal" 
+                  data-target="#modal-default-profile" data-id="{{ $pengguna->id }}">
+                    <i class="fa fa-user-circle"></i> Profil
+                  </a>
                 </td>
               </tr>
               @endforeach

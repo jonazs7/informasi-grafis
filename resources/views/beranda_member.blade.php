@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="areaChart" style="height:250px"></canvas>
+                <canvas id="bmi-chart" style="height:250px"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
@@ -76,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="lineChart" style="height:250px"></canvas>
+                <canvas id="bfp-chart" style="height:250px"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
@@ -112,37 +112,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </tr>
             </thead>
             <tbody>
+            @foreach ($show_data_fisik as $data_fisik)
             <tr>
-              <td>2023-03-21</td>
-              <td>1,63</td>
-              <td>55,2</td>
-              <td>35</td>
-              <td>70</td>
-              <td>52</td>
-              <td>27</td>
-              <td>84</td>
-              <td>89</td>
-              <td>37</td>
-              <td>32</td>
-              <td>15</td>
-              <td>20</td>
-            </tr>
-            <tr>
-              <td>2023-03-21</td>
-              <td>1,63</td>
-              <td>55,2</td>
-              <td>35</td>
-              <td>70</td>
-              <td>52</td>
-              <td>27</td>
-              <td>84</td>
-              <td>89</td>
-              <td>37</td>
-              <td>32</td>
-              <td>15</td>
-              <td>20</td>
-            </tr>
-            <tr>
+              <td>{{ $data_fisik->tgl }}</td>
+              <td>{{ $data_fisik->tinggi }}</td>
+              <td>{{ $data_fisik->berat }}</td>
+              <td>{{ $data_fisik->neck }}</td>
+              <td>{{ $data_fisik->waist}}</td>
+              <td>{{ $data_fisik->hip }}</td>
+              <td>{{ $data_fisik->bisep }}</td>
+              <td>{{ $data_fisik->dada }}</td>
+              <td>{{ $data_fisik->pantat }}</td>
+              <td>{{ $data_fisik->paha_bwh }}</td>
+              <td>{{ $data_fisik->betis }}</td>
+              <td>{{ $data_fisik->body_mass }}</td>
+              <td>{{ $data_fisik->body_fat }} %</td>
+            </tr>         
+            @endforeach
+            {{-- <tr>
               <td>2023-02-15</td>
               <td>20</td>
               <td>20</td>
@@ -156,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <td>20</td>
               <td>20</td>
               <td>20</td>
-            </tr>
+            </tr> --}}
             </tbody>
             <tfoot>
             <tr>
@@ -172,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LPB(cm)</th>
               <th>LBS(cm)</th>
               <th>BMI</th>
-              <th>BFB(%)</th>
+              <th>BFP(%)</th>
             </tr>
             </tfoot>
           </table>
@@ -194,99 +181,97 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 
-<!-- page script -->
+<!-- graphic script -->
 <script>
-  $(function() {
-      /* ChartJS
-       * -------
-       * Here we will create a few charts using ChartJS
-       */
+// LINE CHART
+// Mendapatkan data dari PHP dan mengonversi ke dalam variabel JavaScript
+var yBmi = @json($y_bmi);
+var xBmi = @json($x_bmi);
 
-      //--------------
-      //- AREA CHART -
-      //--------------
+console.log(yBmi);
+console.log(xBmi);
 
-      // Get context with jQuery - using jQuery's .get() method.
-      var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-      // This will get the first returned node in the jQuery collection.
-      var areaChart = new Chart(areaChartCanvas)
-
-      var areaChartData = {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-          datasets: [{
-                  label: 'Electronics',
-                  fillColor: 'rgba(210, 214, 222, 1)',
-                  strokeColor: 'rgba(210, 214, 222, 1)',
-                  pointColor: 'rgba(210, 214, 222, 1)',
-                  pointStrokeColor: '#c1c7d1',
-                  pointHighlightFill: '#fff',
-                  pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data: [65, 59, 80, 81, 56, 55, 40]
-              },
-              {
-                  label: 'Digital Goods',
-                  fillColor: 'rgba(60,141,188,0.9)',
-                  strokeColor: 'rgba(60,141,188,0.8)',
-                  pointColor: '#3b8bba',
-                  pointStrokeColor: 'rgba(60,141,188,1)',
-                  pointHighlightFill: '#fff',
-                  pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data: [28, 48, 40, 19, 86, 27, 90]
-              }
-          ]
+// Konfigurasi grafik
+var ctx = document.getElementById('bmi-chart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: xBmi,  // Data untuk sumbu x (mingguan)
+    datasets: [{
+      label: '',
+      data: yBmi,  // Data untuk sumbu y (BMI)
+      borderColor: '#4B94C0',
+      fill: false
+    }]
+  },
+  options: {
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: ''
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'B M I'
+        },
+        ticks: {
+          precision: 0
+        }
       }
+    }
+  }
+});
+</script>
 
-      var areaChartOptions = {
-          //Boolean - If we should show the scale at all
-          showScale: true,
-          //Boolean - Whether grid lines are shown across the chart
-          scaleShowGridLines: false,
-          //String - Colour of the grid lines
-          scaleGridLineColor: 'rgba(0,0,0,.05)',
-          //Number - Width of the grid lines
-          scaleGridLineWidth: 1,
-          //Boolean - Whether to show horizontal lines (except X axis)
-          scaleShowHorizontalLines: true,
-          //Boolean - Whether to show vertical lines (except Y axis)
-          scaleShowVerticalLines: true,
-          //Boolean - Whether the line is curved between points
-          bezierCurve: true,
-          //Number - Tension of the bezier curve between points
-          bezierCurveTension: 0.3,
-          //Boolean - Whether to show a dot for each point
-          pointDot: false,
-          //Number - Radius of each point dot in pixels
-          pointDotRadius: 4,
-          //Number - Pixel width of point dot stroke
-          pointDotStrokeWidth: 1,
-          //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-          pointHitDetectionRadius: 20,
-          //Boolean - Whether to show a stroke for datasets
-          datasetStroke: true,
-          //Number - Pixel width of dataset stroke
-          datasetStrokeWidth: 2,
-          //Boolean - Whether to fill the dataset with a color
-          datasetFill: true,
-          //String - A legend template
-          legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-          //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-          maintainAspectRatio: true,
-          //Boolean - whether to make the chart responsive to window resizing
-          responsive: true
+<script>
+// LINE CHART
+// Mendapatkan data dari PHP dan mengonversi ke dalam variabel JavaScript
+var yBfp = @json($y_bfp);
+var xBfp = @json($x_bfp);
+
+console.log(yBfp);
+console.log(xBfp);
+
+// Konfigurasi grafik
+var ctx = document.getElementById('bfp-chart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: xBfp,  // Data untuk sumbu x (mingguan)
+    datasets: [{
+      label: '',
+      data: yBfp,  // Data untuk sumbu y (BFP)
+      borderColor: '#4B94C0',
+      fill: false
+    }]
+  },
+  options: {
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: ''
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'B F P'
+        },
+        ticks: {
+          precision: 0
+        }
       }
-
-      //Create the line chart
-      areaChart.Line(areaChartData, areaChartOptions)
-
-      //-------------
-      //- LINE CHART -
-      //--------------
-      var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-      var lineChart = new Chart(lineChartCanvas)
-      var lineChartOptions = areaChartOptions
-      lineChartOptions.datasetFill = false
-      lineChart.Line(areaChartData, lineChartOptions)
-  })
+    }
+  }
+});
 </script>
 </body>
 </html>

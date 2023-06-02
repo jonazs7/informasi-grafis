@@ -444,13 +444,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
 
 <script>
-// $(document).ready(function() {
-$(document).on('click', function() {
+$(document).ready(function() {
+// $(document).on('click', function() { // negbug anjr pas diupdate malah ikut dinamis
   var form = $('#update-form');
   var originalAction = form.attr('action'); // Simpan URL action asli
 
   // Fungsi untuk membuka form modal
-  $('.update-jadwal').click(function() {
+//   $('.update-jadwal').click(function() {
+  $(document).on('click', '.update-jadwal', function() {
     $('input[type=checkbox]').prop('checked', false);
     var jadwalId = $(this).data('id');
     form.attr('action', originalAction.replace(':id_jadwal', jadwalId));
@@ -463,6 +464,27 @@ $(document).on('click', function() {
 });
 </script>
 
+{{-- <script>
+$(document).ready(function() {
+    var form = $('#update-form');
+    var originalAction = form.attr('action'); // Simpan URL action asli
+
+    // Fungsi untuk membuka form modal
+    $(document).on('click', '.update-jadwal', function() {
+    $('input[type=checkbox]').prop('checked', false);
+    var jadwalId = $(this).data('id');
+    // var newAction = form.attr('action').replace(':id_jadwal', jadwalId);
+    // form.attr('action', newAction);
+    form.attr('action', originalAction.replace(':id_jadwal', jadwalId));
+    });
+
+    // Fungsi untuk menutup form modal
+    $('#modal-default-ubah-kegiatan').on('hidden.bs.modal', function() {
+    form.attr('action', originalAction); // Mengembalikan URL action ke nilai asli
+    });
+});
+</script> --}}
+    
 {{-- Kaya gini bisa, tapi harus make document ready  PENJELASAN :
     Dalam contoh skrip yang Anda berikan, fungsi $('.update-jadwal').click(function() { ... }); akan dieksekusi ketika 
     elemen dengan kelas "update-jadwal" diklik. Namun, jika Anda menutup formulir dan membukanya kembali, fungsi 
