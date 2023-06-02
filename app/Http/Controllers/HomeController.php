@@ -33,37 +33,39 @@ class HomeController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        $total_member = Pengguna::select(DB::raw("CAST(COUNT(email) as int) as total_member"))
-        ->where('level', 'Member')
-        ->groupBy(DB::raw("Month(created_at)"))
-        ->pluck('total_member');
-
-        // SUMBU X - Jumlah Anggota Gym Bulanan
-        $bulan = Pengguna::select(DB::raw("MONTHNAME(created_at) as bulan"))
-        ->where('level', 'Member')
-        ->groupBy(DB::raw("MONTHNAME(created_at)"))
-        ->orderBy(DB::raw("MONTH(created_at)"))
-        ->pluck('bulan');
-
-        // SUMBU Y - STATUS TRAINING
-        $total_status = Jadwal::select(DB::raw("CAST(COUNT(status) as int) as total_status"))
-        ->groupBy(DB::raw("status"))
-        ->pluck('total_status');
-        
-        // SUMBU X - STATUS TRAINING
-        $status = Jadwal::select(DB::raw("status as status2"))
-        ->groupBy(DB::raw("status"))
-        ->pluck('status2')->toArray();
-
-        // SUMBU Y - Goal Anggota Gym 
-        $total_goal = Jadwal::select(DB::raw("CAST(COUNT(goal) as int) as total_goal"))
-        ->groupBy(DB::raw("goal"))
-        ->pluck('total_goal');
-        
-        // SUMBU X - Goal Anggota Gym 
-        $goal = Jadwal::select(DB::raw("goal"))
-        ->groupBy(DB::raw("goal"))
-        ->pluck('goal');
+         // SUMBU Y - Jumlah Anggota Gym Bulanan
+         $total_member = Pengguna::select(DB::raw("CAST(COUNT(email) as int) as total_member"))
+         ->where('level', 'Member')
+         ->groupBy(DB::raw("Month(created_at)"))
+         ->orderBy(DB::raw("MONTH(created_at)"))
+         ->pluck('total_member');
+ 
+         // SUMBU X - Jumlah Anggota Gym Bulanan
+         $bulan = Pengguna::select(DB::raw("MONTHNAME(created_at) as bulan"))
+         ->where('level', 'Member')
+         ->groupBy(DB::raw("MONTHNAME(created_at)"))
+         ->orderBy(DB::raw("MONTH(created_at)"))
+         ->pluck('bulan');
+ 
+         // SUMBU Y - STATUS TRAINING
+         $total_status = Jadwal::select(DB::raw("CAST(COUNT(status) as int) as total_status"))
+         ->groupBy(DB::raw("status"))
+         ->pluck('total_status');
+         
+         // SUMBU X - STATUS TRAINING
+         $status = Jadwal::select(DB::raw("status"))
+         ->groupBy(DB::raw("status"))
+         ->pluck('status');
+ 
+         // SUMBU Y - Goal Anggota Gym 
+         $total_goal = Jadwal::select(DB::raw("CAST(COUNT(goal) as int) as total_goal"))
+         ->groupBy(DB::raw("goal"))
+         ->pluck('total_goal');
+         
+         // SUMBU X - Goal Anggota Gym 
+         $goal = Jadwal::select(DB::raw("goal"))
+         ->groupBy(DB::raw("goal"))
+         ->pluck('goal');
 
     
         if (Auth::user()->level == 'Trainer') { 

@@ -50,6 +50,7 @@ class TrainerController extends Controller
         $total_member = Pengguna::select(DB::raw("CAST(COUNT(email) as int) as total_member"))
         ->where('level', 'Member')
         ->groupBy(DB::raw("Month(created_at)"))
+        ->orderBy(DB::raw("MONTH(created_at)"))
         ->pluck('total_member');
 
         // SUMBU X - Jumlah Anggota Gym Bulanan
@@ -311,8 +312,33 @@ class TrainerController extends Controller
 
         $nama_pengguna = Pengguna::find($kode_pengguna);
 
+        // SUMBU Y - BMI
+        $y_bmi = DataFisik::select(DB::raw("body_mass"))
+        ->where('id_pengguna', $kode_pengguna)
+        ->orderBy('tgl')
+        ->pluck('body_mass');
+
+        // SUMBU X - BMI
+        $x_bmi = DataFisik::select(DB::raw("tgl"))
+        ->where('id_pengguna', $kode_pengguna)
+        ->orderBy('tgl')
+        ->pluck('tgl');
+
+        // SUMBU Y - BFP
+        $y_bfp = DataFisik::select(DB::raw("body_fat"))
+        ->where('id_pengguna', $kode_pengguna)
+        ->orderBy('tgl')
+        ->pluck('body_fat');
+
+        // SUMBU X - BFP
+        $x_bfp = DataFisik::select(DB::raw("tgl"))
+        ->where('id_pengguna', $kode_pengguna)
+        ->orderBy('tgl')
+        ->pluck('tgl');
+
         return view('detail_info_trainer', ['imageName' => $pengguna->foto, 'show_data_fisik' => $show_data_fisik, 
-                    'nama_pengguna' => $nama_pengguna ]);
+                    'nama_pengguna' => $nama_pengguna, 'y_bmi' => $y_bmi, 'x_bmi' => $x_bmi,
+                    'y_bfp' => $y_bfp, 'x_bfp' => $x_bfp]);
     }
 
     public function delete_data_fisik($kode_data_fisik){

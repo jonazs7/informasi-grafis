@@ -119,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 
-<!-- page script -->
+<!-- graphic script -->
 <script>
   // LINE CHART
   // Mendapatkan data dari PHP dan mengonversi ke dalam variabel JavaScript
