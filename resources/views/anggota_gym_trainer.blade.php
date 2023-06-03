@@ -56,12 +56,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <!-- Data Table -->
        <div class="box">
         <div class="box-header">
-            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" 
-            data-target="#modal-default-anggota">+ Tambah Anggota</button>
+            {{-- <button type="button" class="btn btn-primary btn-md" data-toggle="modal" 
+            data-target="#modal-default-anggota">+ Tambah Anggota</button> --}}
+            <a class="btn btn-app" type="button" style="width: 140px; margin-top: 8px;" data-toggle="modal" 
+            data-target="#modal-default-anggota">
+              <i class="fa fa-plus"></i>Tambah Anggota
+            </a>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="example2" class="table table-bordered table-hover">
+          <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
               <th>Nama</th>
@@ -77,8 +81,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $pengguna->email }}</td>
                 <td>{{ $pengguna->gender }}</td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm" 
-                  data-toggle="modal" data-target="#modal-default-hapus-anggota" data-id="{{ $pengguna->id }}">Hapus</button>
+                  {{-- <button type="button" class="btn btn-danger btn-sm" 
+                  data-toggle="modal" data-target="#modal-default-hapus-anggota" data-id="{{ $pengguna->id }}">Hapus
+                  </button> --}}
+                  <a class="btn btn-app" type="button" data-toggle="modal" 
+                  data-target="#modal-default-hapus-anggota" data-id="{{ $pengguna->id }}">
+                    <i class="fa fa-trash"></i>Hapus
+                  </a>
                 </td>
               </tr>
               @endforeach

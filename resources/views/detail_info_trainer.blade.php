@@ -135,8 +135,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $data_fisik->betis }}</td>
                 <td>{{ $data_fisik->body_mass }}</td>
                 <td>{{ $data_fisik->body_fat }} %</td>
-                <td><button type="button" class="btn btn-danger btn-sm" 
-                  data-toggle="modal" data-target="#modal-default-hapus-data_fisik" data-id="{{ $data_fisik->id_data_fisik }}">Hapus</button>
+                <td>
+                  {{-- <button type="button" class="btn btn-danger btn-sm" 
+                  data-toggle="modal" data-target="#modal-default-hapus-data_fisik" data-id="{{ $data_fisik->id_data_fisik }}">Hapus
+                  </button> --}}
+                  <a class="btn btn-app" type="button" data-toggle="modal" data-target="#modal-default-hapus-data_fisik" 
+                  data-id="{{ $data_fisik->id_data_fisik }}">
+                    <i class="fa fa-trash"></i>Hapus
+                  </a>
                 </td>
               </tr>
               @endforeach

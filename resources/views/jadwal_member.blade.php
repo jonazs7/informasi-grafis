@@ -42,8 +42,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{ session('berhasil') }}
       </div>
       @endif
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
-      style="margin-top: 12px">+ Tambah Goal</button>
+      {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
+      style="margin-top: 12px">+ Tambah Goal</button> --}}
+      <a class="btn btn-app update-jadwal" type="button" style="width: 140px; margin-top: 8px;" data-toggle="modal" data-target="#modal-default-tambah-goal">
+        <i class="fa fa-plus"></i>Tambah Goal
+      </a>
     </section>
 
     <!-- Main content -->

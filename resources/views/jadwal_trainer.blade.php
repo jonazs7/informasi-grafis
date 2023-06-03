@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="example2" class="table table-bordered table-hover">
+          <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
               <th>Nama</th>
@@ -68,7 +68,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a type="button" class="btn btn-default btn-sm profile-button" data-toggle="modal" 
                   data-target="#modal-default-profile" data-id="{{ $pengguna->id }}" style="margin-left: 8px">Profil</a> --}}
                   <a class="btn btn-app" type="button" href="{{ route('showKegiatan', $pengguna->id) }}">
-                    <span class="badge bg-yellow">3</span>
+                    @if ($pengguna->jmlh_status_proses !=0)
+                      <span class="badge bg-yellow">{{ $pengguna->jmlh_status_proses }}</span>
+                    @endif
                     <i class="fa fa-calendar"></i> Kegiatan
                   </a>
                   <a class="btn btn-app profile-button" type="button" data-toggle="modal" 

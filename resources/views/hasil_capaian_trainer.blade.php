@@ -260,9 +260,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   @endif  
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm create-data-fisik" data-toggle="modal" 
+                  {{-- <button type="button" class="btn btn-primary btn-sm create-data-fisik" data-toggle="modal" 
                   data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}">Tambah Data</button>
-                  <a type="button" class="btn btn-default btn-sm" href="{{ route('detailInfo', $capaian->id) }}">Detail Info</a>
+                  <a type="button" class="btn btn-default btn-sm" href="{{ route('detailInfo', $capaian->id) }}">Detail Info</a> --}}
+                  <a class="btn btn-app create-data-fisik" type="button" data-toggle="modal" 
+                  data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}">
+                    <i class="fa fa-plus"></i> Tambah Data
+                  </a>
+                  <a class="btn btn-app" href="{{ route('detailInfo', $capaian->id) }}">
+                    <i class="fa fa-info"></i> Detail Info
+                  </a>
                 </td>
               </tr>
               @endforeach

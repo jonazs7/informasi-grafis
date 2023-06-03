@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table id="example1" class="table table-bordered table-hover">
                             <thead>
                                 <tr> 
                                     <th>No</th>
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <input type="text" name="id" value="{{ $kegiatan->id_jadwal }}">
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form> --}}
-                                        <button type="button" class="btn btn-danger btn-sm" 
+                                        {{-- <button type="button" class="btn btn-danger btn-sm" 
                                         data-toggle="modal" data-target="#modal-default-hapus-kegiatan" 
                                         data-id="{{ $kegiatan->id_jadwal }}">Hapus
                                         </button>
@@ -105,7 +105,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         data-toggle="modal" data-target="#modal-default-ubah-kegiatan" 
                                         style="margin-left: 8px;"
                                         data-id="{{ $kegiatan->id_jadwal }}">Ubah
-                                        </button>
+                                        </button> --}}
+                                        <a class="btn btn-app update-jadwal" type="button" data-toggle="modal" 
+                                        data-target="#modal-default-ubah-kegiatan" data-id="{{ $kegiatan->id_jadwal }}">
+                                          <i class="fa fa-pencil"></i> Ubah
+                                        </a>
+                                        <a class="btn btn-app update-jadwal" type="button" data-toggle="modal" 
+                                        data-target="#modal-default-hapus-kegiatan" data-id="{{ $kegiatan->id_jadwal }}">
+                                          <i class="fa fa-trash"></i> Hapus
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

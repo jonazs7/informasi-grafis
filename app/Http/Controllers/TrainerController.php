@@ -48,37 +48,37 @@ class TrainerController extends Controller
 
         // SUMBU Y - Jumlah Anggota Gym Bulanan
         $total_member = Pengguna::select(DB::raw("CAST(COUNT(email) as int) as total_member"))
-        ->where('level', 'Member')
-        ->groupBy(DB::raw("Month(created_at)"))
-        ->orderBy(DB::raw("MONTH(created_at)"))
-        ->pluck('total_member');
+            ->where('level', 'Member')
+            ->groupBy(DB::raw("Month(created_at)"))
+            ->orderBy(DB::raw("MONTH(created_at)"))
+            ->pluck('total_member');
 
         // SUMBU X - Jumlah Anggota Gym Bulanan
         $bulan = Pengguna::select(DB::raw("MONTHNAME(created_at) as bulan"))
-        ->where('level', 'Member')
-        ->groupBy(DB::raw("MONTHNAME(created_at)"))
-        ->orderBy(DB::raw("MONTH(created_at)"))
-        ->pluck('bulan');
+            ->where('level', 'Member')
+            ->groupBy(DB::raw("MONTHNAME(created_at)"))
+            ->orderBy(DB::raw("MONTH(created_at)"))
+            ->pluck('bulan');
 
         // SUMBU Y - STATUS TRAINING
         $total_status = Jadwal::select(DB::raw("CAST(COUNT(status) as int) as total_status"))
-        ->groupBy(DB::raw("status"))
-        ->pluck('total_status');
+            ->groupBy(DB::raw("status"))
+            ->pluck('total_status');
         
         // SUMBU X - STATUS TRAINING
         $status = Jadwal::select(DB::raw("status"))
-        ->groupBy(DB::raw("status"))
-        ->pluck('status');
+            ->groupBy(DB::raw("status"))
+            ->pluck('status');
 
         // SUMBU Y - Goal Anggota Gym 
         $total_goal = Jadwal::select(DB::raw("CAST(COUNT(goal) as int) as total_goal"))
-        ->groupBy(DB::raw("goal"))
-        ->pluck('total_goal');
+            ->groupBy(DB::raw("goal"))
+            ->pluck('total_goal');
         
         // SUMBU X - Goal Anggota Gym 
         $goal = Jadwal::select(DB::raw("goal"))
-        ->groupBy(DB::raw("goal"))
-        ->pluck('goal');
+            ->groupBy(DB::raw("goal"))
+            ->pluck('goal');
        
         return view('beranda_trainer', ['imageName' => $pengguna->foto, 'total_member' => $total_member, 'bulan' => $bulan,
                     'total_status' => $total_status, 'status' => $status, 'total_goal' => $total_goal, 
@@ -89,12 +89,24 @@ class TrainerController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
+        // $show_pengguna = DB::table('pengguna')
+        //     ->leftjoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
+        //     ->where('level', 'Member')
+        //     ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender') // bisa dihapus biar kebaca idnya ntar, karena kalau pake select harus sama dengan yg diviewnya ketika ditampilin
+        //     ->distinct() // menghilangkan duplikasi data saat penampilan data
+        //     ->get();
+
         $show_pengguna = DB::table('pengguna')
-            ->leftjoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
+            ->leftJoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
             ->where('level', 'Member')
-            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender') // bisa dihapus biar kebaca idnya ntar, karena kalau pake select harus sama dengan yg diviewnya ketika ditampilin
-            ->distinct() // menghilangkan duplikasi data saat penampilan data
+            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
+            ->selectRaw('SUM(CASE WHEN jadwal.status = "Proses" THEN 1 ELSE 0 END) AS jmlh_status_proses')
+            ->selectRaw('SUM(CASE WHEN jadwal.status = "Selesai" THEN 1 ELSE 0 END) AS jmlh_status_selesai')
+            ->distinct()
+            ->groupBy('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
             ->get();
+            
+        // dd($show_pengguna);
 
         return view('jadwal_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
     }
@@ -226,27 +238,27 @@ class TrainerController extends Controller
         $pengguna = Pengguna::where('id', $user->id)->first();
 
         $show_capaian = DB::table('pengguna')
-        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
-        ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
-        'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
-        ->where('level', '=', 'Member')
-        ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
-        'pengguna.tlpn', 'pengguna.gender')
-        ->get();
+            ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+            ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
+            'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
+            ->where('level', '=', 'Member')
+            ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
+            'pengguna.tlpn', 'pengguna.gender')
+            ->get();
 
         return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto, 'show_capaian' => $show_capaian]);
     }
 
     public function create_data_fisik($kode_pengguna){
         $show_capaian_js = DB::table('pengguna')
-        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
-        ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
-        'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
-        ->where('level', '=', 'Member')
-        ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
-        'pengguna.tlpn', 'pengguna.gender')
-        ->where('id', $kode_pengguna)
-        ->first();
+            ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+            ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
+            'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
+            ->where('level', '=', 'Member')
+            ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
+            'pengguna.tlpn', 'pengguna.gender')
+            ->where('id', $kode_pengguna)
+            ->first();
 
         return response()->json($show_capaian_js);
     }
@@ -307,34 +319,34 @@ class TrainerController extends Controller
         $pengguna = Pengguna::where('id', $user->id)->first();
 
         $show_data_fisik = DB::table('data_fisik')
-        ->where('id_pengguna', $kode_pengguna)
-        ->get();
+            ->where('id_pengguna', $kode_pengguna)
+            ->get();
 
         $nama_pengguna = Pengguna::find($kode_pengguna);
 
         // SUMBU Y - BMI
         $y_bmi = DataFisik::select(DB::raw("body_mass"))
-        ->where('id_pengguna', $kode_pengguna)
-        ->orderBy('tgl')
-        ->pluck('body_mass');
+            ->where('id_pengguna', $kode_pengguna)
+            ->orderBy('tgl')
+            ->pluck('body_mass');
 
         // SUMBU X - BMI
         $x_bmi = DataFisik::select(DB::raw("tgl"))
-        ->where('id_pengguna', $kode_pengguna)
-        ->orderBy('tgl')
-        ->pluck('tgl');
+            ->where('id_pengguna', $kode_pengguna)
+            ->orderBy('tgl')
+            ->pluck('tgl');
 
         // SUMBU Y - BFP
         $y_bfp = DataFisik::select(DB::raw("body_fat"))
-        ->where('id_pengguna', $kode_pengguna)
-        ->orderBy('tgl')
-        ->pluck('body_fat');
+            ->where('id_pengguna', $kode_pengguna)
+            ->orderBy('tgl')
+            ->pluck('body_fat');
 
         // SUMBU X - BFP
         $x_bfp = DataFisik::select(DB::raw("tgl"))
-        ->where('id_pengguna', $kode_pengguna)
-        ->orderBy('tgl')
-        ->pluck('tgl');
+            ->where('id_pengguna', $kode_pengguna)
+            ->orderBy('tgl')
+            ->pluck('tgl');
 
         return view('detail_info_trainer', ['imageName' => $pengguna->foto, 'show_data_fisik' => $show_data_fisik, 
                     'nama_pengguna' => $nama_pengguna, 'y_bmi' => $y_bmi, 'x_bmi' => $x_bmi,
@@ -343,8 +355,8 @@ class TrainerController extends Controller
 
     public function delete_data_fisik($kode_data_fisik){
         DB::table('data_fisik')
-        ->where('id_data_fisik', $kode_data_fisik)
-        ->delete();
+            ->where('id_data_fisik', $kode_data_fisik)
+            ->delete();
 
         return back()->with('delete', 'Data fisik telah dihapus');;
     }
