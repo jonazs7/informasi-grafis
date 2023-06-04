@@ -210,48 +210,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ number_format($capaian->rerata_bfp) }} %</td>
                 <td>
                   @php
-                  $bfpLabel = '';
-                  $bfpColor = '';
-                  // WANITA
-                  if($capaian->rerata_bfp < 10 && $capaian->gender ==='Wanita') {
-                      $bfpLabel = 'Unknown';
-                      $bfpColor = '#d2d6de';
-                  } elseif($capaian->rerata_bfp >= 10 && $capaian->rerata_bfp <= 13.49 && $capaian->gender ==='Wanita') {
-                      $bfpLabel = 'Essential Fat';
-                      $bfpColor = '#3c8dbc';
-                  } elseif ($capaian->rerata_bfp >= 13.50 && $capaian->rerata_bfp <= 20.49 && $capaian->gender ==='Wanita') {
-                      $bfpLabel = 'Athletes';
-                      $bfpColor = '#00c0ef';
-                  } elseif ($capaian->rerata_bfp >= 20.50 && $capaian->rerata_bfp <= 24.49 && $capaian->gender ==='Wanita') {
-                      $bfpLabel = 'Fitness';
-                      $bfpColor = '#00a65a';  
-                  } elseif ($capaian->rerata_bfp >= 24.50 && $capaian->rerata_bfp <= 31.49 && $capaian->gender ==='Wanita') {
-                      $bfpLabel = 'Acceptable';
-                      $bfpColor = '#f39c12';
-                  } elseif ($capaian->rerata_bfp >= 31.50 && $capaian->gender ==='Wanita') {
-                      $bfpLabel = 'Obese';
-                      $bfpColor = '#f56954';
-                  }
-                  // PRIA
-                  if($capaian->rerata_bfp < 2 && $capaian->gender ==='Pria') {
-                      $bfpLabel = 'Unknown';
-                      $bfpColor = '#d2d6de';
-                  } elseif($capaian->rerata_bfp >= 2 && $capaian->rerata_bfp <= 5.49 && $capaian->gender ==='Pria') {
-                      $bfpLabel = 'Essential Fat';
-                      $bfpColor = '#3c8dbc';
-                  } elseif ($capaian->rerata_bfp >= 5.50 && $capaian->rerata_bfp <= 13.49 && $capaian->gender ==='Pria') {
-                      $bfpLabel = 'Athletes';
-                      $bfpColor = '#00c0ef';
-                  } elseif ($capaian->rerata_bfp >= 13.50 && $capaian->rerata_bfp <= 17.49 && $capaian->gender ==='Pria') {
-                      $bfpLabel = 'Fitness';
-                      $bfpColor = '#00a65a';  
-                  } elseif ($capaian->rerata_bfp >= 17.50 && $capaian->rerata_bfp <= 24.49 && $capaian->gender ==='Pria') {
-                      $bfpLabel = 'Acceptable';
-                      $bfpColor = '#f39c12';
-                  } elseif ($capaian->rerata_bfp >= 25.50 && $capaian->gender ==='Pria') {
-                      $bfpLabel = 'Obese';
-                      $bfpColor = '#f56954';
-                  }
+                    $bfpLabel = '';
+                    $bfpColor = '';
+                    // WANITA
+                    if($capaian->rerata_bfp < 10 && $capaian->gender ==='Wanita') {
+                        $bfpLabel = 'Unknown';
+                        $bfpColor = '#d2d6de';
+                    } elseif($capaian->rerata_bfp >= 10 && $capaian->rerata_bfp <= 13.49 && $capaian->gender ==='Wanita') {
+                        $bfpLabel = 'Essential Fat';
+                        $bfpColor = '#3c8dbc';
+                    } elseif ($capaian->rerata_bfp >= 13.50 && $capaian->rerata_bfp <= 20.49 && $capaian->gender ==='Wanita') {
+                        $bfpLabel = 'Athletes';
+                        $bfpColor = '#00c0ef';
+                    } elseif ($capaian->rerata_bfp >= 20.50 && $capaian->rerata_bfp <= 24.49 && $capaian->gender ==='Wanita') {
+                        $bfpLabel = 'Fitness';
+                        $bfpColor = '#00a65a';  
+                    } elseif ($capaian->rerata_bfp >= 24.50 && $capaian->rerata_bfp <= 31.49 && $capaian->gender ==='Wanita') {
+                        $bfpLabel = 'Acceptable';
+                        $bfpColor = '#f39c12';
+                    } elseif ($capaian->rerata_bfp >= 31.50 && $capaian->gender ==='Wanita') {
+                        $bfpLabel = 'Obese';
+                        $bfpColor = '#f56954';
+                    }
+                    // PRIA
+                    if($capaian->rerata_bfp < 2 && $capaian->gender ==='Pria') {
+                        $bfpLabel = 'Unknown';
+                        $bfpColor = '#d2d6de';
+                    } elseif($capaian->rerata_bfp >= 2 && $capaian->rerata_bfp <= 5.49 && $capaian->gender ==='Pria') {
+                        $bfpLabel = 'Essential Fat';
+                        $bfpColor = '#3c8dbc';
+                    } elseif ($capaian->rerata_bfp >= 5.50 && $capaian->rerata_bfp <= 13.49 && $capaian->gender ==='Pria') {
+                        $bfpLabel = 'Athletes';
+                        $bfpColor = '#00c0ef';
+                    } elseif ($capaian->rerata_bfp >= 13.50 && $capaian->rerata_bfp <= 17.49 && $capaian->gender ==='Pria') {
+                        $bfpLabel = 'Fitness';
+                        $bfpColor = '#00a65a';  
+                    } elseif ($capaian->rerata_bfp >= 17.50 && $capaian->rerata_bfp <= 24.49 && $capaian->gender ==='Pria') {
+                        $bfpLabel = 'Acceptable';
+                        $bfpColor = '#f39c12';
+                    } elseif ($capaian->rerata_bfp >= 24.50 && $capaian->gender ==='Pria') {
+                        $bfpLabel = 'Obese';
+                        $bfpColor = '#f56954';
+                    }
                   @endphp
                   @if ($capaian->rerata_bfp !== NULL)
                     <div class="badge" style="background-color: {{ $bfpColor }};">

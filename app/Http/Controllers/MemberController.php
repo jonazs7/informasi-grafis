@@ -17,9 +17,11 @@ class MemberController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        $show_data_fisik = DB::table('data_fisik')
-            ->where('id_pengguna', $user->id)
-            ->get();
+        $show_data_fisik = DB::table('pengguna')
+        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+        ->where('level', '=', 'Member')
+        ->where('id_pengguna', $user->id)
+        ->get();
 
         // SUMBU Y - BMI
         $y_bmi = DataFisik::select(DB::raw("body_mass"))

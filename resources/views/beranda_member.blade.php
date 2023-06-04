@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
               <th>Tanggal</th>
@@ -108,13 +108,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LPB(cm)</th>
               <th>LBS(cm)</th>
               <th>BMI</th>
+              <th>Status BMI</th>
               <th>BFP(%)</th>
+              <th>Status BFP</th>
+              {{-- <th>Aksi</th> --}}
             </tr>
             </thead>
             <tbody>
             @foreach ($show_data_fisik as $data_fisik)
             <tr>
-              <td>{{ $data_fisik->tgl }}</td>
+              <td><a href="#">{{ $data_fisik->tgl }}</a></td>
               <td>{{ $data_fisik->tinggi }}</td>
               <td>{{ $data_fisik->berat }}</td>
               <td>{{ $data_fisik->neck }}</td>
@@ -125,8 +128,92 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <td>{{ $data_fisik->pantat }}</td>
               <td>{{ $data_fisik->paha_bwh }}</td>
               <td>{{ $data_fisik->betis }}</td>
-              <td>{{ $data_fisik->body_mass }}</td>
-              <td>{{ $data_fisik->body_fat }} %</td>
+              <td>{{ number_format($data_fisik->body_mass, 2) }}</td>
+              <td>
+                @php
+                  $bmiLabel = '';
+                  $bmiColor = '';
+
+                  if($data_fisik->body_mass < 18.5) {
+                      $bmiLabel = 'Underweight';
+                      $bmiColor = '#3C8DBC';
+                  } elseif ($data_fisik->body_mass >= 18.5 && $data_fisik->body_mass <= 24.9) {
+                      $bmiLabel = 'Normal weight';
+                      $bmiColor = '#00A65A';
+                  } elseif ($data_fisik->body_mass >= 25 && $data_fisik->body_mass <= 29.9) {
+                      $bmiLabel = 'Overweight';
+                      $bmiColor = '#F39C12';
+                  } elseif ($data_fisik->body_mass >= 30 && $data_fisik->body_mass <= 35) {
+                      $bmiLabel = 'Obese';
+                      $bmiColor = '#DD4B39';
+                  } else {
+                      $bmiLabel = 'Morbid obesity';
+                      $bmiColor = '#504C8C';
+                  }
+                @endphp
+                @if ($data_fisik->body_mass !== NULL)
+                  <div class="badge" style="background-color: {{ $bmiColor }};">
+                    {{ $bmiLabel }}
+                  </div>
+                @endif  
+              </td>
+              <td>{{ number_format($data_fisik->body_fat) }} %</td>
+              <td>
+                @php
+                  $bfpLabel = '';
+                  $bfpColor = '';
+                  // WANITA
+                  if($data_fisik->body_fat < 10 && $data_fisik->gender ==='Wanita') {
+                      $bfpLabel = 'Unknown';
+                      $bfpColor = '#d2d6de';
+                  } elseif($data_fisik->body_fat >= 10 && $data_fisik->body_fat <= 13.49 && $data_fisik->gender ==='Wanita') {
+                      $bfpLabel = 'Essential Fat';
+                      $bfpColor = '#3c8dbc';
+                  } elseif ($data_fisik->body_fat >= 13.50 && $data_fisik->body_fat <= 20.49 && $data_fisik->gender ==='Wanita') {
+                      $bfpLabel = 'Athletes';
+                      $bfpColor = '#00c0ef';
+                  } elseif ($data_fisik->body_fat >= 20.50 && $data_fisik->body_fat <= 24.49 && $data_fisik->gender ==='Wanita') {
+                      $bfpLabel = 'Fitness';
+                      $bfpColor = '#00a65a';  
+                  } elseif ($data_fisik->body_fat >= 24.50 && $data_fisik->body_fat <= 31.49 && $data_fisik->gender ==='Wanita') {
+                      $bfpLabel = 'Acceptable';
+                      $bfpColor = '#f39c12';
+                  } elseif ($data_fisik->body_fat >= 31.50 && $data_fisik->gender ==='Wanita') {
+                      $bfpLabel = 'Obese';
+                      $bfpColor = '#f56954';
+                  }
+                  // PRIA
+                  if($data_fisik->body_fat < 2 && $data_fisik->gender ==='Pria') {
+                      $bfpLabel = 'Unknown';
+                      $bfpColor = '#d2d6de';
+                  } elseif($data_fisik->body_fat >= 2 && $data_fisik->body_fat <= 5.49 && $data_fisik->gender ==='Pria') {
+                      $bfpLabel = 'Essential Fat';
+                      $bfpColor = '#3c8dbc';
+                  } elseif ($data_fisik->body_fat >= 5.50 && $data_fisik->body_fat <= 13.49 && $data_fisik->gender ==='Pria') {
+                      $bfpLabel = 'Athletes';
+                      $bfpColor = '#00c0ef';
+                  } elseif ($data_fisik->body_fat >= 13.50 && $data_fisik->body_fat <= 17.49 && $data_fisik->gender ==='Pria') {
+                      $bfpLabel = 'Fitness';
+                      $bfpColor = '#00a65a';  
+                  } elseif ($data_fisik->body_fat >= 17.50 && $data_fisik->body_fat <= 24.49 && $data_fisik->gender ==='Pria') {
+                      $bfpLabel = 'Acceptable';
+                      $bfpColor = '#f39c12';
+                  } elseif ($data_fisik->body_fat >= 24.50 && $data_fisik->gender ==='Pria') {
+                      $bfpLabel = 'Obese';
+                      $bfpColor = '#f56954';
+                  }
+                @endphp
+                @if ($data_fisik->body_fat !== NULL)
+                  <div class="badge" style="background-color: {{ $bfpColor }};">
+                    {{ $bfpLabel }}
+                  </div>
+                @endif  
+              </td>
+              {{-- <td>
+                <a class="btn btn-app" type="button">
+                  <i class="fa fa-indo"></i> Info
+                </a>
+              </td> --}}
             </tr>         
             @endforeach
             {{-- <tr>
@@ -159,7 +246,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LPB(cm)</th>
               <th>LBS(cm)</th>
               <th>BMI</th>
+              <th>Status BMI</th>
               <th>BFP(%)</th>
+              <th>Status BFP</th>
+              {{-- <th>Aksi</th> --}}
             </tr>
             </tfoot>
           </table>
