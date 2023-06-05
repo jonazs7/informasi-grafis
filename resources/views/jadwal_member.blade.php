@@ -135,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="modal-body">
                   <!-- Input field untuk data -->
-                  <input type="text" name="kode_pengguna" value="{{ $pengguna->id }}">
+                  <input type="hidden" name="kode_pengguna" value="{{ $pengguna->id }}">
                   <!-- Goal -->
                   <div class="form-group">
                     <label>Goal</label>

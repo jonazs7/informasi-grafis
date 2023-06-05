@@ -322,9 +322,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @csrf
             <div class="modal-body">  
                 <!-- Input field untuk data id pengguna -->
-                <input type="text" name="kode_pengguna" id="kode_pengguna">  
+                <input type="hidden" name="kode_pengguna" id="kode_pengguna">  
                 <!-- Input field untuk data gender -->       
-                <input type="text" name="jekel" id="jekel">         
+                <input type="hidden" name="jekel" id="jekel">         
                 <div style="display: flex; justify-content: space-around">
                   <!-- Date -->
                   <div class="form-group">

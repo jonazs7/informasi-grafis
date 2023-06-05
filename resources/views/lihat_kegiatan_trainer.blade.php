@@ -50,6 +50,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   {{ session('updateKegiatan') }}
                 </div>
                 @endif
+                @if ($errors->any())
+                <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
+                    @foreach ($errors->all() as $error)
+                    {{ $error }}
+                    @endforeach
+                    </div> 
+                @endif
                 {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-kegiatan"
                     style="margin-top: 12px">+ Tambah Kegiatan</button> --}}
             </section>
@@ -277,7 +286,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <h4 class="modal-title">Tambah Kegiatan</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="jadwal_id" id="jadwal_kode"> <!-- Hidden field untuk ID jadwal -->
+                        <input type="hidden" name="jadwal_id" id="jadwal_kode"> <!-- Hidden field untuk ID jadwal -->
                         <!-- Status -->
                         <div class="form-group">
                             <label>Status Kegiatan Berjalan</label>
@@ -328,7 +337,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Textbox -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Sesi Program Kegiatan</label>
-                            <input type="text" name="sesi_latihan" id="sesi_latihan" class="form-control">
+                            <input type="text" name="sesi_latihan" id="sesi_latihan" class="form-control"
+                            pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="2">
                         </div>
                         <!-- /.form group -->
                         <!-- checkbox -->

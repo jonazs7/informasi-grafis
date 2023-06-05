@@ -184,6 +184,18 @@ class TrainerController extends Controller
     }
 
     public function update_kegiatan(Request $request, $jadwalId){
+        $request->validate([
+            'tanggal_mulai' => 'nullable|date_format:Y/m/d',
+            'tanggal_selesai' => 'nullable|date_format:Y/m/d',
+      
+            // Tambahkan aturan validasi lainnya di sini
+        ], [
+            // 'tanggal_mulai.required' => 'Kolom Tanggal Mulai harus diisi.',
+            'tanggal_mulai.date_format' => 'Format Tanggal Mulai harus dalam format Y/m/d atau Tahun/Bulan/Tanggal.',
+            // 'tanggal_selesai.required' => 'Kolom Tanggal Mulai harus diisi.',
+            'tanggal_selesai.date_format' => 'Format Tanggal Selesai harus dalam format Y/m/d atau Tahun/Bulan/Tanggal.', 
+        ]);
+
         // Ambil data dari permintaan
         $goal = $request->input('goal');
         $tanggalMulai = $request->input('tanggal_mulai');
