@@ -44,9 +44,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       @endif
       {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
       style="margin-top: 12px">+ Tambah Goal</button> --}}
-      <a class="btn btn-app update-jadwal" type="button" style="width: 140px; margin-top: 8px;" data-toggle="modal" data-target="#modal-default-tambah-goal">
-        <i class="fa fa-plus"></i>Tambah Goal
-      </a>
+      @if ($show_jadwal->contains('status', 'Proses'))
+        <a class="btn btn-app" type="button" style="width: 140px; margin-top: 8px;" 
+        data-toggle="modal" data-target="#modal-default-alert-goal" disabled>
+            <i class="fa fa-plus"></i>Tambah Goal
+        </a>
+      @else
+        <a class="btn btn-app" type="button" style="width: 140px; margin-top: 8px;" 
+        data-toggle="modal" data-target="#modal-default-tambah-goal">
+            <i class="fa fa-plus"></i>Tambah Goal
+        </a>
+      @endif
     </section>
 
     <!-- Main content -->
@@ -144,11 +152,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </select>
                   </div>
                   <!-- /.Goal -->
-                  <!-- /.form group -->
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                   <button type="submit" class="btn btn-primary">Tambah</button>
+              </div>
+          </form>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- modal alert goal -->
+<div class="modal fade" id="modal-default-alert-goal">
+  <div class="modal-dialog" style="width: 30%">
+      <div class="modal-content">
+          <form method="POST" action="{{ route('saveGoal') }}">
+              @csrf
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Peringatan</h4>
+              </div>
+              <div class="modal-body">
+                <p>Anda tidak dapat menambahkan jadwal, selagi ada jadwal training Anda yang <b>sedang berlangsung</b></p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
               </div>
           </form>
       </div>

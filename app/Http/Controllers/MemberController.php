@@ -58,7 +58,7 @@ class MemberController extends Controller
         $show_jadwal = DB::table('jadwal')
             ->where('id_pengguna', $user->id)
             ->get();
-
+        
         return view('jadwal_member', ['imageName' => $pengguna->foto, 'show_jadwal' => $show_jadwal,  'pengguna' => $pengguna]);
     }
 
