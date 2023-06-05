@@ -330,9 +330,15 @@ class TrainerController extends Controller
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
-        $show_data_fisik = DB::table('data_fisik')
-            ->where('id_pengguna', $kode_pengguna)
-            ->get();
+        // $show_data_fisik = DB::table('data_fisik')
+        //     ->where('id_pengguna', $kode_pengguna)
+        //     ->get();
+
+        $show_data_fisik = DB::table('pengguna')
+        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+        ->where('level', '=', 'Member')
+        ->where('id_pengguna', $kode_pengguna)
+        ->get();
 
         $nama_pengguna = Pengguna::find($kode_pengguna);
 
@@ -408,5 +414,49 @@ class TrainerController extends Controller
         $pengguna->delete();
        
         return redirect()->route('anggotaGym')->with('berhasil', 'Data anggota gym telah dihapus');
+    }
+
+    public function edit_profil(){
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('profil_trainer', ['pengguna' => $pengguna, 'imageName' => $pengguna->foto]);
+    }
+
+    public function update_profil(Request $request){
+        // Mengambil data pengguna yang sedang login
+        $user = Auth::user();
+
+        // Mengambil data formulir yang akan diperbarui
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        // Validasi resolusi gambar
+        // $this->validate($request, [
+        //     'gambar' => 'dimensions:max_width=128, max_height=128',
+        // ]);
+
+        // Perbarui data formulir
+        $pengguna->name = $request->input('nama_lengkap');
+        $pengguna->tgl_lahir = $request->input('tanggal_lahir');
+        $pengguna->gender = $request->input('option_gender');
+        $pengguna->tlpn = $request->input('no_telepon');
+        $pengguna->alamat = $request->input('alamat');
+        $pengguna->kidal = $request->input('option_kidal');
+        $pengguna->lama_pnglmn = $request->input('lama_pengalaman');
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = uniqid().'_'.$image->getClientOriginalName();
+
+            // Simpan gambar yang diperbarui ke direktori penyimpanan yang sesuai
+            $image->move(public_path('images/'), $imageName);
+
+            // Update atribut 'image' pada model
+            $pengguna->foto = $imageName;
+        }
+        // Simpan perubahan
+        $pengguna->save();
+        
+        // Redirect ke halaman yang diinginkan setelah berhasil diperbarui
+        return redirect()->route('editProfil')->with('success', 'Data profil telah diperbarui');
     }
 }

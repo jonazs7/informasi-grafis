@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- end Main Header -->
 
   <!-- Left side column. contains the logo and sidebar -->
-  @include('structure/sidebar_member')
+  @include('structure/sidebar_trainer')
   <!-- end Left side column. contains the logo and sidebar -->
 
   <!-- Content Wrapper. Contains page content -->
@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Biodata
+        Profil
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{ route('updateBiodata') }}" method="POST" enctype='multipart/form-data'>
+                <form class="form-horizontal" action="{{ route('updateProfil') }}" method="POST" enctype='multipart/form-data'>
                   @csrf
                   <div class="box-body" style="margin-top: 2%; margin-left: -5%;">
                     <div class="form-group">
@@ -65,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <input type="text" name="nama_lengkap" value="{{ $pengguna->name }}" maxlength="45" class="form-control">
                       </div>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label class="control-label col-sm-2">Tanggal Lahir :</label>
                       <div class="col-sm-2">
                         <div class="input-group">                       
@@ -76,8 +76,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
                         </div>
                       </div>
-                    </div>
-                    <div class="form-group">
+                    </div> --}}
+                    {{-- <div class="form-group">
                       <label class="control-label col-sm-2">Gender :</label>
                       <div class="col-sm-5">
                         <div class="radio">
@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </label>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                       <div>
                         <label class="control-label col-sm-2">No Telepon :</label>
@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group">
                       <label class="control-label col-sm-2">Alamat :</label>
-                      <div class="col-sm-3">
+                      <div class="col-sm-4">
                         <input type="text" name="alamat" value="{{ $pengguna->alamat }}" maxlength="39" class="form-control">
                       </div>
                       {{-- <textarea class="form-control" name="alamat" rows="3" placeholder="Enter ..." style="width: 25%; text-align: left padding: 0;">
@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         {{ trim($pengguna->alamat) }}
                       </div> --}}
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label class="control-label col-sm-2">Kidal :</label>
                       <div class="col-sm-5">
                         <div class="radio">
@@ -124,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </label>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                     {{-- <div class="form-group" style="width: 10%">
                       <label>Kidal</label>
                       <select class="form-control" name="kidal">
