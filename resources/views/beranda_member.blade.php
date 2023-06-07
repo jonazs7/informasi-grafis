@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- AREA CHART -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Grafik BMI Mingguan</h3>
+              <h3 class="box-title">Grafik Progres BMI</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Grafik BFP Mingguan</h3>
+              <h3 class="box-title">Grafik Progres BFP</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

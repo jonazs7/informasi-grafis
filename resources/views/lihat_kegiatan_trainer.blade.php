@@ -115,14 +115,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         style="margin-left: 8px;"
                                         data-id="{{ $kegiatan->id_jadwal }}">Ubah
                                         </button> --}}
-                                        <a class="btn btn-app update-jadwal" type="button" data-toggle="modal" 
+                                        {{-- <a class="btn btn-app update-jadwal" type="button" data-toggle="modal" 
                                         data-target="#modal-default-ubah-kegiatan" data-id="{{ $kegiatan->id_jadwal }}">
                                           <i class="fa fa-pencil"></i> Ubah
                                         </a>
-                                        <a class="btn btn-app update-jadwal" type="button" data-toggle="modal" 
+                                        <a class="btn btn-app" type="button" data-toggle="modal" 
                                         data-target="#modal-default-hapus-kegiatan" data-id="{{ $kegiatan->id_jadwal }}">
                                           <i class="fa fa-trash"></i> Hapus
-                                        </a>
+                                        </a> --}}
+                                        <!-- button ubah kegiatan -->
+                                        <a class="update-jadwal" type="button" data-toggle="modal" 
+                                        data-target="#modal-default-ubah-kegiatan" data-id="{{ $kegiatan->id_jadwal }}" style="position: relative;
+                                            background-color: #3C8DBC;
+                                            border: none;
+                                            color: white;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            display: inline-flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            font-size: 16px;
+                                            cursor: pointer;
+                                            width: 30px;
+                                            height: 30px;
+                                            border-radius: 5px;
+                                            padding: 0;
+                                            margin-left: 4px;">
+                                            <i class="fa fa-edit"></i>
+                                        </a>     
+                                        <!-- end ubah kegiatan -->
+                                        <!-- button hapus kegiatan -->
+                                        <a type="button" data-toggle="modal" 
+                                        data-target="#modal-default-hapus-kegiatan" data-id="{{ $kegiatan->id_jadwal }}" style="position: relative;
+                                            background-color: #3C8DBC;
+                                            border: none;
+                                            color: white;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            display: inline-flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            font-size: 16px;
+                                            cursor: pointer;
+                                            width: 30px;
+                                            height: 30px;
+                                            border-radius: 5px;
+                                            padding: 0;
+                                            margin-left: 4px;">
+                                            <i class="fa fa-trash"></i>
+                                        </a>     
+                                        <!-- end hapus kegiatan -->
                                     </td>
                                 </tr>
                                 @endforeach

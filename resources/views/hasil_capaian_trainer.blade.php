@@ -265,7 +265,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a type="button" class="btn btn-default btn-sm" href="{{ route('detailInfo', $capaian->id) }}">Detail Info</a> --}}
                   <div style="display: flex">
                     <a class="btn btn-app create-data-fisik" type="button" data-toggle="modal" 
-                    data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}" style="width: 10px; height: 10px; 
+                    data-target="#modal-default-data-fisik" data-id="{{ $capaian->id }}" style="width: 30px; height: 30px; 
                     display: flex; justify-content: center; align-items: center;">
                       <i class="fa fa-plus"></i>
                     </a>

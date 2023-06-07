@@ -41,7 +41,7 @@ Route::middleware(['member'])->group(function(){
 // Trainer Gym
 Route::middleware(['trainer'])->group(function(){
     Route::get('/berandaTrainer', [TrainerController::class, 'beranda'])->name('beranda');
-    Route::get('/jadwalTrainer', [TrainerController::class, 'jadwal'])->name('jadwal');
+    Route::get('/jadwalCapaianTrainer', [TrainerController::class, 'jadwal_capaian'])->name('jadwalCapaian');
     Route::get('/hasilCapaian', [TrainerController::class, 'hasil_capaian'])->name('hasilCapaian');
     Route::get('/detailInfo/{kode_pengguna}', [TrainerController::class, 'detail_info'])->name('detailInfo');
     Route::delete('/detailInfo/{kode_pengguna}', [TrainerController::class, 'delete_data_fisik'])->name('deleteDataFisik');

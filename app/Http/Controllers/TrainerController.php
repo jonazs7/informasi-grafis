@@ -85,7 +85,7 @@ class TrainerController extends Controller
                     'goal' => $goal]);
     }
 
-    public function jadwal(){
+    public function jadwal_capaian(){
         $user = Auth::user();
         $pengguna = Pengguna::where('id', $user->id)->first();
 
@@ -96,15 +96,32 @@ class TrainerController extends Controller
         //     ->distinct() // menghilangkan duplikasi data saat penampilan data
         //     ->get();
 
+        // $show_pengguna = DB::table('pengguna')
+        // ->leftJoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
+        // ->where('level', 'Member')
+        // ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
+        // ->selectRaw('SUM(CASE WHEN jadwal.status = "Proses" THEN 1 ELSE 0 END) AS jmlh_status_proses')
+        // ->selectRaw('SUM(CASE WHEN jadwal.status = "Selesai" THEN 1 ELSE 0 END) AS jmlh_status_selesai')
+        // ->distinct()
+        // ->groupBy('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
+        // ->get();
+
         $show_pengguna = DB::table('pengguna')
-            ->leftJoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
-            ->where('level', 'Member')
-            ->select('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
-            ->selectRaw('SUM(CASE WHEN jadwal.status = "Proses" THEN 1 ELSE 0 END) AS jmlh_status_proses')
-            ->selectRaw('SUM(CASE WHEN jadwal.status = "Selesai" THEN 1 ELSE 0 END) AS jmlh_status_selesai')
-            ->distinct()
-            ->groupBy('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
-            ->get();
+        ->leftJoin('jadwal', 'jadwal.id_pengguna', '=', 'pengguna.id')
+        ->where('level', 'Member')
+        ->select(
+            'pengguna.id',
+            'pengguna.name',
+            'pengguna.email',
+            'pengguna.tlpn',
+            'pengguna.gender',
+            DB::raw('(SELECT AVG(body_mass) FROM data_fisik WHERE data_fisik.id_pengguna = pengguna.id) as rerata_bmi'),
+            DB::raw('(SELECT AVG(body_fat) FROM data_fisik WHERE data_fisik.id_pengguna = pengguna.id) as rerata_bfp'),
+            DB::raw('SUM(CASE WHEN jadwal.status = "Proses" THEN 1 ELSE 0 END) AS jmlh_status_proses'),
+            DB::raw('SUM(CASE WHEN jadwal.status = "Selesai" THEN 1 ELSE 0 END) AS jmlh_status_selesai')
+        )
+        ->groupBy('pengguna.id', 'pengguna.name', 'pengguna.email', 'pengguna.tlpn', 'pengguna.gender')
+        ->get();
             
         // dd($show_pengguna);
 
@@ -134,27 +151,27 @@ class TrainerController extends Controller
                     'nama_pengguna' => $nama_pengguna]);
     }
 
-    public function save_kegiatan(Request $request){
-        $program_latihan = implode(', ', $request->input('jenis_latihan'));
+    // public function save_kegiatan(Request $request){
+    //     $program_latihan = implode(', ', $request->input('jenis_latihan'));
 
-        Jadwal::create([
-            'id_pengguna' => $request->input('kode_pengguna'),
-            'tgl_mulai' => $request->input('tanggal_mulai'),
-            'tgl_selesai' => $request->input('tanggal_selesai'),
-            'sesi_latihan' => $request->input('sesi_latihan'),
-            'status' => 'Proses',
-            'jenis_latihan' => $program_latihan
-        ]);
+    //     Jadwal::create([
+    //         'id_pengguna' => $request->input('kode_pengguna'),
+    //         'tgl_mulai' => $request->input('tanggal_mulai'),
+    //         'tgl_selesai' => $request->input('tanggal_selesai'),
+    //         'sesi_latihan' => $request->input('sesi_latihan'),
+    //         'status' => 'Proses',
+    //         'jenis_latihan' => $program_latihan
+    //     ]);
 
-        // $jadwal = new Jadwal();
-        // $jadwal->id_pengguna = $request->kode_pengguna;
-        // $jadwal->tgl_mulai = $request->tanggal_mulai;
-        // $jadwal->tgl_selesai = $request->tanggal_selesai;
-        // $jadwal->sesi_latihan = $request->sesi_latihan;
-        // $jadwal->status = 'Proses';
-        // $jadwal->save();
-        return back();
-    }
+    //     // $jadwal = new Jadwal();
+    //     // $jadwal->id_pengguna = $request->kode_pengguna;
+    //     // $jadwal->tgl_mulai = $request->tanggal_mulai;
+    //     // $jadwal->tgl_selesai = $request->tanggal_selesai;
+    //     // $jadwal->sesi_latihan = $request->sesi_latihan;
+    //     // $jadwal->status = 'Proses';
+    //     // $jadwal->save();
+    //     return back();
+    // }
 
     public function delete_kegiatan($kode_jadwal){
         // $idJadwal = $request->query('id_jadwal');
@@ -245,21 +262,21 @@ class TrainerController extends Controller
         return response()->json($cari_pengguna);
     }
 
-    public function hasil_capaian(){
-        $user = Auth::user();
-        $pengguna = Pengguna::where('id', $user->id)->first();
+    // public function hasil_capaian(){
+    //     $user = Auth::user();
+    //     $pengguna = Pengguna::where('id', $user->id)->first();
 
-        $show_capaian = DB::table('pengguna')
-            ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
-            ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
-            'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
-            ->where('level', '=', 'Member')
-            ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
-            'pengguna.tlpn', 'pengguna.gender')
-            ->get();
+    //     $show_capaian = DB::table('pengguna')
+    //         ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+    //         ->select('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email',
+    //         'pengguna.tlpn', 'pengguna.gender', DB::raw('AVG(body_mass) as rerata_bmi'), DB::raw('AVG(body_fat) as rerata_bfp'))
+    //         ->where('level', '=', 'Member')
+    //         ->groupBy('pengguna.id', 'data_fisik.id_pengguna', 'pengguna.foto', 'pengguna.name', 'pengguna.level', 'pengguna.email', 
+    //         'pengguna.tlpn', 'pengguna.gender')
+    //         ->get();
 
-        return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto, 'show_capaian' => $show_capaian]);
-    }
+    //     return view('hasil_capaian_trainer', ['imageName' => $pengguna->foto, 'show_capaian' => $show_capaian]);
+    // }
 
     public function create_data_fisik($kode_pengguna){
         $show_capaian_js = DB::table('pengguna')
@@ -302,7 +319,7 @@ class TrainerController extends Controller
 
         } else {
             // Menangani kasus jika jenis kelamin tidak ada
-            return back()->with('error', 'Data jenis kelamin belum ada, harap isi terlebih dahulu');
+            return back()->with('error', 'Data gender belum ada, harap isi terlebih dahulu');
         }
 
         // Menyimpan data fisik berdasarkan jenis kelamin
@@ -323,7 +340,7 @@ class TrainerController extends Controller
             'body_fat' => $body_fat
         ]);
 
-        return back()->with('success', 'Data fisik berhasil ditambahkan');
+        return back()->with('successTambahData', 'Data fisik berhasil ditambahkan');
     }
 
     public function detail_info($kode_pengguna){
@@ -376,17 +393,17 @@ class TrainerController extends Controller
             ->where('id_data_fisik', $kode_data_fisik)
             ->delete();
 
-        return back()->with('delete', 'Data fisik telah dihapus');;
+        return back()->with('deleteDataFisik', 'Data fisik telah dihapus');;
     }
 
-    public function anggota_gym(){
-        $user = Auth::user();
-        $pengguna = Pengguna::where('id', $user->id)->first();
+    // public function anggota_gym(){
+    //     $user = Auth::user();
+    //     $pengguna = Pengguna::where('id', $user->id)->first();
 
-        $show_pengguna = DB::table('pengguna')->where('level', 'Member')->get();
+    //     $show_pengguna = DB::table('pengguna')->where('level', 'Member')->get();
         
-        return view('anggota_gym_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
-    }
+    //     return view('anggota_gym_trainer', ['imageName' => $pengguna->foto, 'show_pengguna' => $show_pengguna]);
+    // }
 
     public function save_anggota_gym(Request $request){
         $validatedData = $request->validate([
@@ -405,7 +422,7 @@ class TrainerController extends Controller
             'level' => 'Member',
         ]);
 
-        return redirect()->route('anggotaGym')->with('success', 'Data anggota gym telah ditambahkan');
+        return redirect()->route('jadwalCapaian')->with('successTambahAnggota', 'Data anggota gym telah ditambahkan');
     }
 
     public function delete_anggota_gym($kode){
@@ -413,7 +430,7 @@ class TrainerController extends Controller
         $pengguna = Pengguna::where('id', $kode)->first();
         $pengguna->delete();
        
-        return redirect()->route('anggotaGym')->with('berhasil', 'Data anggota gym telah dihapus');
+        return redirect()->route('jadwalCapaian')->with('successHapusAnggota', 'Data anggota gym telah dihapus');
     }
 
     public function edit_profil(){
