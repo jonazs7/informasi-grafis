@@ -354,122 +354,146 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- modal tambah data fisik -->
 <div class="modal fade" id="modal-default-data-fisik">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 30%;">
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <div style="display: flex; flex-direction: column">
+              <div style="display: flex;">
                 <h4 class="modal-title">Tambah Data Fisik Baru,&nbsp;</h4>
                 <h4 class="modal-title"><b id="nama_tambah"></b></h4>
               </div>
           </div>
-          <form method="POST" action="{{ route('saveDataFisik') }}"> 
+          <form class="form-horizontal" method="POST" action="{{ route('saveDataFisik') }}">
             @csrf
-            <div class="modal-body">  
-                <!-- Input field untuk data id pengguna -->
-                <input type="hidden" name="kode_pengguna" id="kode_pengguna">  
-                <!-- Input field untuk data gender -->       
-                <input type="hidden" name="jekel" id="jekel">         
-                <div style="display: flex; justify-content: space-around">
-                  <!-- Date -->
-                  <div class="form-group">
-                    <label>Tanggal</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" name="tanggal" required class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
+            <div class="box-body" style="margin-top: 2%; margin-left: 5%;">
+              <div class="form-group">
+                  <!-- Input field untuk data id pengguna -->
+                  <input type="hidden" name="kode_pengguna" id="kode_pengguna">  
+                  <!-- Input field untuk data gender -->       
+                  <input type="hidden" name="jekel" id="jekel">      
+                  <label class="control-label col-sm-4">Tanggal: </label>
+                  <div class="col-sm-5">
+                    <div class="input-group">                       
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" name="tanggal" required class="form-control" 
+                        data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
                     </div>
                   </div>
-                  <!-- /.form group -->
+              </div> 
+              <div class="form-group">
+                <label class="control-label col-sm-4">Tinggi:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="tinggi" class="form-control">
                 </div>
-                <div style="display: flex; justify-content: space-around;">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Tinggi (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="tinggi" class="form-control">
-                  </div>
-                  <!-- end text input -->
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Bisep (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_bisep" class="form-control">
-                  </div>
-                  <!-- end text input -->
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
                 </div>
-                <div style="display: flex; justify-content: space-around;">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Berat (kg)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="berat" class="form-control">
-                  </div>
-                  <!-- end text input -->
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Dada (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_dada" class="form-control">
-                  </div>
-                  <!-- end text input -->
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Berat:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="berat" class="form-control">
                 </div>
-                <div style="display: flex; justify-content: space-around;">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Leher (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_leher" class="form-control">
-                  </div>
-                  <!-- end text input -->
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Pantat (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_pantat" class="form-control">
-                  </div>
-                  <!-- end text input -->
+                <div class="col-sm-3">
+                  <p class="help-block">Kg</p>
                 </div>
-                <div style="display: flex; justify-content: space-around;">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Pinggang (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_pinggang" class="form-control">
-                  </div>
-                  <!-- end text input -->
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Paha Bawah (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_paha_bawah" class="form-control">
-                  </div>
-                  <!-- end text input -->
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Leher:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_leher" class="form-control">
                 </div>
-                <div style="display: flex; justify-content: space-around;">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Paha Atas (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_paha_atas" class="form-control">
-                  </div>
-                  <!-- end text input -->
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Lingkar Betis (cm)</label>
-                      <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" maxlength="5" required
-                      name="lingkar_betis" class="form-control">
-                  </div>
-                  <!-- end text input -->
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
                 </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Pinggang:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_pinggang" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Paha Atas:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_paha_atas" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Paha Bawah:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_paha_bawah" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Bisep:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_bisep" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Dada:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_dada" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Pantat:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" 
+                  maxlength="5" required name="lingkar_pantat" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4">Lingkar Betis:</label>
+                <div class="col-sm-3">
+                  <input type="text" pattern="[0-9.]*" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                  maxlength="5" required name="lingkar_betis" class="form-control">
+                </div>
+                <div class="col-sm-3">
+                  <p class="help-block">Cm</p>
+                </div>
+              </div>
             </div>
+            <!-- box-footer -->
             <div class="modal-footer">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-10">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary">Tambah</button>
+              </div>
             </div>
-          </form>  
+            <!-- /.box-footer -->
+          </form>
       </div>
       <!-- /.modal-content -->
   </div>
