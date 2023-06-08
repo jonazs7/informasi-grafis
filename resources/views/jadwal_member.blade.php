@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       @endif
       {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
       style="margin-top: 12px">+ Tambah Goal</button> --}}
-      @if ($show_jadwal->contains('status', 'Proses'))
+      {{-- @if ($show_jadwal->contains('status', 'Proses'))
         <a class="btn btn-app" type="button" style="width: 140px; margin-top: 8px;" 
         data-toggle="modal" data-target="#modal-default-alert-goal" disabled>
             <i class="fa fa-plus"></i>Tambah Goal
@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         data-toggle="modal" data-target="#modal-default-tambah-goal">
             <i class="fa fa-plus"></i>Tambah Goal
         </a>
-      @endif
+      @endif --}}
     </section>
 
     <!-- Main content -->
@@ -63,6 +63,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="box">
             <div class="box-header">
               <h3 class="box-title">Rincian Kegiatan</h3>
+              <!-- button tambah goal -->
+              @if ($show_jadwal->contains('status', 'Proses'))
+                <a type="button" data-toggle="modal" data-target="#modal-default-alert-goal" disabled style="position: relative;
+                  background-color: #3C8DBC;
+                  border: none;
+                  color: white;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 16px;
+                  cursor: pointer;
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 5px;
+                  padding: 0;
+                  margin-left: 4px;">
+                <i class="fa fa-plus"></i>
+                </a>      
+              @else
+                <a type="button" data-toggle="modal" data-target="#modal-default-tambah-goal" style="position: relative;
+                  background-color: #3C8DBC;
+                  border: none;
+                  color: white;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 16px;
+                  cursor: pointer;
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 5px;
+                  padding: 0;
+                  margin-left: 4px;">
+                <i class="fa fa-plus"></i>
+                </a>      
+              @endif
+              <!-- end tambah goal -->       
             </div>
             <!-- /.box-header -->
             <div class="box-body">
