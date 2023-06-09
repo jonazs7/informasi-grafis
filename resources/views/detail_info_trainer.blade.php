@@ -260,52 +260,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                   @endif  
                 </td>
-                {{-- <td>
-                  <button type="button" class="btn btn-danger btn-sm" 
-                  data-toggle="modal" data-target="#modal-default-hapus-data_fisik" data-id="{{ $data_fisik->id_data_fisik }}">Hapus
-                  </button>
-                  <a class="btn btn-app" type="button" data-toggle="modal" data-target="#modal-default-hapus-data_fisik" 
-                  data-id="{{ $data_fisik->id_data_fisik }}">
-                    <i class="fa fa-trash"></i>Hapus
-                  </a>
-                </td> --}}
               </tr>
               @endforeach
-            {{-- <tr>
-              <td>2023-03-21</td>
-              <td>1,63</td>
-              <td>55,2</td>
-              <td>35</td>
-              <td>70</td>
-              <td>52</td>
-              <td>27</td>
-              <td>84</td>
-              <td>89</td>
-              <td>37</td>
-              <td>32</td>
-              <td>15</td>
-              <td>20</td>
-            </tr> --}}
             </tbody>
-            <tfoot>
-            <tr>
-              <th>Tanggal</th>
-              <th>Ti(cm)</th>
-              <th>Be(kg)</th>
-              <th>LL(cm)</th>
-              <th>LP(cm)</th>
-              <th>LPA(cm)</th>
-              <th>LB(cm)</th>
-              <th>LD(cm)</th>
-              <th>LPT(cm)</th>
-              <th>LPB(cm)</th>
-              <th>LBS(cm)</th>
-              <th>BMI</th>
-              <th>Status BMI</th>
-              <th>BFP(%)</th>
-              <th>Status BFP</th>
-            </tr>
-            </tfoot>
           </table>
         </div>
         <!-- /.box-body -->
@@ -489,7 +446,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col-sm-2"></div>
               <div class="col-sm-10">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
             </div>
             <!-- /.box-footer -->

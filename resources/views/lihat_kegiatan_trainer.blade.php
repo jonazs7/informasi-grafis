@@ -59,8 +59,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @endforeach
                     </div> 
                 @endif
-                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-kegiatan"
-                    style="margin-top: 12px">+ Tambah Kegiatan</button> --}}
             </section>
 
             <!-- Main content -->
@@ -99,30 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         {{ $kegiatan->status }}
                                         </div>
                                     </td>
-                                    <td>
-                                        {{-- <form action="{{ route('deleteKegiatan', $kegiatan->id_jadwal) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="text" name="id" value="{{ $kegiatan->id_jadwal }}">
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                        </form> --}}
-                                        {{-- <button type="button" class="btn btn-danger btn-sm" 
-                                        data-toggle="modal" data-target="#modal-default-hapus-kegiatan" 
-                                        data-id="{{ $kegiatan->id_jadwal }}">Hapus
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm update-jadwal" 
-                                        data-toggle="modal" data-target="#modal-default-ubah-kegiatan" 
-                                        style="margin-left: 8px;"
-                                        data-id="{{ $kegiatan->id_jadwal }}">Ubah
-                                        </button> --}}
-                                        {{-- <a class="btn btn-app update-jadwal" type="button" data-toggle="modal" 
-                                        data-target="#modal-default-ubah-kegiatan" data-id="{{ $kegiatan->id_jadwal }}">
-                                          <i class="fa fa-pencil"></i> Ubah
-                                        </a>
-                                        <a class="btn btn-app" type="button" data-toggle="modal" 
-                                        data-target="#modal-default-hapus-kegiatan" data-id="{{ $kegiatan->id_jadwal }}">
-                                          <i class="fa fa-trash"></i> Hapus
-                                        </a> --}}
+                                    <td>    
                                         <!-- button ubah kegiatan -->
                                         <a class="update-jadwal" type="button" data-toggle="modal" 
                                         data-target="#modal-default-ubah-kegiatan" data-id="{{ $kegiatan->id_jadwal }}" style="position: relative;
@@ -186,108 +161,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </div>
     <!-- ./wrapper -->
-
-
-    {{-- <!-- modal tambah kegiatan -->
-    <div class="modal fade" id="modal-default-tambah-kegiatan">
-        <div class="modal-dialog" style="width: 20%">
-            <div class="modal-content">
-                <form method="POST" action="{{ route('saveKegiatan') }}">
-                    @csrf
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Tambah Kegiatan Baru</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Input field untuk data -->
-                        <input type="hidden" name="kode_pengguna" value="{{ $nama_pengguna->id }}">
-                        <!-- Date -->
-                        <div class="form-group">
-                            <label>Tanggal Mulai</label>
-                            <div class="input-group">
-                              <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                              </div>
-                              <input type="text" name="tanggal_mulai" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
-                            </div>
-                        </div>
-                        <!-- /.form group -->
-                        <!-- Date -->
-                        <div class="form-group">
-                            <label>Tanggal Selesai</label>
-                            <div class="input-group">
-                              <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                              </div>
-                              <input type="text" name="tanggal_selesai" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
-                            </div>
-                        </div>
-                        <!-- /.form group -->
-                        <!-- Textbox -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Sesi Program Kegiatan</label>
-                            <input type="text" name="sesi_latihan" class="form-control">
-                        </div>
-                        <!-- /.form group -->
-                        <!-- checkbox -->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Jenis Program Kegiatan</label>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="jenis_latihan[]" value="Full Body"> Full Body
-                                </label>
-                                <label class="col-md-4">
-                                    <input type="checkbox" name="jenis_latihan[]" value="Tricep"> Tricep
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="jenis_latihan[]" value="Pull"> Pull
-                                </label>
-                                <label class="col-md-4">
-                                    <input type="checkbox" name="jenis_latihan[]" value="Shoulder"> Shoulder
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="jenis_latihan[]" value="Push"> Push
-                                </label>
-                                <label class="col-md-4">
-                                    <input type="checkbox" name="jenis_latihan[]" value="Chest"> Chest
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="jenis_latihan[]" value="Legs"> Legs
-                                </label>
-                                <label class="col-md-4">
-                                    <input type="checkbox" name="jenis_latihan[]" value="Back"> Back
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="jenis_latihan[]" value="Bicep"> Bicep
-                                </label>
-                                <label class="col-md-4">
-                                    <input type="checkbox" name="jenis_latihan[]" value="ABS"> ABS
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.form group -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
-                    </div>
-                </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal --> --}}
-
+    
+    
     <!-- modal hapus kegiatan -->
     <div class="modal fade" id="modal-default-hapus-kegiatan">
         <div class="modal-dialog">

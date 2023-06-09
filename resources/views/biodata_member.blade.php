@@ -98,19 +98,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           class="form-control" oninput="formatTelephone()" maxlength="14" >
                         </div>
                       </div>
-                      {{-- <p class="help-block">Contoh: 08xx-xxxx-xxxx</p> --}}
                     </div>
                     <div class="form-group">
                       <label class="control-label col-sm-2">Alamat :</label>
                       <div class="col-sm-3">
                         <input type="text" name="alamat" value="{{ $pengguna->alamat }}" maxlength="39" class="form-control">
-                      </div>
-                      {{-- <textarea class="form-control" name="alamat" rows="3" placeholder="Enter ..." style="width: 25%; text-align: left padding: 0;">
-                        {{ trim($pengguna->alamat) }}
-                      </textarea> --}}
-                      {{-- <div contenteditable="true" name="alamat" style="width: 300px; height: 150px; border: 1px solid #ccc; overflow: auto; padding:8px 8px 8px 8px;">
-                        {{ trim($pengguna->alamat) }}
-                      </div> --}}
+                      </div>      
                     </div>
                     <div class="form-group">
                       <label class="control-label col-sm-2">Kidal :</label>
@@ -125,13 +118,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                       </div>
                     </div>
-                    {{-- <div class="form-group" style="width: 10%">
-                      <label>Kidal</label>
-                      <select class="form-control" name="kidal">
-                        <option value="Tidak" <?php if($pengguna->kidal == 'Tidak') echo 'selected'; ?>>Tidak</option>
-                        <option value="Ya" <?php if($pengguna->kidal == 'Ya') echo 'selected'; ?>>Ya</option>
-                      </select>
-                    </div> --}}
                     <div class="form-group">
                       <label class="control-label col-sm-2">Lama pengalaman :</label>
                       <div class="col-sm-2">
@@ -141,21 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <option value="> 3 Bulan" <?php if($pengguna->lama_pnglmn == '> 3 Bulan') echo 'selected'; ?>>> 3 Bulan</option>
                         </select>
                       </div>
-                    </div>
-                    {{-- <div class="form-group">
-                      <label>Goal</label>
-                      <select class="form-control" style="width: 25%" name="goal">
-                        <option value="Increase muscle size" <?php if($pengguna->goal == 'Increase muscle size') echo 'selected'; ?>>Increase muscle size</option>
-                        <option value="Lose body fat" <?php if($pengguna->goal == 'Lose body fat') echo 'selected'; ?>>Lose body fat</option>
-                        <option value="Sport spesific training" <?php if($pengguna->goal == 'Sport spesific training') echo 'selected'; ?>>Sport spesific training</option>
-                        <option value="Rehabilitate an injury" <?php if($pengguna->goal == 'Rehabilitate an injury') echo 'selected'; ?>>Rehabilitate an injury</option>
-                        <option value="Nutrition education" <?php if($pengguna->goal == 'Nutrition education') echo 'selected'; ?>>Nutrition education</option>
-                        <option value="Start an work out train" <?php if($pengguna->goal == 'Start an work out train') echo 'selected'; ?>>Start an work out train</option>
-                        <option value="Fan" <?php if($pengguna->goal == 'Fan') echo 'selected'; ?>>Fan</option>
-                        <option value="Motivation" <?php if($pengguna->goal == 'Motivation') echo 'selected'; ?>>Motivation</option>
-                        <option value="Lainnya" <?php if($pengguna->goal == 'Lainnya') echo 'selected'; ?>>Lainnya</option>
-                      </select>
-                    </div> --}}
+                    </div> 
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
                         <img src="{{ asset('images/' . $imageName) }}" style="width: 6%; height: 6%; margin-top: 8px">

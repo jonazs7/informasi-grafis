@@ -209,49 +209,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                 @endif  
               </td>
-              {{-- <td>
-                <a class="btn btn-app" type="button">
-                  <i class="fa fa-indo"></i> Info
-                </a>
-              </td> --}}
             </tr>         
             @endforeach
-            {{-- <tr>
-              <td>2023-02-15</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-            </tr> --}}
             </tbody>
-            <tfoot>
-            <tr>
-              <th>Tanggal</th>
-              <th>Ti(cm)</th>
-              <th>Be(kg)</th>
-              <th>LL(cm)</th>
-              <th>LP(cm)</th>
-              <th>LPA(cm)</th>
-              <th>LB(cm)</th>
-              <th>LD(cm)</th>
-              <th>LPT(cm)</th>
-              <th>LPB(cm)</th>
-              <th>LBS(cm)</th>
-              <th>BMI</th>
-              <th>Status BMI</th>
-              <th>BFP(%)</th>
-              <th>Status BFP</th>
-              {{-- <th>Aksi</th> --}}
-            </tr>
-            </tfoot>
           </table>
         </div>
         <!-- /.box-body -->

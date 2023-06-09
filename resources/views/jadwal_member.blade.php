@@ -42,19 +42,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{ session('berhasil') }}
       </div>
       @endif
-      {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default-tambah-goal"
-      style="margin-top: 12px">+ Tambah Goal</button> --}}
-      {{-- @if ($show_jadwal->contains('status', 'Proses'))
-        <a class="btn btn-app" type="button" style="width: 140px; margin-top: 8px;" 
-        data-toggle="modal" data-target="#modal-default-alert-goal" disabled>
-            <i class="fa fa-plus"></i>Tambah Goal
-        </a>
-      @else
-        <a class="btn btn-app" type="button" style="width: 140px; margin-top: 8px;" 
-        data-toggle="modal" data-target="#modal-default-tambah-goal">
-            <i class="fa fa-plus"></i>Tambah Goal
-        </a>
-      @endif --}}
     </section>
 
     <!-- Main content -->
@@ -196,7 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                  <button type="submit" class="btn btn-primary">Tambah</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
           </form>
       </div>
