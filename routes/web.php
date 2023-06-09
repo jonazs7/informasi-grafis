@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Auth;
 
 // Autentifikasi
 Auth::routes();
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', function () { 
+    return view('auth.login'); 
+})->middleware('guest');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Member Gym
