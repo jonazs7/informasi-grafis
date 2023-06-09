@@ -162,13 +162,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>Status BMI</th>
               <th>BFP(%)</th>
               <th>Status BFP</th>
+              <th>Aksi</th>
             </tr>
             </thead>
             <tbody>
               @foreach ($show_data_fisik as $data_fisik)
               <tr>
-                <td><a href="" type="button" data-toggle="modal" data-target="#modal-default-hapus-data_fisik" 
-                  data-id="{{ $data_fisik->id_data_fisik }}">{{ $data_fisik->tgl }}</a></td>
+                <td><a href="" class="info-analisis-data_fisik" data-toggle="modal" data-target="#modal-default-info-data_fisik" 
+                  data-id="{{ $data_fisik->id_data_fisik }}" type="button">{{ $data_fisik->tgl }}</a></td>
                 <td>{{ $data_fisik->tinggi }}</td>
                 <td>{{ $data_fisik->berat }}</td>
                 <td>{{ $data_fisik->neck }}</td>
@@ -259,6 +260,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       {{ $bfpLabel }}
                     </div>
                   @endif  
+                </td>
+                <td>
+                  <!-- button hapus data fisik -->
+                  <a type="button" data-toggle="modal" data-target="#modal-default-hapus-data_fisik" 
+                  data-id="{{ $data_fisik->id_data_fisik }}" style="position: relative;
+                    background-color: #3C8DBC;
+                    border: none;
+                    color: white;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 16px;
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 5px;
+                    padding: 0;
+                    margin-left: 4px;">
+                  <i class="fa fa-trash"></i>
+                  </a>      
+                  <!-- end hapus data fisik -->                        
                 </td>
               </tr>
               @endforeach
@@ -458,7 +482,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- /.modal -->
 
+<!-- modal informasi analisis data fisik -->
+<div class="modal fade" id="modal-default-info-data_fisik">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Hasil Analisa Kegiatan Kebugaran</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="idDataFisik" id="idDataFisik"> <!-- Hidden field untuk ID jadwal -->
+        <b><p>Nama &nbsp;:</p></b><p style="margin-left: 4px" id='namaAnggotaGym'></p>
+        <b><p>Gender &nbsp;:</p></b><p style="margin-left: 4px" id='genderAnggotaGym'></p>
+        <b><p>BMI &nbsp;:</p></b><p style="margin-left: 4px" id='bmi'></p>
+        <b><p>BFP &nbsp;:</p></b><p style="margin-left: 4px" id='bfp'></p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
+
+<!-- hapus data fisik script -->
 <script>
   $('#modal-default-hapus-data_fisik').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
@@ -470,7 +521,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       console.log(url);
   });
 </script>
+<!-- end hapus data fisik script -->
 
+<!-- create data fisik script -->
 <script>
   $(document).ready(function() {
       // Fungsi untuk membuka form modal
@@ -501,6 +554,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
 </script>
+<!-- end create data fisik script -->
+
+<!-- analisis data fisik script -->
+<script>
+  $(document).ready(function() {
+      // Fungsi untuk membuka form modal
+      $('.info-analisis-data_fisik').on('click', function() {
+          var userId = $(this).data('id');
+          var url = "{{ route('showAnalisis', ':id') }}".replace(':id', userId);
+          
+      // Mengirim permintaan AJAX ke backend Laravel
+      $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(response) {
+                    // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
+                     $('#idDataFisik').val(response.id_data_fisik);
+                     $('#namaAnggotaGym').text(response.name);
+                     $('#genderAnggotaGym').text(response.gender);
+                     $('#bmi').text(response.body_mass);
+                     $('#bfp').text(response.body_fat);
+                    
+
+                    console.log(response.id_data_fisik);
+                    console.log(url);
+                    console.log(response.name);
+                    console.log(response.gender);
+                    console.log(response.body_mass);
+                    console.log(response.body_fat);
+                },
+                error: function(xhr) {
+                    // Tangani jika terjadi kesalahan pada permintaan AJAX
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+<!-- end analisis data fisik script -->
 
 <!-- graphic script -->
 <script>
@@ -594,5 +686,6 @@ new Chart(ctx, {
   }
 });
 </script>
+<!-- end graphic script -->
 </body>
 </html>

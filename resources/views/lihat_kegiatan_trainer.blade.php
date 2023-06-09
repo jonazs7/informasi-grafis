@@ -200,7 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Tambah Kegiatan</h4>
+                        <h4 class="modal-title">Susun Kegiatan</h4>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="jadwal_id" id="jadwal_kode"> <!-- Hidden field untuk ID jadwal -->
@@ -316,7 +316,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- /.modal -->
 
-
+<!-- hapus kegiatan script -->
 <script>
     $('#modal-default-hapus-kegiatan').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -328,7 +328,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         console.log(url);
     });
 </script>
+<!-- end hapus kegiatan script -->
 
+<!-- edit kegiatan script -->
 <script>
   $(document).ready(function() {
     //   $('.update-jadwal').click(function() {   
@@ -377,7 +379,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
 </script>
+<!-- end edit kegiatan script -->
 
+<!-- update kegiatan script -->
 <script>
 $(document).ready(function() {
 // $(document).on('click', function() { // negbug anjr pas diupdate malah ikut dinamis
@@ -398,6 +402,7 @@ $(document).ready(function() {
   });
 });
 </script>
+<!-- end update kegiatan script -->
 
 {{-- <script>
 $(document).ready(function() {

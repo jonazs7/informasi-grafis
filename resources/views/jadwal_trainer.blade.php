@@ -318,10 +318,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <div class="modal-body">
         <div style="display: flex;">
-          <b><p>Email &nbsp;:</p></b><p style="margin-left: 4px" id='email'>Email :</p>
+          <b><p>Email &nbsp;:</p></b><p style="margin-left: 4px" id='email'></p>
         </div>
         <div style="display: flex;">
-          <b><p>Tanggal lahir &nbsp;:</p></b><p style="margin-left: 4px" id='tanggal_lahir'>Tanggal lahir :</p>
+          <b><p>Tanggal lahir &nbsp;:</p></b><p style="margin-left: 4px" id='tanggal_lahir'></p>
         </div>
         <div style="display: flex;">
           <b><p>Gender &nbsp;:</p></b><p style="margin-left: 4px" id='gender'></p>
@@ -446,7 +446,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- /.modal -->
 
-
+<!-- profile script -->
 <script>
   $(document).ready(function() {
       $('.profile-button').click(function() {
@@ -485,7 +485,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
 </script>
+<!-- end profile script -->
 
+<!-- hapus anggota script -->
 <script>
   $('#modal-default-hapus-anggota').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
@@ -497,5 +499,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       console.log(url);
   });
 </script>
+<!-- end hapus anggota script -->
 </body>
 </html>

@@ -322,5 +322,6 @@ new Chart(ctx, {
   }
 });
 </script>
+<!-- end graphic script -->
 </body>
 </html>

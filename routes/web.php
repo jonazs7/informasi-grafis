@@ -56,6 +56,7 @@ Route::middleware(['trainer'])->group(function(){
     Route::post('/updateKegiatan/{kode_jadwal}', [TrainerController::class, 'update_kegiatan'])->name('updateKegiatan');
     Route::get('/createDataFisik/{kode_pengguna}', [TrainerController::class, 'create_data_fisik'])->name('createDataFisik');
     Route::post('/saveDataFisik', [TrainerController::class, 'save_data_fisik'])->name('saveDataFisik');
+    Route::get('/showAnalisis/{kode_pengguna}', [TrainerController::class, 'show_analisis_data_fisik'])->name('showAnalisis');
     Route::get('/profilTrainer', [TrainerController::class, 'edit_profil'])->name('editProfil');
     Route::post('/profilTrainer/update', [TrainerController::class, 'update_profil'])->name('updateProfil');
 

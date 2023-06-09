@@ -388,6 +388,16 @@ class TrainerController extends Controller
                     'y_bfp' => $y_bfp, 'x_bfp' => $x_bfp]);
     }
 
+    public function show_analisis_data_fisik($kode_pengguna){
+            $show_analisis = DB::table('pengguna')
+            ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+            ->where('level', '=', 'Member')
+            ->where('id_data_fisik', $kode_pengguna)
+            ->first();
+
+        return response()->json($show_analisis);
+    }
+
     public function delete_data_fisik($kode_data_fisik){
         DB::table('data_fisik')
             ->where('id_data_fisik', $kode_data_fisik)

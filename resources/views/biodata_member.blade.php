@@ -171,10 +171,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 
-</body>
-</html>
 
-
+<!-- format telephone script -->
 <script>
   function formatTelephone() {
     var telephoneInput = document.getElementById('telephone');
@@ -199,4 +197,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
     telephoneInput.value = formattedInput; // input telepon yang ditampilkan akan diformat dengan garis setiap empat angka.
   }
-  </script>
+</script>
+<!-- end format telephone script -->
+</body>
+</html>
+
