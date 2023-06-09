@@ -42,6 +42,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{ session('success') }}
       </div>
       @endif
+      @if ($errors->any())
+      <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
+          @foreach ($errors->all() as $error)
+          {{ $error }}
+          @endforeach
+        </div> 
+      @endif
     </section>
 
     <!-- Main content -->

@@ -148,16 +148,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <thead>
             <tr>
               <th>Tanggal</th>
-              <th>Ti(cm)</th>
-              <th>Be(kg)</th>
-              <th>LL(cm)</th>
-              <th>LP(cm)</th>
-              <th>LPA(cm)</th>
-              <th>LB(cm)</th>
-              <th>LD(cm)</th>
-              <th>LPT(cm)</th>
-              <th>LPB(cm)</th>
-              <th>LBS(cm)</th>
+              <th>Ti<br>(cm)</th>
+              <th>Be<br>(kg)</th>
+              <th>LL<br>(cm)</th>
+              <th>LP<br>(cm)</th>
+              <th>LPA<br>(cm)</th>
+              <th>LB<br>(cm)</th>
+              <th>LD<br>(cm)</th>
+              <th>LPT<br>(cm)</th>
+              <th>LPB<br>(cm)</th>
+              <th>LBS<br>(cm)</th>
               <th>BMI</th>
               <th>Status BMI</th>
               <th>BFP(%)</th>
@@ -317,8 +317,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
               <div style="display: flex;">
-                <h4 class="modal-title">Tambah Data Fisik Baru,&nbsp;</h4>
-                <h4 class="modal-title"><b id="nama_tambah"></b></h4>
+                <h4 class="modal-title">Tambah Data Fisik Baru&nbsp;</h4>
+                {{-- <h4 class="modal-title"><b id="nama_tambah"></b></h4> --}}
               </div>
           </div>
           <form class="form-horizontal" method="POST" action="{{ route('saveDataFisik') }}">

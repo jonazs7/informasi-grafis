@@ -80,6 +80,14 @@ class MemberController extends Controller
     }
 
     public function update_biodata(Request $request){
+        $request->validate([
+            'tanggal_lahir' => 'nullable|date_format:Y/m/d',
+            // Tambahkan aturan validasi lainnya di sini
+        ], [
+            'tanggal_lahir.nullable' => 'Kolom tanggal lahir harus diisi.',
+            'tanggal_lahir.date_format' => 'Format tanggal lahir harus dalam format Y/m/d atau Tahun/Bulan/Tanggal.',
+        ]);
+
         // Mengambil data pengguna yang sedang login
         $user = Auth::user();
 
