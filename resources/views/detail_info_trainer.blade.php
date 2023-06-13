@@ -341,7 +341,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
               <div style="display: flex;">
-                <h4 class="modal-title">Tambah Data Fisik Baru&nbsp;</h4>
+                <h4 class="modal-title">Tambah Data Fisik&nbsp;</h4>
                 {{-- <h4 class="modal-title"><b id="nama_tambah"></b></h4> --}}
               </div>
           </div>
@@ -492,6 +492,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <h4 class="modal-title">Hasil Analisa Kegiatan Kebugaran</h4>
       </div>
       <div class="modal-body">
+        <table>
+          <tr>
+            <td>
+              Nama Anggota Gym : Jonas ae
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tanggal Lahir : 23 Januari 2002
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Jenis Kelamin : Pria
+            </td>
+          </tr>
+        </table>
+        
         <input type="text" name="idDataFisik" id="idDataFisik"> <!-- Hidden field untuk ID jadwal -->
         <b><p>Nama &nbsp;:</p></b><p style="margin-left: 4px" id='namaAnggotaGym'></p>
         <b><p>Gender &nbsp;:</p></b><p style="margin-left: 4px" id='genderAnggotaGym'></p>

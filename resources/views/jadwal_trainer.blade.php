@@ -338,9 +338,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div style="display: flex;">
           <b><p>Lama pengalaman &nbsp;:</p></b><p style="margin-left: 4px" id='lama_pengalaman'></p>
         </div>
-        <div style="display: flex;">
+        {{-- <div style="display: flex;">
           <b><p>Goal &nbsp;:</p></b><p style="margin-left: 4px" id='goal'></p>
-        </div>
+        </div> --}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
@@ -361,7 +361,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Tambah Anggota Gym Baru</h4>
+              <h4 class="modal-title">Tambah Anggota Gym</h4>
           </div>
             <div class="modal-body">
               <!-- text input -->
@@ -476,6 +476,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     console.log(url);
                     console.log(response.foto);
+                    console.log(response.goal);
                 },
                 error: function(xhr) {
                     // Tangani jika terjadi kesalahan pada permintaan AJAX
