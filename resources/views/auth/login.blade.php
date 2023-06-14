@@ -62,7 +62,7 @@
             {{-- <label>
               <input type="checkbox"> Remember Me
             </label> --}}
-            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            {{-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> --}}
           </div>
         </div>
         <!-- /.col -->

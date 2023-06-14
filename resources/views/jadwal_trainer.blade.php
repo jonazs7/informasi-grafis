@@ -354,7 +354,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- modal tambah anggota -->
 <div class="modal fade" id="modal-default-tambah-anggota">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 20%">
       <div class="modal-content">
         <form method="POST" action="{{ route('save_anggotaGym') }}">
           @csrf
