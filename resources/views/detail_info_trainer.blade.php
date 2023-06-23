@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Tanggal</th>
+              <th>Tgl</th>
               <th>Ti<br>(cm)</th>
               <th>Be<br>(kg)</th>
               <th>LL<br>(cm)</th>
@@ -159,9 +159,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LPB<br>(cm)</th>
               <th>LBS<br>(cm)</th>
               <th>BMI</th>
-              <th>Status BMI</th>
+              {{-- <th>Status<br>BMI</th> --}}
               <th>BFP(%)</th>
-              <th>Status BFP</th>
+              {{-- <th>Status BFP</th> --}}
               <th>Aksi</th>
             </tr>
             </thead>
@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $data_fisik->paha_bwh }}</td>
                 <td>{{ $data_fisik->betis }}</td>
                 <td>{{ $data_fisik->body_mass }}</td>
-                <td>
+                {{-- <td>
                   @php
                     $bmiLabel = '';
                     $bmiColor = '';
@@ -208,9 +208,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       {{ $bmiLabel }}
                     </div>
                   @endif  
-                </td>
+                </td> --}}
                 <td>{{ $data_fisik->body_fat }} %</td>
-                <td>
+                {{-- <td>
                   @php
                     $bfpLabel = '';
                     $bfpColor = '';
@@ -260,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       {{ $bfpLabel }}
                     </div>
                   @endif  
-                </td>
+                </td> --}}
                 <td>
                   <!-- button hapus data fisik -->
                   <a type="button" data-toggle="modal" data-target="#modal-default-hapus-data_fisik" 
@@ -491,30 +491,73 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Hasil Analisa Kegiatan Kebugaran</h4>
       </div>
+      {{-- <input type="text" name="idDataFisik" id="idDataFisik"> <!-- Hidden field untuk ID jadwal --> --}}
       <div class="modal-body">
-        <table>
-          <tr>
-            <td>
-              Nama Anggota Gym : Jonas ae
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Tanggal Lahir : 23 Januari 2002
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Jenis Kelamin : Pria
-            </td>
-          </tr>
-        </table>
-        
-        <input type="text" name="idDataFisik" id="idDataFisik"> <!-- Hidden field untuk ID jadwal -->
-        <b><p>Nama &nbsp;:</p></b><p style="margin-left: 4px" id='namaAnggotaGym'></p>
-        <b><p>Gender &nbsp;:</p></b><p style="margin-left: 4px" id='genderAnggotaGym'></p>
-        <b><p>BMI &nbsp;:</p></b><p style="margin-left: 4px" id='bmi'></p>
-        <b><p>BFP &nbsp;:</p></b><p style="margin-left: 4px" id='bfp'></p>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- /.box-header -->
+            <div class="box-body" style="margin-left: -36px">
+              <dl class="dl-horizontal">
+                <dt>Nama Anggota Gym :</dt>
+                <dd id='namaAnggotaGym'></dd>
+                <dt>Tanggal Lahir :</dt>
+                <dd id='tanggalLahir'></dd>
+                <dt>Gender :</dt>
+                <dd id='genderAnggotaGym'></dd>
+              </dl>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <div class="col-md-6">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <dl class="dl-horizontal">
+                <dt>Tanggal Ukur :</dt>
+                <dd id='tglUkur'></dd>
+              </dl>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- Data table -->
+          <div class="row" style="padding: 12px; 12px; 12px; 12px;">
+            <div class="col-xs-12">
+              <div class="box">
+                {{-- <div class="box-header">
+                  <h3 class="box-title">Responsive Hover Table</h3>
+                </div> --}}
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Hasil</th>
+                      <th>Satuan</th>
+                      <th>Status</th>
+                      <th>Keterangan</th>
+                    </tr>
+                    <tr>
+                      <td>BMI</td>
+                      <td id='bmi'></td>
+                      <td>kg/m<sup>2</sup></td>
+                      <td><span class="label label-success">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                    <tr>
+                      <td>BFP</td>
+                      <td id='bfp'></td>
+                      <td>%</td>
+                      <td><span class="label label-success">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+          </div>
+          <!-- end Data table -->
+        </div>
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
@@ -590,7 +633,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
                      $('#idDataFisik').val(response.id_data_fisik);
                      $('#namaAnggotaGym').text(response.name);
+                     $('#tanggalLahir').text(response.tgl_lahir);
                      $('#genderAnggotaGym').text(response.gender);
+                     $('#tglUkur').text(response.tgl);
                      $('#bmi').text(response.body_mass);
                      $('#bfp').text(response.body_fat);
                     
@@ -598,7 +643,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     console.log(response.id_data_fisik);
                     console.log(url);
                     console.log(response.name);
+                    console.log(response.tgl_lahir);
                     console.log(response.gender);
+                    console.log(response.tgl);
                     console.log(response.body_mass);
                     console.log(response.body_fat);
                 },
