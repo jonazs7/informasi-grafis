@@ -65,7 +65,8 @@ Route::middleware(['trainer'])->group(function(){
     Route::post('/profilTrainer/update', [TrainerController::class, 'update_profil'])->name('updateProfil');
     Route::get('/akunTrainer', [TrainerController::class, 'edit_akun_trainer'])->name('editAkunTrainer');
     Route::post('/akunTrainer/update', [TrainerController::class, 'update_akun_trainer'])->name('updateAkunTrainer');
-    Route::get('/filterTanggalAnggota', [MemberController::class, 'filter_tanggal_anggota_gym'])->name('filterTanggalAnggota');
+    Route::get('/filterTanggalAnggota/{kode_pengguna}', [TrainerController::class, 'filter_tanggal_anggota_gym'])->name('filterTanggalAnggota');
+
 
 });
 

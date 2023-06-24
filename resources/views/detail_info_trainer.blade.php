@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div> 
       @endif
       <div style="margin-top: 8px;">
-        <form action="{{ route('filterTanggalAnggota') }}" method="GET" class="form-inline">
+        <form action="{{ route('filterTanggalAnggota', ['kode_pengguna' => $nama_pengguna->id]) }}" method="GET" class="form-inline">
           <div class="form-group">
               <label class="control-label">Tanggal Mulai :</label>
               <div>
@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <button type="submit" class="btn btn-primary" style="margin-top: 20px; margin-left: 40px; width: 56.2px; height: 34px;">
             <i class="fa fa-filter"></i>
           </button>
-          <a type="button" href="#" id="dynamicLink" class="btn btn-default" style="margin-top: 20px; margin-left: 8px; width: 56.2px; height: 34px;">
+          <a type="button" href="" onclick="history.back();" id="dynamicLink" class="btn btn-default" style="margin-top: 20px; margin-left: 8px; width: 56.2px; height: 34px;">
             <i class="fa fa-refresh"></i>
           </a>
         </form>
@@ -839,6 +839,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 </script>
 <!-- end analisis data fisik script -->
+
+<!-- Refresh filtering-->
+<script>
+  // Mendapatkan parameter query string berdasarkan nama
+  function getQueryStringValue(key) {
+      var urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(key);
+  }
+
+  // Mendapatkan id halaman dari parameter query string
+  var pageId = getQueryStringValue('id');
+
+  // Mendapatkan elemen tautan berdasarkan id
+  var link = document.getElementById('dynamicLink');
+
+  // Mengubah tautan href dengan id halaman dari parameter query string
+  if (pageId) {
+      var href = '/detailInfo/' + pageId;
+      link.href = href;
+  }
+  // link.href = '/detailInfo/' + pageId;
+</script>
+<!-- Refresh filtering end -->
 
 <!-- graphic script -->
 <script>
