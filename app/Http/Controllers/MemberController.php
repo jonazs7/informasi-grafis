@@ -163,5 +163,42 @@ class MemberController extends Controller
 
         return redirect()->route('editAkun')->with('success', 'Password telah berhasil diperbarui');
     }
+
+    public function filter_tanggal(Request $request){
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        $start_date = date('Y-m-d', strtotime($request->tanggal_mulai));
+        $end_date = date('Y-m-d', strtotime($request->tanggal_selesai));
+
+        $filteredData = DataFisik::whereDate('tgl', '>=', $start_date)
+            ->whereDate('tgl', '<=', $end_date)
+            ->where('id_pengguna', $user->id)
+            ->get();
+
+        // dd($filteredData);
+        
+        $show_data_fisik = DB::table('pengguna')
+            ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+            ->where('level', '=', 'Member')
+            ->where('id_pengguna', $user->id)
+            ->get();
+
+        // SUMBU Y - BMI
+        $y_bmi = $filteredData->where('id_pengguna', $user->id)->pluck('body_mass');
+
+        // SUMBU X - BMI
+        $x_bmi = $filteredData->where('id_pengguna', $user->id)->pluck('tgl');
+
+        // SUMBU Y - BFP
+        $y_bfp = $filteredData->where('id_pengguna', $user->id)->pluck('body_fat');
+
+        // SUMBU X - BFP
+        $x_bfp = $filteredData->where('id_pengguna', $user->id)->pluck('tgl');
+
+        return view('beranda_member', ['pengguna' => $pengguna, 'imageName' => $pengguna->foto, 
+        'show_data_fisik' => $show_data_fisik, 'y_bmi' => $y_bmi, 'x_bmi' => $x_bmi, 
+        'y_bfp' => $y_bfp, 'x_bfp' => $x_bfp])->with('show_data_fisik', $filteredData);
+    }
     
 }

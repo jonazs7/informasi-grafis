@@ -65,6 +65,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @endforeach
         </div> 
       @endif
+      <div style="margin-top: 8px;">
+        <form action="{{ route('filterTanggalAnggota') }}" method="GET" class="form-inline">
+          <div class="form-group">
+              <label class="control-label">Tanggal Mulai :</label>
+              <div>
+                  <div class="input-group">
+                      <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" name="tanggal_mulai" class="form-control" style="width: 120px" 
+                          data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group" style="margin-left: 40px">
+              <label class="control-label">Tanggal Selesai :</label>
+              <div>
+                  <div class="input-group">
+                      <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" name="tanggal_selesai" class="form-control" style="width: 120px"
+                          data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
+                  </div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top: 20px; margin-left: 40px; width: 56.2px; height: 34px;">
+            <i class="fa fa-filter"></i>
+          </button>
+          <a type="button" href="#" id="dynamicLink" class="btn btn-default" style="margin-top: 20px; margin-left: 8px; width: 56.2px; height: 34px;">
+            <i class="fa fa-refresh"></i>
+          </a>
+        </form>
+      </div>
     </section>
 
     <!-- Main content -->
