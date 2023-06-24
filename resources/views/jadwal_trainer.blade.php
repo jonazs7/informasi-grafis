@@ -449,7 +449,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- profile script -->
 <script>
   $(document).ready(function() {
-      $('.profile-button').click(function() {
+      $(document).on('click', '.profile-button', function() {
+      // $('.profile-button').click(function() {
           var userId = $(this).data('id');
           var url = "{{ route('showProfileAnggota', ':id') }}".replace(':id', userId);
           
