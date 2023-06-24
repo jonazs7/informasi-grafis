@@ -354,7 +354,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- Input field untuk data gender -->       
                   <input type="hidden" name="jekel" id="jekel">      
                   <label class="control-label col-sm-4">Tanggal: </label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-6">
                     <div class="input-group">                       
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
@@ -539,14 +539,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <td>BMI</td>
                       <td id='bmi'></td>
                       <td>kg/m<sup>2</sup></td>
-                      <td><span class="label label-success">Approved</span></td>
+                      <td class="bmi-cell">
+                        @php
+                          $bmiLabel = 'No data';
+                          $bmiColor = '#AAAAAA';
+                        @endphp    
+                        <div class="badge" style="background-color: {{ $bmiColor }};">
+                          {{ $bmiLabel }}
+                        </div>
+                      </td>
                       <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                     </tr>
                     <tr>
                       <td>BFP</td>
                       <td id='bfp'></td>
                       <td>%</td>
-                      <td><span class="label label-success">Approved</span></td>
+                      <td class="bfp-cell">
+                        @php
+                          $bfpLabel = 'No data';
+                          $bfpColor = '#AAAAAA';
+                        @endphp    
+                        <div class="badge" style="background-color: {{ $bfpColor }};">
+                          {{ $bfpLabel }}
+                        </div>
+                      </td>
                       <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                     </tr>
                   </table>
@@ -638,8 +654,90 @@ scratch. This page gets rid of all links and provides the needed markup only.
                      $('#tglUkur').text(response.tgl);
                      $('#bmi').text(response.body_mass);
                      $('#bfp').text(response.body_fat);
-                    
 
+                      // BMI Kategorisasi
+                      var bmiLabel = 'No data';
+                      var bmiColor = '#AAAAAA';
+
+                      if (response.body_mass !== null) {
+                        if (response.body_mass < 18.5) {
+                          bmiLabel = 'Underweight';
+                          bmiColor = '#3C8DBC';
+                        } else if (response.body_mass >= 18.5 && response.body_mass <= 24.9) {
+                          bmiLabel = 'Normal weight';
+                          bmiColor = '#00A65A';
+                        } else if (response.body_mass >= 25 && response.body_mass <= 29.9) {
+                          bmiLabel = 'Overweight';
+                          bmiColor = '#F39C12';
+                        } else if (response.body_mass >= 30 && response.body_mass <= 35) {
+                          bmiLabel = 'Obese';
+                          bmiColor = '#DD4B39';
+                        } else {
+                          bmiLabel = 'Morbid obesity';
+                          bmiColor = '#504C8C';
+                        }
+                      }
+
+                      $('.bmi-cell').html(`
+                          <div class="badge" style="background-color: ${bmiColor};">
+                            ${bmiLabel}
+                          </div>
+                        `);
+
+                      // BFP Kategorisasi
+                      var bfpLabel = 'No data';
+                      var bfpColor = '#AAAAAA';
+                      // Wanita
+                      if (response.body_fat !== null) {
+                        if(response.body_fat < 10 && response.gender ==='Wanita') {
+                            bfpLabel = 'Unknown';
+                            bfpColor = '#d2d6de';
+                        } else if (response.body_fat >= 10 && response.body_fat <= 13.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Essential Fat';
+                            bfpColor = '#3c8dbc';
+                        } else if (response.body_fat >= 13.50 && response.body_fat <= 20.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Athletes';
+                            bfpColor = '#00c0ef';
+                        } else if (response.body_fat >= 20.50 && response.body_fat <= 24.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Fitness';
+                            bfpColor = '#00a65a';  
+                        } else if (response.body_fat >= 24.50 && response.body_fat <= 31.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Acceptable';
+                            bfpColor = '#f39c12';
+                        } else if (response.body_fat >= 31.50 && response.gender ==='Wanita') {
+                            bfpLabel = 'Obese';
+                            bfpColor = '#f56954';
+                        }
+                      }
+                      // Pria
+                      if (response.body_fat !== null) {
+                        if(response.body_fat < 2 && response.gender ==='Pria') {
+                            bfpLabel = 'Unknown';
+                            bfpColor = '#d2d6de';
+                        } else if (response.body_fat >= 2 && response.body_fat <= 5.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Essential Fat';
+                            bfpColor = '#3c8dbc';
+                        } else if (response.body_fat >= 5.50 && response.body_fat <= 13.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Athletes';
+                            bfpColor = '#00c0ef';
+                        } else if (response.body_fat >= 13.50 && response.body_fat <= 17.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Fitness';
+                            bfpColor = '#00a65a';  
+                        } else if (response.body_fat >= 17.50 && response.body_fat <= 24.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Acceptable';
+                            bfpColor = '#f39c12';
+                        } else if (response.body_fat >= 24.50 && response.gender ==='Pria') {
+                            bfpLabel = 'Obese';
+                            bfpColor = '#f56954';
+                        }
+                      }
+
+                      $('.bfp-cell').html(`
+                          <div class="badge" style="background-color: ${bfpColor};">
+                            ${bfpLabel}
+                          </div>
+                        `);
+                        
                     console.log(response.id_data_fisik);
                     console.log(url);
                     console.log(response.name);
