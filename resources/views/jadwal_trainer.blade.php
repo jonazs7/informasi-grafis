@@ -390,7 +390,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- end text input -->
               <!-- text input -->
               <div class="form-group">
-                <label>Password</label>
+                <label>Kata Sandi</label>
                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                   @error('password')
@@ -402,7 +402,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- end text input -->
               <!-- text input -->
               <div class="form-group">
-                <label>Password Konfirmasi</label>
+                <label>Kata Sandi Konfirmasi</label>
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
               </div>
               <!-- end text input -->

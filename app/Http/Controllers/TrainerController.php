@@ -486,4 +486,33 @@ class TrainerController extends Controller
         // Redirect ke halaman yang diinginkan setelah berhasil diperbarui
         return redirect()->route('editProfil')->with('success', 'Data profil telah diperbarui');
     }
+
+    public function edit_akun_trainer(){
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('akun_trainer', ['pengguna' => $pengguna, 'imageName' => $pengguna->foto]);
+    }
+
+    public function update_akun_trainer(Request $request){
+        $request->validate([ 
+            'new_password' => 'required|min:8',
+            'password_confirmation' => 'required|same:new_password',
+        ], [
+            'new_password.required' => 'Password baru wajib diisi',
+            'password_confirmation.required' => 'Password konfirmasi wajib diisi',
+            'new_password.min' => 'Password baru minimal 8 karakter',
+            'password_confirmation.min' => 'Password konfirmasi minimal 8 karakter',
+            'password_confirmation.same' => 'Password konfirmasi tidak sama dengan password baru',
+        ]);
+
+        $user = Auth::user();
+        $newPassword = Hash::make($request->new_password);
+        
+        DB::table('pengguna')
+        ->where('id', $user->id)
+        ->update(['password' => $newPassword]);
+
+        return redirect()->route('editAkunTrainer')->with('success', 'Password telah berhasil diperbarui');
+    }
 }

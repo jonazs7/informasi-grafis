@@ -36,7 +36,8 @@ Route::middleware(['member'])->group(function(){
     Route::post('/biodata/update', [MemberController::class, 'update_biodata'])->name('updateBiodata');
     Route::post('/saveGoal', [MemberController::class, 'save_goal'])->name('saveGoal');
     Route::get('/showAnalisisMember/{kode_pengguna}', [MemberController::class, 'show_analisis_data_fisik'])->name('showAnalisisMember');
-  
+    Route::get('/akunMember', [MemberController::class, 'edit_akun'])->name('editAkun');
+    Route::post('/akunMember/update', [MemberController::class, 'update_akun'])->name('updateAkun');
 });
 
 // Trainer Gym
@@ -60,6 +61,8 @@ Route::middleware(['trainer'])->group(function(){
     Route::get('/showAnalisis/{kode_pengguna}', [TrainerController::class, 'show_analisis_data_fisik'])->name('showAnalisis');
     Route::get('/profilTrainer', [TrainerController::class, 'edit_profil'])->name('editProfil');
     Route::post('/profilTrainer/update', [TrainerController::class, 'update_profil'])->name('updateProfil');
+    Route::get('/akunTrainer', [TrainerController::class, 'edit_akun_trainer'])->name('editAkunTrainer');
+    Route::post('/akunTrainer/update', [TrainerController::class, 'update_akun_trainer'])->name('updateAkunTrainer');
 
 });
 

@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- form start -->
                 <form class="form-horizontal" action="{{ route('updateBiodata') }}" method="POST" enctype='multipart/form-data'>
                   @csrf
-                  <div class="box-body" style="margin-top: 2%; margin-left: -5%;">
+                  <div class="box-body" style="margin-top: 2%; margin-left: -3%;">
                     <div class="form-group">
                       <label class="control-label col-sm-2">Nama Lengkap :</label>
                       <div class="col-sm-3">

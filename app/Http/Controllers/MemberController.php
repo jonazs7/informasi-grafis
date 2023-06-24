@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\DataFisik;
+use Illuminate\Support\Facades\Hash;
 
 
 class MemberController extends Controller
@@ -132,6 +133,35 @@ class MemberController extends Controller
         ->first();
 
         return response()->json($show_analisis);
+    }
+
+    public function edit_akun(){
+        $user = Auth::user();
+        $pengguna = Pengguna::where('id', $user->id)->first();
+
+        return view('akun_member', ['pengguna' => $pengguna, 'imageName' => $pengguna->foto]);
+    }
+
+    public function update_akun(Request $request){
+        $request->validate([ 
+            'new_password' => 'required|min:8',
+            'password_confirmation' => 'required|same:new_password',
+        ], [
+            'new_password.required' => 'Password baru wajib diisi',
+            'password_confirmation.required' => 'Password konfirmasi wajib diisi',
+            'new_password.min' => 'Password baru minimal 8 karakter',
+            'password_confirmation.min' => 'Password konfirmasi minimal 8 karakter',
+            'password_confirmation.same' => 'Password konfirmasi tidak sama dengan password baru',
+        ]);
+
+        $user = Auth::user();
+        $newPassword = Hash::make($request->new_password);
+        
+        DB::table('pengguna')
+        ->where('id', $user->id)
+        ->update(['password' => $newPassword]);
+
+        return redirect()->route('editAkun')->with('success', 'Password telah berhasil diperbarui');
     }
     
 }

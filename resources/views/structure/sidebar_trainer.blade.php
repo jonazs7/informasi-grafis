@@ -16,6 +16,7 @@
         {{-- <li class="{{ request()->is('hasilCapaian',  ) ? 'active' : '' }}"><a href="/hasilCapaian"><i class="fa fa-bar-chart"></i> <span>Hasil Capaian</span></a></li> --}}
         {{-- <li class="{{ request()->is('anggotaGym') ? 'active' : '' }}"><a href="/anggotaGym"><i class="fa fa-users"></i> <span>Anggota gym</span></a></li> --}}
         <li class="{{ request()->is('profilTrainer') ? 'active' : '' }}"><a href="/profilTrainer"><i class="fa fa-user"></i> <span>Profil</span></a></li>
+        <li class="{{ request()->is('akunTrainer') ? 'active' : '' }}"><a href="/akunTrainer"><i class="fa fa-gear"></i> <span>Akun</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
