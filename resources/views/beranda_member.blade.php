@@ -96,39 +96,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Tanggal</th>
+              <th>Tgl</th>
               <th>Ti<br>(cm)</th>
               <th>Be<br>(kg)</th>
               <th>LL<br>(cm)</th>
               <th>LP<br>(cm)</th>
               <th>LPA<br>(cm)</th>
+              <th>LPB<br>(cm)</th>
               <th>LB<br>(cm)</th>
               <th>LD<br>(cm)</th>
-              <th>LPT<br>(cm)</th>
-              <th>LPB<br>(cm)</th>
+              <th>LPT<br>(cm)</th>   
               <th>LBS<br>(cm)</th>
               <th>BMI</th>
-              <th>Status BMI</th>
+              {{-- <th>Status BMI</th> --}}
               <th>BFP(%)</th>
-              <th>Status BFP</th>
+              {{-- <th>Status BFP</th> --}}
             </tr>
             </thead>
             <tbody>
             @foreach ($show_data_fisik as $data_fisik)
             <tr>
-              <td><a href="#">{{ $data_fisik->tgl }}</a></td>
+              <td><a href="" class="info-analisis-data_fisik" data-toggle="modal" data-target="#modal-default-info-data_fisik" 
+                data-id="{{ $data_fisik->id_data_fisik }}" type="button">{{ $data_fisik->tgl }}</a></td>
               <td>{{ $data_fisik->tinggi }}</td>
               <td>{{ $data_fisik->berat }}</td>
               <td>{{ $data_fisik->neck }}</td>
               <td>{{ $data_fisik->waist}}</td>
               <td>{{ $data_fisik->hip }}</td>
+              <td>{{ $data_fisik->paha_bwh }}</td>
               <td>{{ $data_fisik->bisep }}</td>
               <td>{{ $data_fisik->dada }}</td>
               <td>{{ $data_fisik->pantat }}</td>
-              <td>{{ $data_fisik->paha_bwh }}</td>
               <td>{{ $data_fisik->betis }}</td>
               <td>{{ number_format($data_fisik->body_mass, 2) }}</td>
-              <td>
+              {{-- <td>
                 @php
                   $bmiLabel = '';
                   $bmiColor = '';
@@ -155,9 +156,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     {{ $bmiLabel }}
                   </div>
                 @endif  
-              </td>
+              </td> --}}
               <td>{{ number_format($data_fisik->body_fat) }} %</td>
-              <td>
+              {{-- <td>
                 @php
                   $bfpLabel = '';
                   $bfpColor = '';
@@ -207,7 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     {{ $bfpLabel }}
                   </div>
                 @endif  
-              </td>
+              </td> --}}
             </tr>         
             @endforeach
             </tbody>
@@ -229,6 +230,283 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 
+
+<!-- modal informasi analisis data fisik -->
+<div class="modal fade" id="modal-default-info-data_fisik">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Hasil Analisa Kegiatan Kebugaran</h4>
+      </div>
+      {{-- <input type="text" name="idDataFisik" id="idDataFisik"> <!-- Hidden field untuk ID jadwal --> --}}
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- /.box-header -->
+            <div class="box-body" style="margin-left: -36px">
+              <dl class="dl-horizontal">
+                <dt>Nama Anggota Gym :</dt>
+                <dd id='namaAnggotaGym'></dd>
+                <dt>Tanggal Lahir :</dt>
+                <dd id='tanggalLahir'></dd>
+                <dt>Gender :</dt>
+                <dd id='genderAnggotaGym'></dd>
+              </dl>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <div class="col-md-6">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <dl class="dl-horizontal">
+                <dt>Tanggal Ukur :</dt>
+                <dd id='tglUkur'></dd>
+              </dl>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- Data table -->
+          <div class="row" style="padding: 12px; 12px; 12px; 12px;">
+            <div class="col-xs-12">
+              <div class="box">
+                {{-- <div class="box-header">
+                  <h3 class="box-title">Responsive Hover Table</h3>
+                </div> --}}
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Hasil</th>
+                      <th>Satuan</th>
+                      <th>Status</th>
+                      <th>Keterangan</th>
+                    </tr>
+                    <tr>
+                      <td>BMI</td>
+                      <td id='bmi'></td>
+                      <td>kg/m<sup>2</sup></td>
+                      <td class="bmi-cell"></td>
+                      <td class="bmi-ktrngn"></td>
+                    </tr>
+                    <tr>
+                      <td>BFP</td>
+                      <td id='bfp'></td>
+                      <td>%</td>
+                      <td class="bfp-cell"></td>
+                      {{-- <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td> --}}
+                      <td class="bfp-ktrngn"></td>
+                    </tr>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+          </div>
+          <!-- end Data table -->
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- analisis data fisik script -->
+<script>
+  $(document).ready(function() {
+      // Fungsi untuk membuka form modal
+      $('.info-analisis-data_fisik').on('click', function() {
+          var userId = $(this).data('id');
+          var url = "{{ route('showAnalisisMember', ':id') }}".replace(':id', userId);
+          
+      // Mengirim permintaan AJAX ke backend Laravel
+      $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(response) {
+                    // Mengisi nilai-nilai kontrol form modal dengan data yang diterima
+                     $('#idDataFisik').val(response.id_data_fisik);
+                     $('#namaAnggotaGym').text(response.name);
+                     $('#tanggalLahir').text(response.tgl_lahir);
+                     $('#genderAnggotaGym').text(response.gender);
+                     $('#tglUkur').text(response.tgl);
+                     $('#bmi').text(response.body_mass);
+                     $('#bfp').text(response.body_fat);
+
+                      // BMI Kategorisasi
+                      var bmiLabel = 'No data';
+                      var bmiColor = '#AAAAAA';
+
+                      if (response.body_mass !== null) {
+                        if (response.body_mass < 18.5) {
+                          bmiLabel = 'Underweight';
+                          bmiColor = '#3C8DBC';
+                        } else if (response.body_mass >= 18.5 && response.body_mass <= 24.9) {
+                          bmiLabel = 'Normal weight';
+                          bmiColor = '#00A65A';
+                        } else if (response.body_mass >= 25 && response.body_mass <= 29.9) {
+                          bmiLabel = 'Overweight';
+                          bmiColor = '#F39C12';
+                        } else if (response.body_mass >= 30 && response.body_mass <= 35) {
+                          bmiLabel = 'Obese';
+                          bmiColor = '#DD4B39';
+                        } else {
+                          bmiLabel = 'Morbid obesity';
+                          bmiColor = '#504C8C';
+                        }
+                      }
+
+                      $('.bmi-cell').html(`
+                          <div class="badge" style="background-color: ${bmiColor};">
+                            ${bmiLabel}
+                          </div>
+                        `);
+
+                      // BFP Kategorisasi
+                      var bfpLabel = 'No data';
+                      var bfpColor = '#AAAAAA';
+                      // Wanita
+                      if (response.body_fat !== null) {
+                        if(response.body_fat < 10 && response.gender ==='Wanita') {
+                            bfpLabel = 'Unknown';
+                            bfpColor = '#d2d6de';
+                        } else if (response.body_fat >= 10 && response.body_fat <= 13.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Essential Fat';
+                            bfpColor = '#3c8dbc';
+                        } else if (response.body_fat >= 13.50 && response.body_fat <= 20.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Athletes';
+                            bfpColor = '#00c0ef';
+                        } else if (response.body_fat >= 20.50 && response.body_fat <= 24.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Fitness';
+                            bfpColor = '#00a65a';  
+                        } else if (response.body_fat >= 24.50 && response.body_fat <= 31.49 && response.gender ==='Wanita') {
+                            bfpLabel = 'Acceptable';
+                            bfpColor = '#f39c12';
+                        } else if (response.body_fat >= 31.50 && response.gender ==='Wanita') {
+                            bfpLabel = 'Obese';
+                            bfpColor = '#f56954';
+                        }
+                      }
+                      // Pria
+                      if (response.body_fat !== null) {
+                        if(response.body_fat < 2 && response.gender ==='Pria') {
+                            bfpLabel = 'Unknown';
+                            bfpColor = '#d2d6de';
+                        } else if (response.body_fat >= 2 && response.body_fat <= 5.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Essential Fat';
+                            bfpColor = '#3c8dbc';
+                        } else if (response.body_fat >= 5.50 && response.body_fat <= 13.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Athletes';
+                            bfpColor = '#00c0ef';
+                        } else if (response.body_fat >= 13.50 && response.body_fat <= 17.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Fitness';
+                            bfpColor = '#00a65a';  
+                        } else if (response.body_fat >= 17.50 && response.body_fat <= 24.49 && response.gender ==='Pria') {
+                            bfpLabel = 'Acceptable';
+                            bfpColor = '#f39c12';
+                        } else if (response.body_fat >= 24.50 && response.gender ==='Pria') {
+                            bfpLabel = 'Obese';
+                            bfpColor = '#f56954';
+                        }
+                      }
+
+                      $('.bfp-cell').html(`
+                          <div class="badge" style="background-color: ${bfpColor};">
+                            ${bfpLabel}
+                          </div>
+                        `);
+
+                    // BMI Keterangan
+                    var bmiKtrngn = 'No data';
+                      if (response.body_mass !== null) {
+                        if (response.body_mass < 18.5) {
+                          bmiKtrngn = 'Berat badan dibawah normal atau kurang ideal';
+                        } else if (response.body_mass >= 18.5 && response.body_mass <= 24.9) {
+                          bmiKtrngn = 'Berat badan berada pada batas ideal';
+                        } else if (response.body_mass >= 25 && response.body_mass <= 29.9) {
+                          bmiKtrngn = 'Berat badan melebihi batas ideal';
+                        } else if (response.body_mass >= 30 && response.body_mass <= 35) {
+                          bmiKtrngn = 'Berat badan sudah mencapai obesitas tingkat I';
+                        } else {
+                          bmiKtrngn = 'Berat badan sudah mencapai obesitas tingkat I';
+                        }
+                      }
+
+                      $('.bmi-ktrngn').html(`
+                          <div>
+                            ${bmiKtrngn}
+                          </div>
+                        `);
+                    
+                    // BFP Keterangan
+                    var bfpKtrngn = 'No data';
+                    // Wanita
+                    if (response.body_fat !== null) {
+                      if(response.body_fat < 10 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Unknown';
+                      } else if (response.body_fat >= 10 && response.body_fat <= 13.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Persentase ini adalah yang terendah yang seharusnya dimiliki seorang wanita. Pada persentase ini, vaskularisasi dan lurik wanita terlihat';
+                      } else if (response.body_fat >= 13.50 && response.body_fat <= 20.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh didistribusikan secara merata ke seluruh tubuh. Otot mungkin sedikit terlihat, tetapi tidak terlalu jelas';
+                      } else if (response.body_fat >= 20.50 && response.body_fat <= 24.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh lebih terlihat, terutama di sekitar pinggang dan paha. Otot mungkin tidak terlihat';
+                      } else if (response.body_fat >= 24.50 && response.body_fat <= 31.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh lebih menonjol, terutama di perut, pinggul, dan paha. Otot tidak terlalu terlihat';
+                      } else if (response.body_fat >= 31.50 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh sangat terlihat di seluruh tubuh. Otot tidak didefinisikan sama sekali';
+                      }
+                    }
+                     // Pria
+                     if (response.body_fat !== null) {
+                      if(response.body_fat < 2 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Unknown';
+                      } else if (response.body_fat >= 2 && response.body_fat <= 5.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Sangat kurus. Banyak binaragawan turun ke persentase lemak tubuh sekitar 2-4% saat mereka bersiap untuk kompetisi';
+                      } else if (response.body_fat >= 5.50 && response.body_fat <= 13.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Otot tubuh sangat jelas dan perut terlihat. Vaskularitas juga menonjol';
+                      } else if (response.body_fat >= 13.50 && response.body_fat <= 17.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Otot Perut masih terlihat, tetapi tidak begitu jelas. Vaskularisasi kurang menonjol dibandingkan persentase lemak tubuh yang lebih rendah';
+                      } else if (response.body_fat >= 17.50 && response.body_fat <= 24.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Otot Perut kurang terlihat, dan sebagian lemak tubuh mungkin terlihat di sekitar pinggang';
+                      } else if (response.body_fat >= 24.50 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Garis pinggang terasa lebih tebal, dan lemak tubuh mungkin terlihat di area lain seperti dada dan punggung';
+                      }
+                    }
+
+                    $('.bfp-ktrngn').html(`
+                          <div>
+                            ${bfpKtrngn}
+                          </div>
+                        `);
+
+                        
+                    console.log(response.id_data_fisik);
+                    console.log(url);
+                    console.log(response.name);
+                    console.log(response.tgl_lahir);
+                    console.log(response.gender);
+                    console.log(response.tgl);
+                    console.log(response.body_mass);
+                    console.log(response.body_fat);
+                },
+                error: function(xhr) {
+                    // Tangani jika terjadi kesalahan pada permintaan AJAX
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+<!-- end analisis data fisik script -->
 
 <!-- graphic script -->
 <script>

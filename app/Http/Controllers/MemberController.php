@@ -123,5 +123,15 @@ class MemberController extends Controller
         // Redirect ke halaman yang diinginkan setelah berhasil diperbarui
         return redirect()->route('editBiodata')->with('success', 'Data biodata telah diperbarui');
     }
+
+    public function show_analisis_data_fisik($kode_pengguna){
+        $show_analisis = DB::table('pengguna')
+        ->leftjoin('data_fisik', 'data_fisik.id_pengguna', '=', 'pengguna.id')
+        ->where('level', '=', 'Member')
+        ->where('id_data_fisik', $kode_pengguna)
+        ->first();
+
+        return response()->json($show_analisis);
+    }
     
 }

@@ -153,10 +153,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <th>LL<br>(cm)</th>
               <th>LP<br>(cm)</th>
               <th>LPA<br>(cm)</th>
+              <th>LPB<br>(cm)</th>
               <th>LB<br>(cm)</th>
               <th>LD<br>(cm)</th>
               <th>LPT<br>(cm)</th>
-              <th>LPB<br>(cm)</th>
               <th>LBS<br>(cm)</th>
               <th>BMI</th>
               {{-- <th>Status<br>BMI</th> --}}
@@ -175,10 +175,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td>{{ $data_fisik->neck }}</td>
                 <td>{{ $data_fisik->waist}}</td>
                 <td>{{ $data_fisik->hip }}</td>
+                <td>{{ $data_fisik->paha_bwh }}</td>
                 <td>{{ $data_fisik->bisep }}</td>
                 <td>{{ $data_fisik->dada }}</td>
                 <td>{{ $data_fisik->pantat }}</td>
-                <td>{{ $data_fisik->paha_bwh }}</td>
                 <td>{{ $data_fisik->betis }}</td>
                 <td>{{ $data_fisik->body_mass }}</td>
                 {{-- <td>
@@ -539,31 +539,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <td>BMI</td>
                       <td id='bmi'></td>
                       <td>kg/m<sup>2</sup></td>
-                      <td class="bmi-cell">
-                        @php
-                          $bmiLabel = 'No data';
-                          $bmiColor = '#AAAAAA';
-                        @endphp    
-                        <div class="badge" style="background-color: {{ $bmiColor }};">
-                          {{ $bmiLabel }}
-                        </div>
-                      </td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td class="bmi-cell"></td>
+                      <td class="bmi-ktrngn"></td>
                     </tr>
                     <tr>
                       <td>BFP</td>
                       <td id='bfp'></td>
                       <td>%</td>
-                      <td class="bfp-cell">
-                        @php
-                          $bfpLabel = 'No data';
-                          $bfpColor = '#AAAAAA';
-                        @endphp    
-                        <div class="badge" style="background-color: {{ $bfpColor }};">
-                          {{ $bfpLabel }}
-                        </div>
-                      </td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td class="bfp-cell"></td>
+                      {{-- <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td> --}}
+                      <td class="bfp-ktrngn"></td>
                     </tr>
                   </table>
                 </div>
@@ -737,6 +722,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             ${bfpLabel}
                           </div>
                         `);
+
+                    // BMI Keterangan
+                    var bmiKtrngn = 'No data';
+                      if (response.body_mass !== null) {
+                        if (response.body_mass < 18.5) {
+                          bmiKtrngn = 'Berat badan dibawah normal atau kurang ideal';
+                        } else if (response.body_mass >= 18.5 && response.body_mass <= 24.9) {
+                          bmiKtrngn = 'Berat badan berada pada batas ideal';
+                        } else if (response.body_mass >= 25 && response.body_mass <= 29.9) {
+                          bmiKtrngn = 'Berat badan melebihi batas ideal';
+                        } else if (response.body_mass >= 30 && response.body_mass <= 35) {
+                          bmiKtrngn = 'Berat badan sudah mencapai obesitas tingkat I';
+                        } else {
+                          bmiKtrngn = 'Berat badan sudah mencapai obesitas tingkat I';
+                        }
+                      }
+
+                      $('.bmi-ktrngn').html(`
+                          <div>
+                            ${bmiKtrngn}
+                          </div>
+                        `);
+                    
+                    // BFP Keterangan
+                    var bfpKtrngn = 'No data';
+                    // Wanita
+                    if (response.body_fat !== null) {
+                      if(response.body_fat < 10 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Unknown';
+                      } else if (response.body_fat >= 10 && response.body_fat <= 13.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Persentase ini adalah yang terendah yang seharusnya dimiliki seorang wanita. Pada persentase ini, vaskularisasi dan lurik wanita terlihat';
+                      } else if (response.body_fat >= 13.50 && response.body_fat <= 20.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh didistribusikan secara merata ke seluruh tubuh. Otot mungkin sedikit terlihat, tetapi tidak terlalu jelas';
+                      } else if (response.body_fat >= 20.50 && response.body_fat <= 24.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh lebih terlihat, terutama di sekitar pinggang dan paha. Otot mungkin tidak terlihat';
+                      } else if (response.body_fat >= 24.50 && response.body_fat <= 31.49 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh lebih menonjol, terutama di perut, pinggul, dan paha. Otot tidak terlalu terlihat';
+                      } else if (response.body_fat >= 31.50 && response.gender ==='Wanita') {
+                          bfpKtrngn = 'Lemak tubuh sangat terlihat di seluruh tubuh. Otot tidak didefinisikan sama sekali';
+                      }
+                    }
+                     // Pria
+                     if (response.body_fat !== null) {
+                      if(response.body_fat < 2 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Unknown';
+                      } else if (response.body_fat >= 2 && response.body_fat <= 5.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Sangat kurus. Banyak binaragawan turun ke persentase lemak tubuh sekitar 2-4% saat mereka bersiap untuk kompetisi';
+                      } else if (response.body_fat >= 5.50 && response.body_fat <= 13.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Otot tubuh sangat jelas dan perut terlihat. Vaskularitas juga menonjol';
+                      } else if (response.body_fat >= 13.50 && response.body_fat <= 17.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Otot Perut masih terlihat, tetapi tidak begitu jelas. Vaskularisasi kurang menonjol dibandingkan persentase lemak tubuh yang lebih rendah';
+                      } else if (response.body_fat >= 17.50 && response.body_fat <= 24.49 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Otot Perut kurang terlihat, dan sebagian lemak tubuh mungkin terlihat di sekitar pinggang';
+                      } else if (response.body_fat >= 24.50 && response.gender ==='Pria') {
+                          bfpKtrngn = 'Garis pinggang terasa lebih tebal, dan lemak tubuh mungkin terlihat di area lain seperti dada dan punggung';
+                      }
+                    }
+
+                    $('.bfp-ktrngn').html(`
+                          <div>
+                            ${bfpKtrngn}
+                          </div>
+                        `);
+
                         
                     console.log(response.id_data_fisik);
                     console.log(url);

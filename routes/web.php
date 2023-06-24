@@ -35,6 +35,7 @@ Route::middleware(['member'])->group(function(){
     Route::get('/biodata', [MemberController::class, 'edit_biodata'])->name('editBiodata');
     Route::post('/biodata/update', [MemberController::class, 'update_biodata'])->name('updateBiodata');
     Route::post('/saveGoal', [MemberController::class, 'save_goal'])->name('saveGoal');
+    Route::get('/showAnalisisMember/{kode_pengguna}', [MemberController::class, 'show_analisis_data_fisik'])->name('showAnalisisMember');
   
 });
 
