@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- modal tambah goal -->
 <div class="modal fade" id="modal-default-tambah-goal">
-  <div class="modal-dialog" style="width: 20%">
+  <div class="modal-dialog" style="width: 28%">
       <div class="modal-content">
           <form method="POST" action="{{ route('saveGoal') }}">
               @csrf
@@ -167,7 +167,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- Goal -->
                   <div class="form-group">
                     <label>Goal</label>
-                    <select class="form-control" name="goal" id="goal">
+                    <select class="form-control" name="goal" id="goal" onchange="updateGoalDescription()">
                       <option value="Increase muscle size">Increase muscle size</option>
                       <option value="Lose body fat">Lose body fat</option>
                       <option value="Sport spesific training">Sport spesific training</option>
@@ -180,6 +180,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </select>
                   </div>
                   <!-- /.Goal -->
+                  <!-- Keterangan goal -->
+                  <div class="form-group">
+                    <p id="goalDescription">Program yang ditujukan untuk meningkatkan massa otot.</p>
+                  </div>
+                  <!-- /.Keterangan goal end -->
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -217,5 +222,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<!-- keterangan goal dinamis -->
+<script>
+  function updateGoalDescription() {
+    const selectElement = document.getElementById("goal");
+    const selectedValue = selectElement.value;
+    const goalDescription = document.getElementById("goalDescription");
+
+    // Update keterangan goal sesuai dengan nilai yang dipilih
+    switch (selectedValue) {
+      case "Increase muscle size":
+        goalDescription.textContent = "Program yang ditujukan untuk meningkatkan massa otot.";
+        break;
+      case "Lose body fat":
+        goalDescription.textContent = "Program yang ditujukan untuk mengurangi lemak tubuh.";
+        break;
+      case "Sport spesific training":
+        goalDescription.textContent = "Program yang ditujukan untuk pelatihan olahraga spesifik.";
+        break;
+      case "Rehabilitate an injury":
+        goalDescription.textContent = "Program yang ditujukan untuk rehabilitasi cedera.";
+        break;
+      case "Nutrition education":
+        goalDescription.textContent = "Program yang ditujukan untuk edukasi nutrisi.";
+        break;
+      case "Start an work out train":
+        goalDescription.textContent = "Program yang ditujukan untuk memulai latihan.";
+        break;
+      case "Fan":
+        goalDescription.textContent = "Program untuk ditujukan untuk melatih anggota tubuh bagian atas.";
+        break;
+      case "Motivation":
+        goalDescription.textContent = "Program yang ditujukan untuk pemula yang ingin hidup bugar.";
+        break;
+      case "Lainnya":
+        goalDescription.textContent = "Program lainnya.";
+        break;
+      default:
+        goalDescription.textContent = "";
+    }
+  }
+</script>
+<!-- keterangan goal dinamis end -->
 </body>
 </html>
