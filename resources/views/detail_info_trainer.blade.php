@@ -400,7 +400,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" name="tanggal" required class="form-control" 
+                        @php
+                          $tanggal = date("Y m d");
+                        @endphp
+                        <input type="text" name="tanggal" value="<?php echo $tanggal; ?>" required class="form-control" 
                         data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
                     </div>
                   </div>
