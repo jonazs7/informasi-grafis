@@ -26,7 +26,10 @@ class JadwalSeeder extends Seeder
             'jenis_latihan' => 'Push, Pull', 'status' => 'Selesai'],
 
             ['id_pengguna' => '6', 'goal' => 'Lose body fat', 'tgl_mulai' => '2023-05-13', 'tgl_selesai' => '2023-06-13', 'sesi_latihan' => '12',
-            'jenis_latihan' => NULL, 'status' => 'Proses'],
+            'jenis_latihan' => 'Push, Pull', 'status' => 'Selesai'],
+
+            ['id_pengguna' => '7', 'goal' => 'Increase muscle size', 'tgl_mulai' => '2023-02-01', 'tgl_selesai' => '2023-04-01', 'sesi_latihan' => '12',
+            'jenis_latihan' => 'Push, Pull', 'status' => 'Selesai'],
         ];
 
         DB::table('jadwal')->insert($data);
