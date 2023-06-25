@@ -542,6 +542,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
 <!-- end analisis data fisik script -->
 
+<!-- Orderby descending datatable -->
+<script>
+  $(document).ready(function() {
+     if ($.fn.DataTable.isDataTable('#example1')) {
+         $('#example1').DataTable().destroy();
+     }
+   
+     $('#example1').DataTable({
+         "order": [[ 0, "desc" ]]
+     });
+ });
+</script>
+<!-- Orderby descending datatable end -->
+
 <!-- graphic script -->
 <script>
 // LINE CHART

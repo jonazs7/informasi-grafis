@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-            <div class="box-body chart-responsive" style="width: 95%; height: 0; padding-bottom: 47%;">
+            <div class="box-body chart-responsive" style="width: 95%; height: 0; padding-bottom: 46.5%;">
               <canvas id="goal-anggota-gym-chart"></canvas>
             </div>
             <!-- /.box-body -->

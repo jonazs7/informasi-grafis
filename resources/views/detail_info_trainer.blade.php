@@ -49,6 +49,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {{ session('error') }}
       </div>
       @endif
+      @if(session('errorAngka'))
+      <div class="alert alert-warning alert-dismissible" style="margin-top: 8px">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-warning"></i>Peringatan !</h4>
+        {{ session('errorAngka') }}
+      </div>
+      @endif
       @if(session('successTambahData'))
       <div class="alert alert-success alert-dismissible" style="margin-top: 8px">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -862,6 +869,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
   // link.href = '/detailInfo/' + pageId;
 </script>
 <!-- Refresh filtering end -->
+
+<!-- Orderby descending datatable -->
+<script>
+  $(document).ready(function() {
+     if ($.fn.DataTable.isDataTable('#example1')) {
+         $('#example1').DataTable().destroy();
+     }
+   
+     $('#example1').DataTable({
+         "order": [[ 0, "desc" ]]
+     });
+ });
+</script>
+<!-- Orderby descending datatable end -->
 
 <!-- graphic script -->
 <script>

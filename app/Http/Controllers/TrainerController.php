@@ -306,22 +306,50 @@ class TrainerController extends Controller
         // Memeriksa jenis kelamin dan mengatur rumus yang sesuai
         if ($gender == 'Pria') {
             // Rumus untuk Pria
-            $body_mass = $request->input('berat') / (($request->input('tinggi') / 100) * ($request->input('tinggi') / 100));
-            $body_fat = 495 / (1.0324 - 0.19077 * log10($request->input('lingkar_pinggang')-$request->input('lingkar_leher'))
-                        + 0.15456 * log10($request->input('tinggi')) ) - 450;
-
+            $tinggi = $request->input('tinggi');
+            $lingkar_pinggang = $request->input('lingkar_pinggang');
+            $lingkar_leher = $request->input('lingkar_leher');
+    
+            // Validasi tinggi, lingkar pinggang, dan lingkar leher
+            if ($tinggi != 0 && $lingkar_pinggang != 0 && $lingkar_leher != 0) {
+                $body_mass = $request->input('berat') / (($tinggi / 100) * ($tinggi / 100));
+                $body_fat = 495 / (1.0324 - 0.19077 * log10($lingkar_pinggang - $lingkar_leher)
+                            + 0.15456 * log10($tinggi)) - 450;
+    
+                // Validasi body_mass dan body_fat
+                if ($body_mass <= 0 || $body_fat <= 0) {
+                    return back()->with('errorAngka', 'Nilai Body Mass Index dan Body Fat harus di atas 0 atau tidak dapat negatif.');
+                }
+            } else {
+                return back()->with('errorAngka', 'Tinggi, lingkar pinggang, dan lingkar leher harus di atas 0.');
+            }
+                        
         } elseif ($gender == 'Wanita') {
             // Rumus untuk Wanita
-            $body_mass = $request->input('berat') / (($request->input('tinggi') / 100) * ($request->input('tinggi') / 100));
-            $body_fat =  495 / (1.29579 - 0.35004 * log10($request->input('lingkar_pinggang')+
-            $request->input('lingkar_paha_atas')-$request->input('lingkar_leher'))
-                        + 0.22100 * log10($request->input('tinggi')) ) - 450;
+            $tinggi = $request->input('tinggi');
+            $lingkar_pinggang = $request->input('lingkar_pinggang');
+            $lingkar_leher = $request->input('lingkar_leher');
+            $lingkar_paha_atas = $request->input('lingkar_paha_atas');
+    
+            // Validasi tinggi, lingkar pinggang, lingkar leher, dan lingkar paha atas
+            if ($tinggi != 0 && $lingkar_pinggang != 0 && $lingkar_leher != 0 && $lingkar_paha_atas != 0) {
+                $body_mass = $request->input('berat') / (($tinggi / 100) * ($tinggi / 100));
+                $body_fat = 495 / (1.29579 - 0.35004 * log10($lingkar_pinggang + $lingkar_paha_atas - $lingkar_leher)
+                            + 0.22100 * log10($tinggi)) - 450;
+    
+                // Validasi body_mass dan body_fat
+                if ($body_mass <= 0 || $body_fat <= 0) {
+                    return back()->with('errorAngka', 'Nilai Body Mass Index dan Body Fat harus di atas 0 atau tidak dapat negatif.');
+                }
+            } else {
+                return back()->with('errorAngka', 'Tinggi, lingkar pinggang, lingkar leher, dan lingkar paha atas harus di atas 0.');
+            }
 
         } else {
             // Menangani kasus jika jenis kelamin tidak ada
             return back()->with('error', 'Data gender belum ada, harap isi terlebih dahulu');
         }
-
+        
         // Menyimpan data fisik berdasarkan jenis kelamin
         DataFisik::create([
             'id_pengguna' => $request->input('kode_pengguna'),
@@ -356,6 +384,8 @@ class TrainerController extends Controller
         ->where('level', '=', 'Member')
         ->where('id_pengguna', $kode_pengguna)
         ->get();
+
+        // dd($show_data_fisik);
 
         $nama_pengguna = Pengguna::find($kode_pengguna);
 
